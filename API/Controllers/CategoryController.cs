@@ -18,7 +18,7 @@ namespace API.Controllers
             _iCategoryService = iCategoryService;
         }
 
-        [HttpGet]
+        [HttpGet] 
         [ActionName("GetAll")]
         public IActionResult GetAll()
         {
