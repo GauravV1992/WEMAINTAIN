@@ -7,5 +7,7 @@
         public string CreatedOn { get; set; }
         public int? ModifiedBy { get; set; }
         public string ModifiedOn { get; set; }
+
+        public int TotalRecords { get; set; }
     }
 }
