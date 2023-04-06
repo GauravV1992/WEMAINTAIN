@@ -1,8 +1,9 @@
 ﻿using Repositories.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace Repositories
 {
-   public class DBCategory : BaseEntity
+   public class Package : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

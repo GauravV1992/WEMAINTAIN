@@ -1,20 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Repositories;
+using System.Data;
 
 namespace Repositories
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext
     {
-        public ApplicationDBContext()
+        private readonly IConfiguration _configuration;
+        private readonly string _connectionString;
+        public ApplicationDBContext(IConfiguration configuration)
         {
-
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("SqlConnectionString");
         }
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
-        {
-
-        }
-        public DbSet<DBCategory> Categories { get; set; }
-
+        public IDbConnection CreateConnection()
+            => new SqlConnection(_connectionString);
     }
 }
 

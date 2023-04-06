@@ -6,7 +6,10 @@
     <title>@ViewData["Title"] - WEMAINTAIN</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WEMAINTAIN.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/jquery.datatables.min.js"></script>
+    <script src="~/js/datatables.bootstrap5.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -22,23 +25,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                      @*  <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        @*  <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>*@
                         <li class="nav-item dropdown" id="myDropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" data-bs-toggle="dropdown">Master</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Package</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index">Package</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Services</a></li>
                             </ul>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Manage Service Rate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">User Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Labour Request</a>
+                        </li>
                     </ul>
-
-
-
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="btn btn-primary" asp-area="" asp-controller="Login" asp-action="Index">Log Out</a></li>
+                        <li><a class="btn btn-secondary" asp-area="" asp-controller="Login" asp-action="Index">Log Out</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,9 +63,8 @@
             &copy; 2023 - WEMAINTAIN@* - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
