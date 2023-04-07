@@ -1,36 +1,30 @@
 ﻿@Html.AntiForgeryToken()
 <div class="row">
     <div class="col-md-12">
-        <button class="btn btn-primary float-end" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          Create
-        </button>
-</div></div>
-<div class="collapse pt-2" id="collapseExample">
-    <div class="card card-body">
-        Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+        <input value="Create" onclick="AddPackage()" class="btn btn-primary btn-sm float-end" type="button" />
     </div>
 </div>
-
-    <div class="row">
+<div class="pt-2" id="divPackage">
+  
+</div>
+<h5>Package List</h5>
+<div class="row">
     <div class="col-md-12 pt-2">
         <section id="header">
-            <table id="categoryGrid" class="table table-bordered table-striped">
+            <table id="categoryGrid" class="table table-bordered  table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th></th>
+                        <th>Package Name</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
         </section>
-        </div>
     </div>
-
-   
-
+</div>
 <script src="~/js/category.js" asp-append-version="true"></script>
 <script type="text/javascript">
     $(function () {

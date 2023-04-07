@@ -4,10 +4,10 @@ namespace Repositories.Interface
 {
     public interface ICategoryRepository
     {
-        //long Add(CategoryRequest viewModel);
-        //long Update(CategoryRequest viewModel);
-        //long Delete(long Id);
- Task<IEnumerable<Package>> GetAll();
-        //Package GetById(long Id);
+        Task<long> Add(CategoryRequest viewModel);
+        Task<long> Update(CategoryRequest viewModel);
+        Task<long> Delete(long Id);
+        Task<IEnumerable<Package>> GetAll();
+        Task<Package> GetById(long Id);
     }
 }

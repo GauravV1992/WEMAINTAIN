@@ -19,58 +19,43 @@ namespace Repositories.Implementation
         {
             _context = context;
         }
-        //public long Add(CategoryRequest viewModel)
-        //{
-        //    try
-        //    {
-        //        var response = _context.Database.ExecuteSqlRaw(" execute InsertColorMaster @Name,@Code,@CreatedBy",
-        //            new SqlParameter("@Name", viewModel.Name),
-        //            new SqlParameter("@CreatedBy", viewModel.CreatedBy)
-        //            );
-
-        //        return response;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    return 0;
-        //}
-        //public long Update(CategoryRequest viewModel)
-        //{
-        //    try
-        //    {
-        //        var response = _context.Database.ExecuteSqlRaw(" execute UpdateColorMaster @Id,@Name,@Code,@ModifiedBy,@ModifiedOn",
-        //            new SqlParameter("@Id", viewModel.Id),
-        //            new SqlParameter("@Name", viewModel.Name),
-        //            new SqlParameter("@ModifiedBy", viewModel.ModifiedBy),
-        //            new SqlParameter("@ModifiedOn", viewModel.ModifiedOn)
-        //            );
-
-        //        return response;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    return 0;
-        //}
-        //public long Delete(long Id)
-        //{
-        //    try
-        //    {
-        //        var response = _context.Database.ExecuteSqlRaw("Execute DeleteColorMaster @Id",
-        //         new SqlParameter("@Id", Id)
-        //        );
-
-        //        return response;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    return 0;
-        //}
+        public async Task<long> Add(CategoryRequest viewModel)
+        {
+            var procedureName = "SavePackage";
+            var parameters = new DynamicParameters();
+            parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var packages = await connection.QuerySingleAsync<Package>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return packages.Id;
+            }
+        }
+        public async Task<long> Update(CategoryRequest viewModel)
+        {
+            var procedureName = "SavePackage";
+            var parameters = new DynamicParameters();
+            parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
+            parameters.Add("Id", viewModel.Id, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var packages = await connection.QuerySingleAsync<Package>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return packages.Id;
+            }
+        }
+        public async Task<long> Delete(long id)
+        {
+            var procedureName = "DeletePackage";
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var packages = await connection.QuerySingleAsync<Package>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return packages.Id;
+            }
+        }
 
         public async Task<IEnumerable<Package>> GetAll()
         {
@@ -85,14 +70,18 @@ namespace Repositories.Implementation
             }
         }
 
-        //public Package GetById(long Id)
-        //{
-        //    Package response = _context.Packages.FromSqlRaw("GetColorMasterbyId @Id",
-        //         new SqlParameter("@Id", Id)
-        //        ).AsEnumerable().FirstOrDefault();
-
-        //    return response;
-        //}
+        public async Task<Package> GetById(long id)
+        {
+            var procedureName = "GetPackageById";
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var packages = await connection.QueryFirstOrDefaultAsync<Package>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return packages;
+            }
+        }
 
 
     }
