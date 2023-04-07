@@ -2,11 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 using Dapper;
 using System.Data;
 
