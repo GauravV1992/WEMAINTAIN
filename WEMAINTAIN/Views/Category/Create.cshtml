@@ -1,59 +1,29 @@
-﻿@{
-    Layout = null;
-}
+﻿@using BusinessEntities.RequestDto
+@model CategoryRequest
+@using (Html.BeginForm("Save", "Category", FormMethod.Post, new { @id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Login</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WEMAINTAIN.styles.css" asp-append-version="true" />
-</head>
-<body style="background-color:#f8f9fa">
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            <main>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-5">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header"><h3 class="text-center font-weight-light my-4">WEMAINTAIN</h3></div>
-                                <div class="card-body">
-                                    <form>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputEmail" type="text" placeholder="User name" />
-                                            <label for="inputEmail">User name</label>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
-                                            <label for="inputPassword">Password</label>
-                                        </div>
-                                       @* <div class="form-check mb-3">
-                                            <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                            <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-                                        </div>*@
-                                        <div class="mt-4 mb-0 text-center">
-                                            <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Login</a>
-                                      @*      <a class="btn btn-primary" href="index.html">Login</a>*@
-                                          @*  <a class="small" href="password.html">Forgot Password?</a>*@
-                                        </div>
-                                    </form>
-                                </div>
-                               @* <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
-                                </div>*@
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
+    <div class="card">
+        <div class="card-header">
+            Create Package
+        </div>
+         <div class="card-body">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Package Name</label>
+            @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" })
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
+                <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
+            </div>
         </div>
     </div>
-</body>
-</html>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        OnCreateEditPageLoad();
+    })
+</script>

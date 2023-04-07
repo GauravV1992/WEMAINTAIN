@@ -6,10 +6,10 @@ namespace BusinessServices.Interface
 {
     public interface ICategoryService
     {
-        ResultDto<long> Add(CategoryRequest viewModel);
-        ResultDto<long> Update(CategoryRequest viewModel);
-        ResultDto<long> Delete(long Id);
-        ResultDto<IEnumerable<CategoryResponse>> GetAll();
-        ResultDto<CategoryResponse> GetById(long Id);
+        Task<ResultDto<long>> Add(CategoryRequest viewModel);
+        Task<ResultDto<long>> Update(CategoryRequest viewModel);
+        Task<ResultDto<long>> Delete(long Id);
+        Task<ResultDto<IEnumerable<CategoryResponse>>> GetAll();
+        Task<ResultDto<CategoryResponse>> GetById(long Id);
     }
 }

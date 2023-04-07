@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +15,7 @@ using AutoMapper.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddSingleton<ApplicationDBContext>();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEMAINTAIN", Version = "v1" });
@@ -23,18 +24,20 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
+//builder.Services.AddAutoMapper();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-var connection = builder.Configuration.GetConnectionString("SqlConnectionString");
-builder.Services.AddDbContext<ApplicationDBContext>(options =>
+var config = new MapperConfiguration(cfg =>
 {
-    options.UseSqlServer(connection);
+    cfg.AddProfile(new BusinessServices.Automapper.AutoMapper());
 });
-
-builder.Services.AddAutoMapper();
+var mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
 ServicesConfig.AddExtensionServices(builder.Services);
 
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
+
 
 
 var app = builder.Build();

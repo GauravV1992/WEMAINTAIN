@@ -2,13 +2,15 @@
 using BusinessEntities.ResponseDto;
 using BusinessServices.Interface;
 using Repositories.Interface;
-using AutoMapper;
+using AutoMapper.Mappers;
 using Repositories;
 using BusinessEntities.Common;
+using AutoMapper;
+//using AutoMapper;
 
 namespace BusinessServices.Implementation
 {
-   public class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _iCategoryRepository;
         private IMapper _mapper;
@@ -17,7 +19,7 @@ namespace BusinessServices.Implementation
             _iCategoryRepository = repository;
             _mapper = mapper;
         }
-        public ResultDto<long> Add(CategoryRequest viewModel)
+        public async Task<ResultDto<long>> Add(CategoryRequest viewModel)
         {
             var res = new ResultDto<long>()
             {
@@ -25,23 +27,12 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = _iCategoryRepository.Add(viewModel);
-            if (response == -1)
-            {
-                res.Errors.Add("Color Name Already Exists !!");
-            }
-            else if (response == -2)
-            {
-                res.Errors.Add("Color Name length not greater than 5 char long !! !!");
-            }
-            else
-            {
-                res.IsSuccess = true;
-                res.Data = response;
-            }
+            var response = await _iCategoryRepository.Add(viewModel);
+            res.IsSuccess = true;
+            res.Data = response;
             return res;
         }
-        public ResultDto<long> Update(CategoryRequest viewModel)
+        public async Task<ResultDto<long>> Update(CategoryRequest viewModel)
         {
             var res = new ResultDto<long>()
             {
@@ -49,23 +40,12 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = _iCategoryRepository.Update(viewModel);
-            if (response == -1)
-            {
-                res.Errors.Add("Color Name Already Exists !!");
-            }
-            else if (response == -2)
-            {
-                res.Errors.Add("Color Name length not greater than 5 char long !! !!");
-            }
-            else
-            {
-                res.IsSuccess = true;
-                res.Data = response;
-            }
+            var response = await _iCategoryRepository.Update(viewModel);
+            res.IsSuccess = true;
+            res.Data = response;
             return res;
         }
-        public ResultDto<long> Delete(long Id)
+        public async Task<ResultDto<long>> Delete(long Id)
         {
             var res = new ResultDto<long>()
             {
@@ -73,20 +53,13 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = _iCategoryRepository.Delete(Id);
-            if (response == -1)
-            {
-                res.Errors.Add("Color Does Not Exists For This Id!!");
-            }
-            else
-            {
-                res.IsSuccess = true;
-                res.Data = response;
-            }
+            var response = await _iCategoryRepository.Delete(Id);
+            res.IsSuccess = true;
+            res.Data = response;
             return res;
         }
 
-        public ResultDto<IEnumerable<CategoryResponse>> GetAll()
+        public async Task<ResultDto<IEnumerable<CategoryResponse>>> GetAll()
         {
             var res = new ResultDto<IEnumerable<CategoryResponse>>()
             {
@@ -95,7 +68,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = _iCategoryRepository.GetAll();
+            var response = await _iCategoryRepository.GetAll();
 
             if (response == null)
             {
@@ -104,12 +77,20 @@ namespace BusinessServices.Implementation
             else
             {
                 res.IsSuccess = true;
-                res.Data = _mapper.Map<IEnumerable<DBCategory>, IEnumerable<CategoryResponse>>(response);
+                try
+                {
+                    res.Data = _mapper.Map<IEnumerable<Package>, IEnumerable<CategoryResponse>>(response);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             return res;
         }
 
-        public ResultDto<CategoryResponse> GetById(long Id)
+        public async Task<ResultDto<CategoryResponse>> GetById(long Id)
         {
             var res = new ResultDto<CategoryResponse>()
             {
@@ -118,7 +99,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = _iCategoryRepository.GetById(Id);
+            var response = await _iCategoryRepository.GetById(Id);
             if (response == null)
             {
                 res.Errors.Add("Data Not Found !!");
@@ -126,9 +107,8 @@ namespace BusinessServices.Implementation
             else
             {
                 res.IsSuccess = true;
-                res.Data = _mapper.Map<DBCategory, CategoryResponse>(response);
+                res.Data = _mapper.Map<Package, CategoryResponse>(response);
             }
-
             return res;
         }
     }
