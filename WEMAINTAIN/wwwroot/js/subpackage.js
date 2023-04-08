@@ -4,7 +4,7 @@ function AddSubPackage() {
 	$("#divSubPackage").empty();
 	//var clientId = $('#ClientId').val();
 	//var jsonObject = { clientId: clientId };
-	/*$('#loading').show();*/
+
 	$.ajax({
 		type: "Get",
 		url: '/SubPackage/Create',
@@ -15,15 +15,15 @@ function AddSubPackage() {
 			$('#divSubPackage').html(response);
 		},
 		complete: function () {
+			
 			/*$('#loading').hide();*/
 		}
 	});
 }
 function EditSubPackage(id) {
-	debugger;
 	$("#divSubPackage").empty();
 	var jsonObject = { Id: id };
-	/*$('#loading').show();*/
+
 	$.ajax({
 		type: "Get",
 		url: '/SubPackage/Edit',
@@ -34,7 +34,10 @@ function EditSubPackage(id) {
 			$('#divSubPackage').html(response);
 		},
 		complete: function () {
-			/*$('#loading').hide();*/
+			
+			
+			ScrollToTop();
+	
 		}
 	});
 }
@@ -42,15 +45,12 @@ function OnCancel() {
 	$("#divSubPackage").empty();
 }
 function BindSubPackageDatatable() {
-	debugger;
 	$("#SubPackageGrid").DataTable({
-
+		"processing": true, // for show progress bar,
+		"retrieve": true,
 		"language": {
-			/*"zeroRecords": "No records found.",*/
-			"infoFiltered": "",
-			"infoPostFix": ""
+			'processing': 'Loading...'
 		},
-		"processing": false,
 		"serverside": true,
 		"bLengthChange": false,
 		"pageLength": 10,
@@ -117,7 +117,7 @@ function OnCreatePageLoad() {
 		//	return;
 		//}
 		$(':submit', this).attr('disabled', 'disabled');
-		/*$('#loading').show();*/
+		showLoader("divCreate");
 		$.ajax(
 			{
 				cache: false,
@@ -139,6 +139,7 @@ function OnCreatePageLoad() {
 					$(':submit').prop('disabled', false);
 					ClearControl();
 					RefreshGrid()
+					hideLoader();
 				}
 			});
 	});
@@ -150,7 +151,7 @@ function OnEditPageLoad() {
 		//	return;
 		//}
 		$(':submit', this).attr('disabled', 'disabled');
-		/*	$('#loading').show();*/
+		showLoader("divEdit");
 		$.ajax(
 			{
 				cache: false,
@@ -169,7 +170,8 @@ function OnEditPageLoad() {
 				complete: function () {
 					$(':submit').prop('disabled', false);
 					ClearControl();
-					RefreshGrid()
+					RefreshGrid();
+					hideLoader();
 				}
 			});
 	});

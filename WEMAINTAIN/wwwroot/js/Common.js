@@ -10,13 +10,25 @@ var emailSucc = "Mail Sent Successfully!";
 var errorMsg = "Oops! Something went wrong, Please Contact Admin!"
 var confirmDeleteRecord = "Are you sure you want delete record?"
 var confirmDeleteRecord = "Are you sure you want delete record?"
+
+
+
+
 function showLoader(divId) {
 	if (divId != '') {
-		jQuery("#" + divId).append("<div class='k-loading-mask'><span class='k-loading-text'>Loading...</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>");
+		debugger;
+		jQuery("#" + divId).append("<div id='preloaded'><div class='preloaded'><img src='" + loaderPath + "'/></div></div>");
+		$("#preloaded").css("display", "block");
 	}
+}
+function hideLoader() {
+	$("#preloaded").css("display", "none");
 }
 function CheckUndefinedBlankAndNull(object) {
 	return (object === undefined || object === null || object === '');
+}
+function ScrollToTop() {
+	$("html, body").animate({ scrollTop: 0 }, "slow");
 }
 function CheckMobileNumber(control) {
 
@@ -37,7 +49,7 @@ function BindPackageNames() {
 			$.each(result.data, function (i, data) {
 				controlId.append(new Option(data.text, data.value));
 			});
-			if (!CheckUndefinedBlankAndNull(packageId)){
+			if (!CheckUndefinedBlankAndNull(packageId)) {
 				controlId.val(packageId);
 			}
 		},
