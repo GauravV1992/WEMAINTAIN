@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
+using BusinessServices.Implementation;
 using BusinessServices.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -90,6 +91,17 @@ namespace API.Controllers
                 return Ok(res);
             }
 
+            return NotFound(res);
+        }
+        [HttpGet("{Id}")]
+        [ActionName("GetSubPackageNames")]
+        public async Task<IActionResult> GetSubPackageNames(long Id)
+        {
+            var res = await _iSubPackageService.GetSubPackageNames(Id);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
             return NotFound(res);
         }
 

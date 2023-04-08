@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.RequestDto;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Repositories.Interface
 {
@@ -9,5 +10,7 @@ namespace Repositories.Interface
         Task<long> Delete(long Id);
         Task<IEnumerable<Service>> GetAll();
         Task<Service> GetById(long Id);
+
+        Task<IList<SelectListItem>> GetServiceNames(long id);
     }
 }

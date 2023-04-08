@@ -1,6 +1,5 @@
 ﻿using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
-using BusinessServices.Implementation;
 using BusinessServices.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,19 +10,19 @@ namespace API.Controllers
     //[Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ServiceController : ControllerBase
+    public class PackageRateController : ControllerBase
     {
-        private readonly IServiceService _iServiceService;
-        public ServiceController(IServiceService iServiceService)
+        private readonly IPackageRateService _iPackageRateService;
+        public PackageRateController(IPackageRateService iPackageRateService)
         {
-            _iServiceService = iServiceService;
+            _iPackageRateService = iPackageRateService;
         }
 
-        [HttpGet]
+        [HttpGet] 
         [ActionName("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var res = await _iServiceService.GetAll();
+            var res = await _iPackageRateService.GetAll();
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -35,7 +34,7 @@ namespace API.Controllers
         [ActionName("GetById")]
         public async Task<IActionResult> GetById(long Id)
         {
-            var res = await _iServiceService.GetById(Id);
+            var res = await _iPackageRateService.GetById(Id);
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -45,13 +44,13 @@ namespace API.Controllers
 
         [HttpPost]
         [ActionName("Save")]
-        public async Task<IActionResult> Post([FromBody] ServiceRequest viewModel)
+        public async Task<IActionResult> Post([FromBody] PackageRateRequest viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = await _iServiceService.Add(viewModel);
+            var res = await _iPackageRateService.Add(viewModel);
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -62,13 +61,13 @@ namespace API.Controllers
 
         [HttpPost]
         [ActionName("Update")]
-        public async Task<IActionResult> Update([FromBody] ServiceRequest viewModel)
+        public async Task<IActionResult> Update([FromBody] PackageRateRequest viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = await _iServiceService.Update(viewModel);
+            var res = await _iPackageRateService.Update(viewModel);
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -85,23 +84,12 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = await _iServiceService.Delete(viewModel.Id);
+            var res = await _iPackageRateService.Delete(viewModel.Id);
             if (res.IsSuccess)
             {
                 return Ok(res);
             }
 
-            return NotFound(res);
-        }
-        [HttpGet("{Id}")]
-        [ActionName("GetServiceNames")]
-        public async Task<IActionResult> GetServiceNames(long id)
-        {
-            var res = await _iServiceService.GetServiceNames(id);
-            if (res.IsSuccess)
-            {
-                return Ok(res);
-            }
             return NotFound(res);
         }
 

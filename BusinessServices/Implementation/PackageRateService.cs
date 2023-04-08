@@ -6,22 +6,20 @@ using AutoMapper.Mappers;
 using Repositories;
 using BusinessEntities.Common;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Repositories.Implementation;
 //using AutoMapper;
 
 namespace BusinessServices.Implementation
 {
-    public class ServiceService : IServiceService
+    public class PackageRateService : IPackageRateService
     {
-        private readonly IServiceRepository _iServiceRepository;
+        private readonly IPackageRateRepository _IPackageRateRepository;
         private IMapper _mapper;
-        public ServiceService(IServiceRepository repository, IMapper mapper)
+        public PackageRateService(IPackageRateRepository repository, IMapper mapper)
         {
-            _iServiceRepository = repository;
+            _IPackageRateRepository = repository;
             _mapper = mapper;
         }
-        public async Task<ResultDto<long>> Add(ServiceRequest viewModel)
+        public async Task<ResultDto<long>> Add(PackageRateRequest viewModel)
         {
             var res = new ResultDto<long>()
             {
@@ -29,12 +27,12 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = await _iServiceRepository.Add(viewModel);
+            var response = await _IPackageRateRepository.Add(viewModel);
             res.IsSuccess = true;
             res.Data = response;
             return res;
         }
-        public async Task<ResultDto<long>> Update(ServiceRequest viewModel)
+        public async Task<ResultDto<long>> Update(PackageRateRequest viewModel)
         {
             var res = new ResultDto<long>()
             {
@@ -42,7 +40,7 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = await _iServiceRepository.Update(viewModel);
+            var response = await _IPackageRateRepository.Update(viewModel);
             res.IsSuccess = true;
             res.Data = response;
             return res;
@@ -55,22 +53,22 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = await _iServiceRepository.Delete(Id);
+            var response = await _IPackageRateRepository.Delete(Id);
             res.IsSuccess = true;
             res.Data = response;
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<ServiceResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<PackageRateResponse>>> GetAll()
         {
-            var res = new ResultDto<IEnumerable<ServiceResponse>>()
+            var res = new ResultDto<IEnumerable<PackageRateResponse>>()
             {
                 IsSuccess = false,
                 Data = null,
                 Errors = new List<string>()
             };
 
-            var response = await _iServiceRepository.GetAll();
+            var response = await _IPackageRateRepository.GetAll();
 
             if (response == null)
             {
@@ -81,7 +79,7 @@ namespace BusinessServices.Implementation
                 res.IsSuccess = true;
                 try
                 {
-                    res.Data = _mapper.Map<IEnumerable<Service>, IEnumerable<ServiceResponse>>(response);
+                    res.Data = _mapper.Map<IEnumerable<PackageRate>, IEnumerable<PackageRateResponse>>(response);
 
                 }
                 catch (Exception ex)
@@ -92,16 +90,16 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<ServiceResponse>> GetById(long Id)
+        public async Task<ResultDto<PackageRateResponse>> GetById(long Id)
         {
-            var res = new ResultDto<ServiceResponse>()
+            var res = new ResultDto<PackageRateResponse>()
             {
                 IsSuccess = false,
                 Data = null,
                 Errors = new List<string>()
             };
 
-            var response = await _iServiceRepository.GetById(Id);
+            var response = await _IPackageRateRepository.GetById(Id);
             if (response == null)
             {
                 res.Errors.Add("Data Not Found !!");
@@ -109,36 +107,7 @@ namespace BusinessServices.Implementation
             else
             {
                 res.IsSuccess = true;
-                res.Data = _mapper.Map<Service, ServiceResponse>(response);
-            }
-            return res;
-        }
-        public async Task<ResultDto<IList<SelectListItem>>> GetServiceNames(long id)
-        {
-            var res = new ResultDto<IList<SelectListItem>>()
-            {
-                IsSuccess = false,
-                Data = null,
-                Errors = new List<string>()
-            };
-
-            var response = await _iServiceRepository.GetServiceNames(id);
-
-            if (response == null)
-            {
-                res.Errors.Add("Data Not Found !!");
-            }
-            else
-            {
-                res.IsSuccess = true;
-                try
-                {
-                    res.Data = response;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                res.Data = _mapper.Map<PackageRate, PackageRateResponse>(response);
             }
             return res;
         }
