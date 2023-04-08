@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.RequestDto;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Repositories.Interface
 {
@@ -9,5 +10,6 @@ namespace Repositories.Interface
         Task<long> Delete(long Id);
         Task<IEnumerable<SubPackage>> GetAll();
         Task<SubPackage> GetById(long Id);
+        Task<IList<SelectListItem>> GetSubPackageNames(long id);
     }
 }

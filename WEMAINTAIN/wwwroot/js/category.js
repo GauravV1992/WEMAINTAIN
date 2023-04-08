@@ -123,7 +123,7 @@ function OnCreatePageLoad() {
 			return;
 		}
 		$(':submit', this).attr('disabled', 'disabled');
-		/*$('#loading').show();*/
+		showLoader("divCreate");
 		$.ajax(
 			{
 				cache: false,
@@ -144,7 +144,8 @@ function OnCreatePageLoad() {
 					/*$('#loading').hide();*/
 					$(':submit').prop('disabled', false);
 					ClearControl();
-					RefreshGrid()
+					RefreshGrid();
+					hideLoader();
 				}
 			});
 	});
@@ -156,7 +157,7 @@ function OnEditPageLoad() {
 			return;
 		}
 		$(':submit', this).attr('disabled', 'disabled');
-		/*	$('#loading').show();*/
+		showLoader("divEdit");
 		$.ajax(
 			{
 				cache: false,
@@ -175,7 +176,8 @@ function OnEditPageLoad() {
 				complete: function () {
 					$(':submit').prop('disabled', false);
 					ClearControl();
-					RefreshGrid()
+					RefreshGrid();
+					hideLoader();
 				}
 			});
 	});

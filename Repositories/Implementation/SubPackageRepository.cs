@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Repositories.Interface;
 using Dapper;
 using System.Data;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Repositories.Implementation
 {
@@ -76,6 +76,25 @@ namespace Repositories.Implementation
                 var packages = await connection.QueryFirstOrDefaultAsync<SubPackage>
            (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return packages;
+            }
+        }
+        public async Task<IList<SelectListItem>> GetSubPackageNames(long id)
+        {
+            List<SelectListItem> dataList = new List<SelectListItem>();
+            var procedureName = "GetSubPackageNames";
+            var parameters = new DynamicParameters();
+            parameters.Add("PackageId", id, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var packages = await connection.QueryAsync<SubPackage>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+                dataList.Add(new SelectListItem() { Text = "Select", Value = "" });
+                foreach (var item in packages)
+                {
+                    dataList.Add(new SelectListItem { Text = item.Name.ToString(), Value = Convert.ToInt32(item.Id).ToString() });
+                }
+                return dataList;
             }
         }
 

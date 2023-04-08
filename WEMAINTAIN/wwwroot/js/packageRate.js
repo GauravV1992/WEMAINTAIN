@@ -1,53 +1,50 @@
 
-
-function AddSubPackage() {
-	$("#divSubPackage").empty();
-	//var clientId = $('#ClientId').val();
-	//var jsonObject = { clientId: clientId };
-
+function OnCreateEditPageLoad() {
+	OnCreatePageLoad();
+	OnEditPageLoad();
+	BindPackageNames();
+	BindServiceNames($('#SubPackageId').val());
+	GetSubPackageOnPackageChange();
+	$('#PackageId').on("change", GetSubPackageOnPackageChange);
+}
+function AddPackageRate() {
+	$("#divPackageRate").empty();
 	$.ajax({
 		type: "Get",
-		url: '/SubPackage/Create',
+		url: '/PackageRate/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
-			debugger;
-			$('#divSubPackage').html(response);
+			$('#divPackageRate').html(response);
 		},
 		complete: function () {
-			
-			/*$('#loading').hide();*/
 		}
 	});
 }
-function EditSubPackage(id) {
-	$("#divSubPackage").empty();
-	var jsonObject = { Id: id };
+function EditPackageRate(id) {
 
+	$("#divPackageRate").empty();
+	var jsonObject = { Id: id };
 	$.ajax({
 		type: "Get",
-		url: '/SubPackage/Edit',
+		url: '/PackageRate/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
-			debugger;
-			$('#divSubPackage').html(response);
+			$('#divPackageRate').html(response);
 		},
 		complete: function () {
-			
-			
 			ScrollToTop();
-	
 		}
 	});
 }
 function OnCancel() {
-	$("#divSubPackage").empty();
+	$("#divPackageRate").empty();
 }
-function BindSubPackageDatatable() {
-	$("#SubPackageGrid").DataTable({
+function BindPackageRateDatatable() {
+	$("#PackageRateGrid").DataTable({
+
 		"language": {
-			/*"zeroRecords": "No records found.",*/
 			"infoFiltered": "",
 			"infoPostFix": ""
 		},
@@ -61,7 +58,7 @@ function BindSubPackageDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/SubPackage/GetAll",
+			"url": "/PackageRate/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -70,7 +67,11 @@ function BindSubPackageDatatable() {
 		},
 		"columns": [{ "data": "id" },
 		{ "data": "packageName" },
-		{ "data": "name" },
+		{ "data": "subPackageName" },
+		{ "data": "serviceName" },
+		{ "data": "rate" },
+		{ "data": "discount" },
+		{ "data": "packageAmount" },
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -100,32 +101,35 @@ function BindSubPackageDatatable() {
 }
 function CreateActionButton(id) {
 	var html = '';
-	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditSubPackage(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
+	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditPackageRate(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
 	return html;
 }
 
-
-function OnCreateEditPageLoad() {
-	OnCreatePageLoad();
-	OnEditPageLoad();
-	BindPackageNames();
+function GetSubPackageOnPackageChange() {
+	debugger;
+	BindSubPackageNames($('#PackageId').val());
 }
-
 function ValidateForm() {
-	if (CheckUndefinedBlankAndNull($("#Name").val())) {
-		toastr.error('Please Enter Sub-Package Name');
+	if (CheckUndefinedBlankAndNull($("#PackageId").val())) {
+		toastr.error('Please Select Package Name');
 		return false;
 	}
-	if ($("#PackageId").val()=="") {
-		toastr.error('Please Select Package Name');
+	else if (CheckUndefinedBlankAndNull($("#SubPackageId").val())) {
+		toastr.error('Please Select Sub Package Name');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#ServiceId").val())) {
+		toastr.error('Please Select Service Name');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#Rate").val())) {
+		toastr.error('Please Enter Rate');
 		return false;
 	}
 	return true;
 }
-
 function OnCreatePageLoad() {
 	$("#frmCreate").on("submit", function (e) {
-		debugger;
 		e.preventDefault();
 		if (!ValidateForm()) {
 			return;
@@ -149,10 +153,9 @@ function OnCreatePageLoad() {
 					}
 				},
 				complete: function () {
-					/*$('#loading').hide();*/
 					$(':submit').prop('disabled', false);
 					ClearControl();
-					RefreshGrid()
+					RefreshGrid();
 					hideLoader();
 				}
 			});
@@ -165,7 +168,7 @@ function OnEditPageLoad() {
 			return;
 		}
 		$(':submit', this).attr('disabled', 'disabled');
-		showLoader("divEdit");
+		showLoader("divCreate");
 		$.ajax(
 			{
 				cache: false,
@@ -192,16 +195,10 @@ function OnEditPageLoad() {
 }
 function Delete(Id) {
 	if (confirm(confirmDeleteRecord)) {
-		//window.addAntiForgeryToken = function (Id) {
 		var jsonObject = { Id: Id };
-		//	jsonObject._RequestVerificationToken = $("#lstLedger").find('input[name=_RequestVerificationToken]').val();
-		//	return jsonObject;
-		//};
-		//var jsonObject = window.addAntiForgeryToken(Id);
-		//$('#loading').show();
 		$.ajax({
 			type: "POST",
-			url: "/SubPackage/Delete",
+			url: "/PackageRate/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",
@@ -214,18 +211,15 @@ function Delete(Id) {
 				}
 			},
 			complete: function () {
-				//$('#loading').hide();
 				$('#tr_' + jsonObject.Id).remove();
 			}
 		});
-
 	}
 }
 function ClearControl() {
-	$("#divSubPackage").empty();
+	$("#divPackageRate").empty();
 }
-
 function RefreshGrid() {
-	var oTable = $('#SubPackageGrid').DataTable();
+	var oTable = $('#PackageRateGrid').DataTable();
 	oTable.ajax.reload();
 }

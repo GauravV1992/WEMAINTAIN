@@ -6,6 +6,8 @@ using AutoMapper.Mappers;
 using Repositories;
 using BusinessEntities.Common;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Repositories.Implementation;
 //using AutoMapper;
 
 namespace BusinessServices.Implementation
@@ -108,6 +110,35 @@ namespace BusinessServices.Implementation
             {
                 res.IsSuccess = true;
                 res.Data = _mapper.Map<SubPackage, SubPackageResponse>(response);
+            }
+            return res;
+        }
+        public async Task<ResultDto<IList<SelectListItem>>> GetSubPackageNames(long id)
+        {
+            var res = new ResultDto<IList<SelectListItem>>()
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
+
+            var response = await _iSubPackageRepository.GetSubPackageNames(id);
+
+            if (response == null)
+            {
+                res.Errors.Add("Data Not Found !!");
+            }
+            else
+            {
+                res.IsSuccess = true;
+                try
+                {
+                    res.Data = response;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             return res;
         }

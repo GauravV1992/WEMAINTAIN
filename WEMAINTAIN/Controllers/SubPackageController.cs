@@ -2,6 +2,7 @@
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http.Json;
@@ -116,6 +117,29 @@ namespace WEMAINTAIN.Controllers
                 {
                     recordsTotal = 1,
                     data = categories.Data.ToList()
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetSubPackageNames(int packageId)
+        {
+            try
+            {
+                var subPackages = new ResultDto<IEnumerable<SelectListItem>>();
+                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackageNames/" + packageId + "");
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                    subPackages = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                }
+                return Json(new
+                {
+                    data = subPackages.Data.ToList()
                 });
             }
             catch (Exception ex)

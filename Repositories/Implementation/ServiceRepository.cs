@@ -5,6 +5,7 @@ using Repositories.Interface;
 
 using Dapper;
 using System.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Repositories.Implementation
 {
@@ -73,6 +74,25 @@ namespace Repositories.Implementation
                 var Services = await connection.QueryFirstOrDefaultAsync<Service>
            (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return Services;
+            }
+        }
+        public async Task<IList<SelectListItem>> GetServiceNames(long id)
+        {
+            List<SelectListItem> dataList = new List<SelectListItem>();
+            var procedureName = "GetServiceNames";
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var packages = await connection.QueryAsync<Service>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+                dataList.Add(new SelectListItem() { Text = "Select", Value = "" });
+                foreach (var item in packages)
+                {
+                    dataList.Add(new SelectListItem { Text = item.Name.ToString(), Value = Convert.ToInt32(item.Id).ToString() });
+                }
+                return dataList;
             }
         }
 
