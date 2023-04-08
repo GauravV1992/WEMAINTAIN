@@ -18,9 +18,21 @@ function showLoader(divId) {
 function CheckUndefinedBlankAndNull(object) {
 	return (object === undefined || object === null || object === '');
 }
-function CheckMobileNumber(control) {
-
+function CheckEmailAddress(email) {
+	// Validate email format
+	var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	return expr.test(email);
 }
+
+$(document).ready(function () {
+	$('.numberonly').keypress(function (e) {
+		var charCode = (e.which) ? e.which : e.keyCode
+		if (String.fromCharCode(charCode).match(/[^0-9]/g))
+			return false;
+	});    
+});
+
+
 function BindPackageNames() {
 	var siteId = $('#SiteId').val();
 	var jsonObject = { siteId: siteId };

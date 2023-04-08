@@ -115,14 +115,28 @@ function ValidateForm() {
 		toastr.error('Please Enter Last Name');
 		return false;
 	}
+	else if (CheckUndefinedBlankAndNull($("#MobileNo").val())) {
+		toastr.error('Please Enter Mobile Number');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#Address").val())) {
+		toastr.error('Please Enter Address');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#Email").val())) {
+		toastr.error('Please Enter EmailAddress');
+		return false;
+	}
+	else if (!CheckEmailAddress($("#Email").val())) {
+		toastr.error('Invalid EmailAddress!');
+		return false;
+	}
+	
 	return true;
 }
 function OnCreatePageLoad() {
 	$("#frmCreate").on("submit", function (e) {
 		e.preventDefault();
-		//if (!$(this).valid()) {
-		//	return;
-		//}
 		if (!ValidateForm()) {
 			return;
 		}
@@ -156,9 +170,6 @@ function OnCreatePageLoad() {
 function OnEditPageLoad() {
 	$("#frmEdit").on("submit", function (e) {
 		e.preventDefault();
-		//if (!$(this).valid()) {
-		//	return;
-		//}
 		if (!ValidateForm()) {
 			return;
 		}

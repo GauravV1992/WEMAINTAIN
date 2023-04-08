@@ -109,13 +109,26 @@ function OnCreateEditPageLoad() {
 	OnEditPageLoad();
 	BindPackageNames();
 }
+
+function ValidateForm() {
+	if (CheckUndefinedBlankAndNull($("#Name").val())) {
+		toastr.error('Please Enter Sub-Package Name');
+		return false;
+	}
+	if ($("#PackageId").val()=="") {
+		toastr.error('Please Select Package Name');
+		return false;
+	}
+	return true;
+}
+
 function OnCreatePageLoad() {
 	$("#frmCreate").on("submit", function (e) {
 		debugger;
 		e.preventDefault();
-		//if (!$(this).valid()) {
-		//	return;
-		//}
+		if (!ValidateForm()) {
+			return;
+		}
 		$(':submit', this).attr('disabled', 'disabled');
 		/*$('#loading').show();*/
 		$.ajax(
@@ -146,9 +159,9 @@ function OnCreatePageLoad() {
 function OnEditPageLoad() {
 	$("#frmEdit").on("submit", function (e) {
 		e.preventDefault();
-		//if (!$(this).valid()) {
-		//	return;
-		//}
+		if (!ValidateForm()) {
+			return;
+		}
 		$(':submit', this).attr('disabled', 'disabled');
 		/*	$('#loading').show();*/
 		$.ajax(
