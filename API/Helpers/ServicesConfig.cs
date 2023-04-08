@@ -16,6 +16,8 @@ namespace API.Helpers
         {
             services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+            services.AddScoped(typeof(IUserService), typeof(UserService));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(IServiceRepository), typeof(ServiceRepository));
             services.AddScoped(typeof(IServiceService), typeof(ServiceService));
             services.AddScoped(typeof(ISubPackageRepository), typeof(SubPackageRepository));

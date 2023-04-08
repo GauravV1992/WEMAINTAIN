@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\user.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\js\service.js" />
     <Content Remove="wwwroot\js\subpackage.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\css\styles.css" />
+    <None Include="wwwroot\js\user.js" />
     <None Include="wwwroot\js\subpackage.js" />
     <None Include="wwwroot\js\service.js" />
     <None Include="wwwroot\js\category.js" />
