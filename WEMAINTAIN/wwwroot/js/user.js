@@ -62,11 +62,11 @@ function BindUserDatatable() {
 			},
 		},
 		"columns": [{ "data": "id" },
-			{ "data": "firstName" },
-			{ "data": "lastName" },
-			{ "data": "address" },
-			{ "data": "email" },
-			{ "data": "mobileNo" },
+		{ "data": "firstName" },
+		{ "data": "lastName" },
+		{ "data": "address" },
+		{ "data": "email" },
+		{ "data": "mobileNo" },
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -105,13 +105,27 @@ function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
 	OnEditPageLoad();
 }
+
+function ValidateForm() {
+	if (CheckUndefinedBlankAndNull($("#FirstName").val())) {
+		toastr.error('Please Enter First Name');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#LastName").val())) {
+		toastr.error('Please Enter Last Name');
+		return false;
+	}
+	return true;
+}
 function OnCreatePageLoad() {
 	$("#frmCreate").on("submit", function (e) {
-		debugger;
 		e.preventDefault();
 		//if (!$(this).valid()) {
 		//	return;
 		//}
+		if (!ValidateForm()) {
+			return;
+		}
 		$(':submit', this).attr('disabled', 'disabled');
 		/*$('#loading').show();*/
 		$.ajax(
@@ -145,6 +159,9 @@ function OnEditPageLoad() {
 		//if (!$(this).valid()) {
 		//	return;
 		//}
+		if (!ValidateForm()) {
+			return;
+		}
 		$(':submit', this).attr('disabled', 'disabled');
 		/*	$('#loading').show();*/
 		$.ajax(

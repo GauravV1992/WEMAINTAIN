@@ -10,27 +10,30 @@
             Edit User
         </div>
         <div class="card-body">
-            <div class="mb-3 col-md-4">
-                <label for="exampleFormControlInput1" class="form-label">FirstName</label>
-                @Html.TextBoxFor(model => model.FirstName, new { @Class = "form-control" })
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">FirstName</label>
+                    @Html.TextBoxFor(model => model.FirstName, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">LastName</label>
+                    @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">MobileNo</label>
+                    @Html.TextBoxFor(model => model.MobileNo, new { @Class = "form-control" })
+                </div>
             </div>
-            <div class="mb-3 col-md-4">
-                <label for="exampleFormControlInput1" class="form-label">LastName</label>
-                @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control" })
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Address</label>
+                    @Html.TextBoxFor(model => model.Address, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    @Html.TextBoxFor(model => model.Email, new { @Class = "form-control" })
+                </div>
             </div>
-            <div class="mb-3 col-md-4">
-                <label for="exampleFormControlInput1" class="form-label">MobileNo</label>
-                @Html.TextBoxFor(model => model.MobileNo, new { @Class = "form-control" })
-            </div>
-            <div class="mb-3 col-md-6">
-                <label for="exampleFormControlInput1" class="form-label">Address</label>
-                @Html.TextBoxFor(model => model.Address, new { @Class = "form-control" })
-            </div>
-            <div class="mb-3 col-md-6">
-                <label for="exampleFormControlInput1" class="form-label">Email</label>
-                @Html.TextBoxFor(model => model.Email, new { @Class = "form-control" })
-            </div>
-            
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
                 <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>

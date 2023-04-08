@@ -18,6 +18,9 @@ function showLoader(divId) {
 function CheckUndefinedBlankAndNull(object) {
 	return (object === undefined || object === null || object === '');
 }
+function CheckMobileNumber(control) {
+
+}
 function BindPackageNames() {
 	var siteId = $('#SiteId').val();
 	var jsonObject = { siteId: siteId };
