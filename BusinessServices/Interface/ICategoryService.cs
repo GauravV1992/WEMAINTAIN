@@ -1,6 +1,8 @@
 ﻿using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace BusinessServices.Interface
 {
@@ -11,5 +13,6 @@ namespace BusinessServices.Interface
         Task<ResultDto<long>> Delete(long Id);
         Task<ResultDto<IEnumerable<CategoryResponse>>> GetAll();
         Task<ResultDto<CategoryResponse>> GetById(long Id);
+        Task<ResultDto<IList<SelectListItem>>> GetPackages();
     }
 }

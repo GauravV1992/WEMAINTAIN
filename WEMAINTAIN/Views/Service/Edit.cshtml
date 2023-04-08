@@ -1,0 +1,29 @@
+﻿@using BusinessEntities.ResponseDto
+@model ServiceResponse
+@using (Html.BeginForm("Update", "Service", FormMethod.Post, new { @id = "frmEdit" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="card">
+        <div class="card-header">
+            Create Service
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Service Name</label>
+                @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" })
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
+                <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        OnCreateEditPageLoad();
+    })
+</script>

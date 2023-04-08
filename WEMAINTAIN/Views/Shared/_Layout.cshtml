@@ -11,8 +11,7 @@
     <script src="~/js/common.js"></script>
     <script src="~/js/jquery.datatables.min.js"></script>
     <script src="~/js/datatables.bootstrap5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    <script src="~/js/toastr.min.js"></script>
 </head>
 <body>
     <header>
@@ -35,7 +34,8 @@
                             <a class="nav-link text-dark dropdown-toggle" href="#" data-bs-toggle="dropdown">Master</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index">Package</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Services</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="SubPackage" asp-action="Index">Sub Package</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Service" asp-action="Index">Services</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">

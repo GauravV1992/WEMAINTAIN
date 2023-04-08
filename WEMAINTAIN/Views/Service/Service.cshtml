@@ -1,0 +1,33 @@
+﻿@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12">
+        <input value="Create" onclick="AddService()" class="btn btn-primary btn-sm float-end" type="button" />
+    </div>
+</div>
+<div class="pt-2" id="divService">
+  
+</div>
+<h5>Service List</h5>
+<div class="row">
+    <div class="col-md-12 pt-2">
+        <section id="header">
+            <table id="ServiceGrid" class="table table-bordered  table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Service Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+<script src="~/js/Service.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        BindServiceDatatable();
+    });
+</script>

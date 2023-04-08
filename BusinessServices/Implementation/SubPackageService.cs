@@ -6,21 +6,20 @@ using AutoMapper.Mappers;
 using Repositories;
 using BusinessEntities.Common;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
 //using AutoMapper;
 
 namespace BusinessServices.Implementation
 {
-    public class CategoryService : ICategoryService
+    public class SubPackageService : ISubPackageService
     {
-        private readonly ICategoryRepository _iCategoryRepository;
+        private readonly ISubPackageRepository _iSubPackageRepository;
         private IMapper _mapper;
-        public CategoryService(ICategoryRepository repository, IMapper mapper)
+        public SubPackageService(ISubPackageRepository repository, IMapper mapper)
         {
-            _iCategoryRepository = repository;
+            _iSubPackageRepository = repository;
             _mapper = mapper;
         }
-        public async Task<ResultDto<long>> Add(CategoryRequest viewModel)
+        public async Task<ResultDto<long>> Add(SubPackageRequest viewModel)
         {
             var res = new ResultDto<long>()
             {
@@ -28,12 +27,12 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = await _iCategoryRepository.Add(viewModel);
+            var response = await _iSubPackageRepository.Add(viewModel);
             res.IsSuccess = true;
             res.Data = response;
             return res;
         }
-        public async Task<ResultDto<long>> Update(CategoryRequest viewModel)
+        public async Task<ResultDto<long>> Update(SubPackageRequest viewModel)
         {
             var res = new ResultDto<long>()
             {
@@ -41,7 +40,7 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = await _iCategoryRepository.Update(viewModel);
+            var response = await _iSubPackageRepository.Update(viewModel);
             res.IsSuccess = true;
             res.Data = response;
             return res;
@@ -54,22 +53,22 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
-            var response = await _iCategoryRepository.Delete(Id);
+            var response = await _iSubPackageRepository.Delete(Id);
             res.IsSuccess = true;
             res.Data = response;
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<CategoryResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<SubPackageResponse>>> GetAll()
         {
-            var res = new ResultDto<IEnumerable<CategoryResponse>>()
+            var res = new ResultDto<IEnumerable<SubPackageResponse>>()
             {
                 IsSuccess = false,
                 Data = null,
                 Errors = new List<string>()
             };
 
-            var response = await _iCategoryRepository.GetAll();
+            var response = await _iSubPackageRepository.GetAll();
 
             if (response == null)
             {
@@ -80,7 +79,7 @@ namespace BusinessServices.Implementation
                 res.IsSuccess = true;
                 try
                 {
-                    res.Data = _mapper.Map<IEnumerable<Package>, IEnumerable<CategoryResponse>>(response);
+                    res.Data = _mapper.Map<IEnumerable<SubPackage>, IEnumerable<SubPackageResponse>>(response);
 
                 }
                 catch (Exception ex)
@@ -91,16 +90,16 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<CategoryResponse>> GetById(long Id)
+        public async Task<ResultDto<SubPackageResponse>> GetById(long Id)
         {
-            var res = new ResultDto<CategoryResponse>()
+            var res = new ResultDto<SubPackageResponse>()
             {
                 IsSuccess = false,
                 Data = null,
                 Errors = new List<string>()
             };
 
-            var response = await _iCategoryRepository.GetById(Id);
+            var response = await _iSubPackageRepository.GetById(Id);
             if (response == null)
             {
                 res.Errors.Add("Data Not Found !!");
@@ -108,41 +107,9 @@ namespace BusinessServices.Implementation
             else
             {
                 res.IsSuccess = true;
-                res.Data = _mapper.Map<Package, CategoryResponse>(response);
+                res.Data = _mapper.Map<SubPackage, SubPackageResponse>(response);
             }
             return res;
         }
-
-        public async Task<ResultDto<IList<SelectListItem>>> GetPackages()
-        {
-            var res = new ResultDto<IList<SelectListItem>>()
-            {
-                IsSuccess = false,
-                Data = null,
-                Errors = new List<string>()
-            };
-
-            var response = await _iCategoryRepository.GetPackages();
-
-            if (response == null)
-            {
-                res.Errors.Add("Data Not Found !!");
-            }
-            else
-            {
-                res.IsSuccess = true;
-                try
-                {
-                    res.Data = response;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            return res;
-        }
-
-       
     }
 }

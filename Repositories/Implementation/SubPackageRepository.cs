@@ -2,94 +2,83 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interface;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Dapper;
 using System.Data;
 
+
 namespace Repositories.Implementation
 {
-    public class CategoryRepository : ICategoryRepository
+    public class SubPackageRepository : ISubPackageRepository
     {
         private readonly ApplicationDBContext _context;
-        public CategoryRepository(ApplicationDBContext context)
+        public SubPackageRepository(ApplicationDBContext context)
         {
             _context = context;
         }
-        public async Task<long> Add(CategoryRequest viewModel)
+        public async Task<long> Add(SubPackageRequest viewModel)
         {
-            var procedureName = "SavePackage";
+            var procedureName = "SaveSubPackage";
             var parameters = new DynamicParameters();
+            parameters.Add("PackageId", viewModel.PackageId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
+
             using (var connection = _context.CreateConnection())
             {
-                var packages = await connection.QuerySingleAsync<Package>
+                var packages = await connection.QuerySingleAsync<SubPackage>
            (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return packages.Id;
             }
         }
-        public async Task<long> Update(CategoryRequest viewModel)
+        public async Task<long> Update(SubPackageRequest viewModel)
         {
-            var procedureName = "SavePackage";
+            var procedureName = "SaveSubPackage";
             var parameters = new DynamicParameters();
             parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
             parameters.Add("Id", viewModel.Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("PackageId", viewModel.PackageId, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
-                var packages = await connection.QuerySingleAsync<Package>
+                var packages = await connection.QuerySingleAsync<SubPackage>
            (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return packages.Id;
             }
         }
         public async Task<long> Delete(long id)
         {
-            var procedureName = "DeletePackage";
+            var procedureName = "DeleteSubPackage";
             var parameters = new DynamicParameters();
             parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
-                var packages = await connection.QuerySingleAsync<Package>
+                var packages = await connection.QuerySingleAsync<SubPackage>
            (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return packages.Id;
             }
         }
-        public async Task<IEnumerable<Package>> GetAll()
+
+        public async Task<IEnumerable<SubPackage>> GetAll()
         {
-            var procedureName = "GetAllPackage";
+            var procedureName = "GetAllSubPackage";
             using (var connection = _context.CreateConnection())
             {
-                var packages = await connection.QueryAsync<Package>
+                var packages = await connection.QueryAsync<SubPackage>
            (procedureName, null, commandType: CommandType.StoredProcedure);
                 return packages;
             }
         }
-        public async Task<Package> GetById(long id)
+        public async Task<SubPackage> GetById(long id)
         {
-            var procedureName = "GetPackageById";
+            var procedureName = "GetSubPackageById";
             var parameters = new DynamicParameters();
             parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
-                var packages = await connection.QueryFirstOrDefaultAsync<Package>
+                var packages = await connection.QueryFirstOrDefaultAsync<SubPackage>
            (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return packages;
             }
         }
-        public async Task<IList<SelectListItem>> GetPackages()
-        {
-            List<SelectListItem> dataList = new List<SelectListItem>();
-            var procedureName = "GetPackageNames";
-            using (var connection = _context.CreateConnection())
-            {
-                var packages = await connection.QueryAsync<Package>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
 
-                dataList.Add(new SelectListItem() { Text = "Select", Value = "" });
-                foreach (var item in packages)
-                {
-                    dataList.Add(new SelectListItem { Text = item.Name.ToString(), Value = Convert.ToInt32(item.Id).ToString() });
-                }
-                return dataList;
-            }
-        }
+
     }
 }
