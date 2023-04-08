@@ -16,6 +16,10 @@ namespace API.Helpers
         {
             services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+            services.AddScoped(typeof(IServiceRepository), typeof(ServiceRepository));
+            services.AddScoped(typeof(IServiceService), typeof(ServiceService));
+            services.AddScoped(typeof(ISubPackageRepository), typeof(SubPackageRepository));
+            services.AddScoped(typeof(ISubPackageService), typeof(SubPackageService));
 
         }
         public static void AddConfigure(IApplicationBuilder app, IWebHostEnvironment env)

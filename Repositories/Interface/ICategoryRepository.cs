@@ -1,5 +1,5 @@
 ﻿using BusinessEntities.RequestDto;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Repositories.Interface
 {
     public interface ICategoryRepository
@@ -9,5 +9,6 @@ namespace Repositories.Interface
         Task<long> Delete(long Id);
         Task<IEnumerable<Package>> GetAll();
         Task<Package> GetById(long Id);
+        Task<IList<SelectListItem>> GetPackages();
     }
 }

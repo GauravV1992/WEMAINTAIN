@@ -2,7 +2,6 @@
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http.Json;
@@ -17,49 +16,49 @@ using WEMAINTAIN.Models;
 
 namespace WEMAINTAIN.Controllers
 {
-    public class CategoryController : Controller
+    public class ServiceController : Controller
     {
-        private readonly ILogger<CategoryController> _logger;
+        private readonly ILogger<ServiceController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public CategoryController(ILogger<CategoryController> logger, IHttpClientFactory httpClientFactory)
+        public ServiceController(ILogger<ServiceController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
         }
         public IActionResult Index()
         {
-            return View("Categories");
+            return View("Service");
         }
 
         [HttpGet]
-        public ActionResult Create(CategoryRequest request)
+        public ActionResult Create(ServiceRequest request)
         {
-            var categories = new CategoryRequest();
-            return PartialView("~/views/category/create.cshtml", categories);
+            var Service = new ServiceRequest();
+            return PartialView("~/views/Service/create.cshtml", Service);
         }
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var categories = new ResultDto<CategoryResponse>();
+            var Service = new ResultDto<ServiceResponse>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-            var httpResponseMessage = await httpClient.GetAsync("Category/GetById/" + id + "");
+            var httpResponseMessage = await httpClient.GetAsync("Service/GetById/" + id + "");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                categories = JsonSerializer.Deserialize<ResultDto<CategoryResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                Service = JsonSerializer.Deserialize<ResultDto<ServiceResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return PartialView("~/views/category/edit.cshtml", categories.Data);
+            return PartialView("~/views/Service/edit.cshtml", Service.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Save(CategoryRequest request)
+        public async Task<ActionResult> Save(ServiceRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
             {
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/Save", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/Save", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -71,13 +70,13 @@ namespace WEMAINTAIN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(CategoryRequest request)
+        public async Task<ActionResult> Update(ServiceRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
             {
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/Update", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/Update", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -93,7 +92,7 @@ namespace WEMAINTAIN.Controllers
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
             ValueRequest objValue = new ValueRequest();
             objValue.Id = id;
-            var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/Delete", objValue);
+            var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/Delete", objValue);
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -104,49 +103,24 @@ namespace WEMAINTAIN.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> GetAll(CategoryRequest request)
+        public async Task<ActionResult> GetAll(ServiceRequest request)
         {
             try
             {
                 //var page = request.Start / request.Length + 1;
-                var categories = new ResultDto<IEnumerable<CategoryResponse>>();
+                var Service = new ResultDto<IEnumerable<ServiceResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                var httpResponseMessage = await httpClient.GetAsync("Category/GetAll");
+                var httpResponseMessage = await httpClient.GetAsync("Service/GetAll");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<CategoryResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<CategoryResponse>>>(contentStream);
+                    Service = JsonSerializer.Deserialize<ResultDto<IEnumerable<ServiceResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    //Service = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<ServiceResponse>>>(contentStream);
                 }
                 return Json(new
                 {
                     recordsTotal = 1,
-                    data = categories.Data.ToList()
-                });
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> GetPackageNames()
-        {
-            try
-            {
-                var categories = new ResultDto<IEnumerable<SelectListItem>>();
-                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                var httpResponseMessage = await httpClient.GetAsync("Category/GetPackageNames");
-                if (httpResponseMessage.IsSuccessStatusCode)
-                {
-                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<CategoryResponse>>>(contentStream);
-                }
-                return Json(new
-                {
-                    data = categories.Data.ToList()
+                    data = Service.Data.ToList()
                 });
             }
             catch (Exception ex)
