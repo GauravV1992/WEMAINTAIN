@@ -10,19 +10,19 @@ namespace API.Controllers
     //[Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class ServiceController : ControllerBase
     {
-        private readonly ICategoryService _iCategoryService;
-        public CategoryController(ICategoryService iCategoryService)
+        private readonly IServiceService _iServiceService;
+        public ServiceController(IServiceService iServiceService)
         {
-            _iCategoryService = iCategoryService;
+            _iServiceService = iServiceService;
         }
 
         [HttpGet]
         [ActionName("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var res = await _iCategoryService.GetAll();
+            var res = await _iServiceService.GetAll();
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -34,7 +34,7 @@ namespace API.Controllers
         [ActionName("GetById")]
         public async Task<IActionResult> GetById(long Id)
         {
-            var res = await _iCategoryService.GetById(Id);
+            var res = await _iServiceService.GetById(Id);
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -44,13 +44,13 @@ namespace API.Controllers
 
         [HttpPost]
         [ActionName("Save")]
-        public async Task<IActionResult> Post([FromBody] CategoryRequest viewModel)
+        public async Task<IActionResult> Post([FromBody] ServiceRequest viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = await _iCategoryService.Add(viewModel);
+            var res = await _iServiceService.Add(viewModel);
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -61,13 +61,13 @@ namespace API.Controllers
 
         [HttpPost]
         [ActionName("Update")]
-        public async Task<IActionResult> Update([FromBody] CategoryRequest viewModel)
+        public async Task<IActionResult> Update([FromBody] ServiceRequest viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = await _iCategoryService.Update(viewModel);
+            var res = await _iServiceService.Update(viewModel);
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -84,7 +84,7 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = await _iCategoryService.Delete(viewModel.Id);
+            var res = await _iServiceService.Delete(viewModel.Id);
             if (res.IsSuccess)
             {
                 return Ok(res);
@@ -92,18 +92,6 @@ namespace API.Controllers
 
             return NotFound(res);
         }
-        [HttpGet]
-        [ActionName("GetPackageNames")]
-        public async Task<IActionResult> GetPackageNames()
-        {
-            var res = await _iCategoryService.GetPackages();
-            if (res.IsSuccess)
-            {
-                return Ok(res);
-            }
-            return NotFound(res);
-        }
-
 
     }
 }

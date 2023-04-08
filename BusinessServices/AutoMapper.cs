@@ -16,6 +16,8 @@ namespace BusinessServices.Automapper
         {
             //CreateMap<CategoryDto, Category>().ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Name)).ForMember(dest => dest.CategoryId, opt => opt.Ignore());
             CreateMap<Package, CategoryResponse>();
+            CreateMap<Service, ServiceResponse>();
+            CreateMap<SubPackage, SubPackageResponse>();
         }
     }
 }

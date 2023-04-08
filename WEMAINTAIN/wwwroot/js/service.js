@@ -1,35 +1,35 @@
-function AddPackage() {
-	$("#divPackage").empty();
+function AddService() {
+	$("#divService").empty();
 	//var clientId = $('#ClientId').val();
 	//var jsonObject = { clientId: clientId };
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Category/Create',
+		url: '/Service/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
 			debugger;
-			$('#divPackage').html(response);
+			$('#divService').html(response);
 		},
 		complete: function () {
 			/*$('#loading').hide();*/
 		}
 	});
 }
-function EditPackage(id) {
+function EditService(id) {
 	debugger;
-	$("#divPackage").empty();
+	$("#divService").empty();
 	var jsonObject = { Id: id };
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Category/Edit',
+		url: '/Service/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
 			debugger;
-			$('#divPackage').html(response);
+			$('#divService').html(response);
 		},
 		complete: function () {
 			/*$('#loading').hide();*/
@@ -37,10 +37,10 @@ function EditPackage(id) {
 	});
 }
 function OnCancel() {
-	$("#divPackage").empty();
+	$("#divService").empty();
 }
-function BindCategoryDatatable() {
-	$("#categoryGrid").DataTable({
+function BindServiceDatatable() {
+	$("#ServiceGrid").DataTable({
 
 		"language": {
 			/*"zeroRecords": "No records found.",*/
@@ -57,7 +57,7 @@ function BindCategoryDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/Category/GetAll",
+			"url": "/Service/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -95,15 +95,14 @@ function BindCategoryDatatable() {
 }
 function CreateActionButton(id) {
 	var html = '';
-	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditPackage(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
+	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditService(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
 	return html;
 }
 
- 
+
 function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
 	OnEditPageLoad();
-
 }
 function OnCreatePageLoad() {
 	$("#frmCreate").on("submit", function (e) {
@@ -181,7 +180,7 @@ function Delete(Id) {
 		//$('#loading').show();
 		$.ajax({
 			type: "POST",
-			url: "/Category/Delete",
+			url: "/Service/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",
@@ -202,11 +201,11 @@ function Delete(Id) {
 	}
 }
 function ClearControl() {
-	$("#divPackage").empty();
+	$("#divService").empty();
 }
 
 function RefreshGrid() {
 
-	var oTable = $('#categoryGrid').DataTable();
+	var oTable = $('#ServiceGrid').DataTable();
 	oTable.ajax.reload();
 }
