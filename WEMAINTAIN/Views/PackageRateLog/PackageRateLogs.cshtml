@@ -1,0 +1,32 @@
+﻿@Html.AntiForgeryToken()
+<div class="pt-2" id="divPackageRateLog">
+</div>
+<h5>Package Rate Log Report</h5>
+<div class="row">
+    <div class="col-md-12 pt-2">
+        <section id="header">
+            <table id="PackageRateLogGrid" class="table table-bordered  table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>PackageName</th>
+                        <th>SubPackageName</th>
+                        <th>ServiceName</th>
+                        <th>Rate</th>
+                        <th>Discount</th>
+                        <th>PackageAmount</th>
+                        <th>ModifiedOn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+<script src="~/js/packageratelog.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        BindPackageRateLogDatatable();
+    });
+</script>
