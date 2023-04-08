@@ -46,11 +46,12 @@ function OnCancel() {
 }
 function BindSubPackageDatatable() {
 	$("#SubPackageGrid").DataTable({
-		"processing": true, // for show progress bar,
-		"retrieve": true,
 		"language": {
-			'processing': 'Loading...'
+			/*"zeroRecords": "No records found.",*/
+			"infoFiltered": "",
+			"infoPostFix": ""
 		},
+		"processing": false,
 		"serverside": true,
 		"bLengthChange": false,
 		"pageLength": 10,
