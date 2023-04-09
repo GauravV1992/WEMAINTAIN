@@ -15,6 +15,7 @@ namespace Repositories
         public decimal Rate { get; set; }
         public decimal Discount { get; set; }
         public decimal PackageAmount { get; set; }
+        public string AMCPeriod { get; set; }
         // public DateTime ModifiedOn { get; set; }
     }
 }

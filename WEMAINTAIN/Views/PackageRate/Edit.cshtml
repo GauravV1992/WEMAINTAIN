@@ -38,6 +38,17 @@
                     @Html.TextBoxFor(model => model.PackageAmount, new { @Class = "form-control" })
                 </div>
             </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">AMC Period</label>
+                    @Html.DropDownListFor(model=>model.AMCPeriod,new List<SelectListItem>{new SelectListItem{ Text="Select", Value = "" },
+                new SelectListItem{ Text="Monthly", Value = "Monthly" },
+                new SelectListItem{ Text="Quarterly", Value = "Quarterly" },
+                new SelectListItem{ Text="Half yearly", Value = "Half yearly" },
+                new SelectListItem{ Text="Yearly", Value = "Yearly" }
+                },new {@Class="form-select"})
+                </div>
+            </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
                 <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
