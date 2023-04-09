@@ -30,6 +30,7 @@ function BindPackageRateLogDatatable() {
 			{ "data": "rate" },
 			{ "data": "discount" },
 			{ "data": "packageAmount" },
+			{ "data": "amcPeriod" },
 			{ "data": "modifiedOn" },
 		],
 		"columnDefs": [{

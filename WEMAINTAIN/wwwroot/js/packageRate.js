@@ -72,6 +72,7 @@ function BindPackageRateDatatable() {
 		{ "data": "rate" },
 		{ "data": "discount" },
 		{ "data": "packageAmount" },
+		{ "data": "amcPeriod" },
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -124,6 +125,10 @@ function ValidateForm() {
 	}
 	else if (CheckUndefinedBlankAndNull($("#Rate").val())) {
 		toastr.error('Please Enter Rate');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#AMCPeriod").val())) {
+		toastr.error('Please Select AMC Period');
 		return false;
 	}
 	return true;
