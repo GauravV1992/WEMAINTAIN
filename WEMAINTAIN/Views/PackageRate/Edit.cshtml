@@ -19,10 +19,17 @@
                     <label for="exampleFormControlInput1" class="form-label">Sub Package Name</label>
                     @Html.DropDownListFor(model=>model.SubPackageId,new List<SelectListItem>(),new {@Class="form-select"})
                 </div>
-                <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Service Name</label>
-                    @Html.DropDownListFor(model=>model.ServiceId,new List<SelectListItem>(),new {@Class="form-select"})
-                </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="exampleFormControlInput1" class="form-label">AMC Period</label>
+                    @Html.DropDownListFor(model=>model.AMCPeriod,new List<SelectListItem>{new SelectListItem{ Text="Select", Value = "" },
+                 new SelectListItem{ Text="Daily", Value = "Daily" },
+                    new SelectListItem{ Text="Monthly", Value = "Monthly" },
+                new SelectListItem{ Text="Quarterly", Value = "Quarterly" },
+                new SelectListItem{ Text="Half Yearly", Value = "Half Yearly" },
+                new SelectListItem{ Text="Yearly", Value = "Yearly" }
+                },new {@Class="form-select"})
+                    </div>
+               
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
@@ -39,15 +46,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">AMC Period</label>
-                    @Html.DropDownListFor(model=>model.AMCPeriod,new List<SelectListItem>{new SelectListItem{ Text="Select", Value = "" },
-                new SelectListItem{ Text="Monthly", Value = "Monthly" },
-                new SelectListItem{ Text="Quarterly", Value = "Quarterly" },
-                new SelectListItem{ Text="Half Yearly", Value = "Half Yearly" },
-                new SelectListItem{ Text="Yearly", Value = "Yearly" }
-                },new {@Class="form-select"})
-                </div>
+                     <div class="mb-3 col-md-4">
+                        <label for="exampleFormControlInput1" class="form-label">Service Name</label>
+                    @Html.DropDownListFor(model=>model.ServiceId,new List<SelectListItem>(),new {@Class="form-select"})
+                    </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>

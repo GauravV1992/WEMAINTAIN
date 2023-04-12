@@ -11,13 +11,14 @@
         </div>
         <div class="card-body">
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Sub Package Name</label>
-                @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" })
-            </div>
-            <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Select Package Name</label>
                 @Html.DropDownListFor(model=>model.PackageId,new List<SelectListItem>(),new {@Class="form-select"})
             </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Sub Package Name</label>
+                @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" })
+            </div>
+           
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
                 <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
