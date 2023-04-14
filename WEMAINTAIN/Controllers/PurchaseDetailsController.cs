@@ -16,7 +16,7 @@ namespace WEMAINTAIN.Controllers
 {
     public class PurchaseDetailsController : Controller
     {
-        private readonly ILogger<PackageRateController> _logger;
+        private readonly ILogger<PurchaseDetailsController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
         public PurchaseDetailsController(ILogger<PurchaseDetailsController> logger, IHttpClientFactory httpClientFactory)
         {
