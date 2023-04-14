@@ -61,7 +61,7 @@ namespace WEMAINTAIN.Controllers
                 //var page = request.Start / request.Length + 1;
                 var purchaseDetails = new ResultDto<IEnumerable<PurchaseDetailsResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                var httpResponseMessage = await httpClient.GetAsync("PackageRate/GetAll");
+                var httpResponseMessage = await httpClient.GetAsync("PurchaseDetails/GetAll");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
