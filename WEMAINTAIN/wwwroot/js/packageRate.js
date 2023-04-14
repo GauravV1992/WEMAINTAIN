@@ -73,7 +73,6 @@ function BindPackageRateDatatable() {
 		{ "data": "discount" },
 		{ "data": "packageAmount" },
 		{ "data": "amcPeriod" },
-		{ "data": "termsAndCondition" },
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -120,18 +119,27 @@ function ValidateForm() {
 		toastr.error('Please Select Sub Package Name');
 		return false;
 	}
-	else if (CheckUndefinedBlankAndNull($("#ServiceId").val())) {
-		toastr.error('Please Select Service Name');
+	else if (CheckUndefinedBlankAndNull($("#AMCPeriod").val())) {
+		toastr.error('Please Select AMC Period');
 		return false;
 	}
 	else if (CheckUndefinedBlankAndNull($("#Rate").val())) {
 		toastr.error('Please Enter Rate');
 		return false;
 	}
-	else if (CheckUndefinedBlankAndNull($("#AMCPeriod").val())) {
-		toastr.error('Please Select AMC Period');
+	else if (CheckUndefinedBlankAndNull($("#Discount").val())) {
+		toastr.error('Please Enter Discount');
 		return false;
 	}
+	else if (CheckUndefinedBlankAndNull($("#PackageAmount").val())) {
+		toastr.error('Please Enter Package Amount');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#ServiceId").val())) {
+		toastr.error('Please Select Service Name');
+		return false;
+	}
+	
 	return true;
 }
 function OnCreatePageLoad() {

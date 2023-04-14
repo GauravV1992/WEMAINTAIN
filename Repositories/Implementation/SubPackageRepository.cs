@@ -21,6 +21,7 @@ namespace Repositories.Implementation
             var parameters = new DynamicParameters();
             parameters.Add("PackageId", viewModel.PackageId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
+            parameters.Add("TermsAndCondition", viewModel.TermsAndCondition, DbType.String, ParameterDirection.Input);
 
             using (var connection = _context.CreateConnection())
             {
@@ -33,9 +34,10 @@ namespace Repositories.Implementation
         {
             var procedureName = "SaveSubPackage";
             var parameters = new DynamicParameters();
-            parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
             parameters.Add("Id", viewModel.Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
             parameters.Add("PackageId", viewModel.PackageId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("TermsAndCondition", viewModel.TermsAndCondition, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var packages = await connection.QuerySingleAsync<SubPackage>
