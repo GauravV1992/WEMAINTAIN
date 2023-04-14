@@ -50,15 +50,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Service Name</label>
                     @Html.DropDownListFor(model=>model.ServiceId,new List<SelectListItem>(),new {@Class="form-select"})
                     </div>
-                <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">AMC Period</label>
-                    @Html.DropDownListFor(model=>model.AMCPeriod,new List<SelectListItem>{new SelectListItem{ Text="Select", Value = "" },
-                new SelectListItem{ Text="Monthly", Value = "Monthly" },
-                new SelectListItem{ Text="Quarterly", Value = "Quarterly" },
-                new SelectListItem{ Text="Half Yearly", Value = "Half Yearly" },
-                new SelectListItem{ Text="Yearly", Value = "Yearly" }
-                },new {@Class="form-select"})
-                </div>
+             
                 <div class="mb-3 col-md-8">
                     <label for="exampleFormControlInput1" class="form-label">Terms & Condition</label>
                     @Html.TextAreaFor(model=>model.TermsAndCondition,new { @Class = "form-control" })
