@@ -1,7 +1,7 @@
 
 function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
-	OnEditPageLoad();
+	/*OnEditPageLoad();*/
 	BindPackageNames();
 	BindServiceNames($('#SubPackageId').val());
 	GetSubPackageOnPackageChange();
