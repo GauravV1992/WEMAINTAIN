@@ -18,6 +18,11 @@
                 <label for="exampleFormControlInput1" class="form-label">Sub Package Name</label>
                 @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" })
             </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Terms & Condition</label>
+                @Html.TextAreaFor(model => model.TermsAndCondition, new { @Class = "form-control" })
+
+            </div>
             
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>

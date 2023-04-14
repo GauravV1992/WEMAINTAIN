@@ -71,6 +71,7 @@ function BindSubPackageDatatable() {
 		"columns": [{ "data": "id" },
 		{ "data": "packageName" },
 		{ "data": "name" },
+		{ "data":"termsAndCondition"},
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -118,6 +119,11 @@ function ValidateForm() {
 	}
 	if ($("#PackageId").val()=="") {
 		toastr.error('Please Select Package Name');
+		return false;
+	}
+ 
+	if (CheckUndefinedBlankAndNull($("#TermsAndCondition").val())) {
+		toastr.error('Please Enter Terms And Condition');
 		return false;
 	}
 	return true;
