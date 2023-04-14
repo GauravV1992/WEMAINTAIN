@@ -13,9 +13,9 @@ namespace API.Controllers
     public class PurchaseDetailsController : ControllerBase
     {
         private readonly IPurchaseDetailsService _iPurchaseDetailsService;
-        public PurchaseDetailsController(IPurchaseDetailsService iPackageRateService)
+        public PurchaseDetailsController(IPurchaseDetailsService iPurchaseDetailsService)
         {
-            _iPurchaseDetailsService = iPackageRateService;
+            _iPurchaseDetailsService = iPurchaseDetailsService;
         }
 
         [HttpGet] 

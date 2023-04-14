@@ -1,13 +1,13 @@
 ﻿@using BusinessEntities.RequestDto
-@model PackageRateRequest
-@using (Html.BeginForm("Save", "PackageRate", FormMethod.Post, new { @id = "frmCreate" }))
+@model PurchaseDetailsRequest
+@using (Html.BeginForm("Save", "PurchaseDetails", FormMethod.Post, new { @id = "frmCreate" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
 
     <div class="card" id="divCreate">
         <div class="card-header">
-            Create Package Rate
+            Create Purchase Detail
         </div>
         <div class="card-body" id="divCreate">
             <div class="row">
@@ -42,6 +42,7 @@
             <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">AMC Period</label>
                 @Html.DropDownListFor(model=>model.AMCPeriod,new List<SelectListItem>{new SelectListItem{ Text="Select", Value = "" },
+            new SelectListItem{ Text="Daily", Value = "Daily" },
             new SelectListItem{ Text="Monthly", Value = "Monthly" },
             new SelectListItem{ Text="Quarterly", Value = "Quarterly" },
             new SelectListItem{ Text="Half Yearly", Value = "Half Yearly" },
@@ -60,7 +61,7 @@
 
 <script type="text/javascript">
     var packageId='';
-     var subPackageId='';
+    var subPackageId='';
     var serviceId = '';
     $(document).ready(function () {
         OnCreateEditPageLoad();

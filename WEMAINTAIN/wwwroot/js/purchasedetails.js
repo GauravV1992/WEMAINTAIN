@@ -7,8 +7,8 @@ function OnCreateEditPageLoad() {
 	GetSubPackageOnPackageChange();
 	$('#PackageId').on("change", GetSubPackageOnPackageChange);
 }
-function AddPackageRate() {
-	$("#divPackageRate").empty();
+function AddPurchaseDetails() {
+	$("#divPurchaseDetails").empty();
 	$.ajax({
 		type: "Get",
 		url: '/PurchaseDetails/Create',
@@ -21,27 +21,11 @@ function AddPackageRate() {
 		}
 	});
 }
-function EditPackageRate(id) {
-
-	$("#divPurchaseDetails").empty();
-	var jsonObject = { Id: id };
-	$.ajax({
-		type: "Get",
-		url: '/PurchaseDetails/Edit',
-		data: jsonObject,
-		datatype: "json",
-		success: function (response) {
-			$('#divPurchaseDetails').html(response);
-		},
-		complete: function () {
-			ScrollToTop();
-		}
-	});
-}
+ 
 function OnCancel() {
 	$("#divPurchaseDetails").empty();
 }
-function BindPackageRateDatatable() {
+function BindPurchaseDetailsDatatable() {
 	$("#PurchaseDetailsGrid").DataTable({
 
 		"language": {
@@ -73,12 +57,6 @@ function BindPackageRateDatatable() {
 		{ "data": "discount" },
 		{ "data": "packageAmount" },
 		{ "data": "amcPeriod" },
-		{
-			"name": "Action",
-			render: function (data, type, row) {
-				return CreateActionButton(row.id);
-			}
-		}
 		],
 		"columnDefs": [{
 			"defaultContent": "-",
@@ -119,18 +97,27 @@ function ValidateForm() {
 		toastr.error('Please Select Sub Package Name');
 		return false;
 	}
-	else if (CheckUndefinedBlankAndNull($("#ServiceId").val())) {
-		toastr.error('Please Select Service Name');
+	else if (CheckUndefinedBlankAndNull($("#AMCPeriod").val())) {
+		toastr.error('Please Select AMC Period');
 		return false;
 	}
 	else if (CheckUndefinedBlankAndNull($("#Rate").val())) {
 		toastr.error('Please Enter Rate');
 		return false;
 	}
-	else if (CheckUndefinedBlankAndNull($("#AMCPeriod").val())) {
-		toastr.error('Please Select AMC Period');
+	else if (CheckUndefinedBlankAndNull($("#Discount").val())) {
+		toastr.error('Please Enter Discount');
 		return false;
 	}
+	else if (CheckUndefinedBlankAndNull($("#PackageAmount").val())) {
+		toastr.error('Please Enter Package Amount');
+		return false;
+	}
+	else if (CheckUndefinedBlankAndNull($("#ServiceId").val())) {
+		toastr.error('Please Select Service Name');
+		return false;
+	}
+
 	return true;
 }
 function OnCreatePageLoad() {
@@ -166,61 +153,8 @@ function OnCreatePageLoad() {
 			});
 	});
 }
-//function OnEditPageLoad() {
-//	$("#frmEdit").on("submit", function (e) {
-//		e.preventDefault();
-//		if (!ValidateForm()) {
-//			return;
-//		}
-//		$(':submit', this).attr('disabled', 'disabled');
-//		showLoader("divCreate");
-//		$.ajax(
-//			{
-//				cache: false,
-//				async: true,
-//				type: "POST",
-//				url: $(this).attr('action'),
-//				data: $(this).serialize(),
-//				success: function (data) {
-//					debugger;
-//					if (data.data > 0) {
-//						toastr.success(suceessMsg);
-//					} else {
-//						toastr.error(errorMsg);
-//					}
-//				},
-//				complete: function () {
-//					$(':submit').prop('disabled', false);
-//					ClearControl();
-//					RefreshGrid();
-//					hideLoader();
-//				}
-//			});
-//	});
-//}
-function Delete(Id) {
-	if (confirm(confirmDeleteRecord)) {
-		var jsonObject = { Id: Id };
-		$.ajax({
-			type: "POST",
-			url: "/PurchaseDetails/Delete",
-			data: jsonObject,
-			async: false,
-			datatype: "json",
-			success: function (data) {
-				debugger;
-				if (data.data > 0) {
-					toastr.success(suceessMsgDelete);
-				} else {
-					toastr.error(errorMsg);
-				}
-			},
-			complete: function () {
-				$('#tr_' + jsonObject.Id).remove();
-			}
-		});
-	}
-}
+ 
+ 
 function ClearControl() {
 	$("#divPurchaseDetails").empty();
 }

@@ -29,6 +29,9 @@ namespace API.Helpers
             services.AddScoped(typeof(IPackageRateLogRepository), typeof(PackageRateLogRepository));
             services.AddScoped(typeof(IPackageRateLogService), typeof(PackageRateLogService));
 
+            services.AddScoped(typeof(IPurchaseDetailsRepository), typeof(PurchaseDetailsRepository));
+            services.AddScoped(typeof(IPurchaseDetailsService), typeof(PurchaseDetailsService));
+
         }
         public static void AddConfigure(IApplicationBuilder app, IWebHostEnvironment env)
         {
