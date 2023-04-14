@@ -11,11 +11,11 @@ function AddPackageRate() {
 	$("#divPackageRate").empty();
 	$.ajax({
 		type: "Get",
-		url: '/PackageRate/Create',
+		url: '/PurchaseDetails/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
-			$('#divPackageRate').html(response);
+			$('#divPurchaseDetails').html(response);
 		},
 		complete: function () {
 		}
@@ -23,15 +23,15 @@ function AddPackageRate() {
 }
 function EditPackageRate(id) {
 
-	$("#divPackageRate").empty();
+	$("#divPurchaseDetails").empty();
 	var jsonObject = { Id: id };
 	$.ajax({
 		type: "Get",
-		url: '/PackageRate/Edit',
+		url: '/PurchaseDetails/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
-			$('#divPackageRate').html(response);
+			$('#divPurchaseDetails').html(response);
 		},
 		complete: function () {
 			ScrollToTop();
@@ -39,10 +39,10 @@ function EditPackageRate(id) {
 	});
 }
 function OnCancel() {
-	$("#divPackageRate").empty();
+	$("#divPurchaseDetails").empty();
 }
 function BindPackageRateDatatable() {
-	$("#PackageRateGrid").DataTable({
+	$("#PurchaseDetailsGrid").DataTable({
 
 		"language": {
 			"infoFiltered": "",
@@ -58,7 +58,7 @@ function BindPackageRateDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/PackageRate/GetAll",
+			"url": "/PurchaseDetails/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -73,7 +73,6 @@ function BindPackageRateDatatable() {
 		{ "data": "discount" },
 		{ "data": "packageAmount" },
 		{ "data": "amcPeriod" },
-		{ "data": "termsAndCondition" },
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -167,44 +166,44 @@ function OnCreatePageLoad() {
 			});
 	});
 }
-function OnEditPageLoad() {
-	$("#frmEdit").on("submit", function (e) {
-		e.preventDefault();
-		if (!ValidateForm()) {
-			return;
-		}
-		$(':submit', this).attr('disabled', 'disabled');
-		showLoader("divCreate");
-		$.ajax(
-			{
-				cache: false,
-				async: true,
-				type: "POST",
-				url: $(this).attr('action'),
-				data: $(this).serialize(),
-				success: function (data) {
-					debugger;
-					if (data.data > 0) {
-						toastr.success(suceessMsg);
-					} else {
-						toastr.error(errorMsg);
-					}
-				},
-				complete: function () {
-					$(':submit').prop('disabled', false);
-					ClearControl();
-					RefreshGrid();
-					hideLoader();
-				}
-			});
-	});
-}
+//function OnEditPageLoad() {
+//	$("#frmEdit").on("submit", function (e) {
+//		e.preventDefault();
+//		if (!ValidateForm()) {
+//			return;
+//		}
+//		$(':submit', this).attr('disabled', 'disabled');
+//		showLoader("divCreate");
+//		$.ajax(
+//			{
+//				cache: false,
+//				async: true,
+//				type: "POST",
+//				url: $(this).attr('action'),
+//				data: $(this).serialize(),
+//				success: function (data) {
+//					debugger;
+//					if (data.data > 0) {
+//						toastr.success(suceessMsg);
+//					} else {
+//						toastr.error(errorMsg);
+//					}
+//				},
+//				complete: function () {
+//					$(':submit').prop('disabled', false);
+//					ClearControl();
+//					RefreshGrid();
+//					hideLoader();
+//				}
+//			});
+//	});
+//}
 function Delete(Id) {
 	if (confirm(confirmDeleteRecord)) {
 		var jsonObject = { Id: Id };
 		$.ajax({
 			type: "POST",
-			url: "/PackageRate/Delete",
+			url: "/PurchaseDetails/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",
@@ -223,9 +222,9 @@ function Delete(Id) {
 	}
 }
 function ClearControl() {
-	$("#divPackageRate").empty();
+	$("#divPurchaseDetails").empty();
 }
 function RefreshGrid() {
-	var oTable = $('#PackageRateGrid').DataTable();
+	var oTable = $('#PurchaseDetailsGrid').DataTable();
 	oTable.ajax.reload();
 }

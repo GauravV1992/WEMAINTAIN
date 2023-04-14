@@ -16,5 +16,7 @@ namespace Repositories
         public decimal Discount { get; set; }
         public decimal PackageAmount { get; set; }
         public string AMCPeriod { get; set; }
+
+        public string TermsAndCondition { get; set; }
     }
 }

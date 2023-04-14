@@ -48,11 +48,8 @@
             new SelectListItem{ Text="Yearly", Value = "Yearly" }
             },new {@Class="form-select"})
             </div>
-                <div class="mb-3 col-md-8">
-                    <label for="exampleFormControlInput1" class="form-label">Terms & Condition</label>
-                    @Html.TextAreaFor(model => model.TermsAndCondition, new { @Class = "form-control" })
-                </div>
-                </div>
+                
+          </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
                 <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>

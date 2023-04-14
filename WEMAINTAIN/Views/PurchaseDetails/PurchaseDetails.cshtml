@@ -1,17 +1,17 @@
 ﻿@Html.AntiForgeryToken()
 <div class="row">
     <div class="col-md-12">
-        <input value="Create" onclick="AddPackageRate()" class="btn btn-primary btn-sm float-end" type="button" />
+        <input value="Create" onclick="AddPurchaseDetails()" class="btn btn-primary btn-sm float-end" type="button" />
     </div>
 </div>
-<div class="pt-2" id="divPackageRate">
+<div class="pt-2" id="divPurchaseDetails">
   
 </div>
 <h5>Package Rate List</h5>
 <div class="row">
     <div class="col-md-12 pt-2">
         <section id="header">
-            <table id="PackageRateGrid" class="table table-bordered  table-striped">
+            <table id="PurchaseDetailsGrid" class="table table-bordered  table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -22,8 +22,6 @@
                         <th>Discount</th>
                         <th>Package Amount</th>
                         <th>AMC Period</th>
-                        <th>Terms And Condition</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +30,9 @@
         </section>
     </div>
 </div>
-<script src="~/js/PackageRate.js" asp-append-version="true"></script>
+<script src="~/js/purchasedetails.js" asp-append-version="true"></script>
 <script type="text/javascript">
     $(function () {
-        BindPackageRateDatatable();
+        BindPurchaseDetailsDatatable();
     });
 </script>

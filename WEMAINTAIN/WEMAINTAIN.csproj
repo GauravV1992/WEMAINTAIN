@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\js\packageRate.js" />
     <Content Remove="wwwroot\js\packageratelog.js" />
+    <Content Remove="wwwroot\js\purchasedetails.js" />
     <Content Remove="wwwroot\js\user.js" />
   </ItemGroup>
 
@@ -19,6 +20,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\styles.css" />
+    <None Include="wwwroot\js\purchasedetails.js" />
     <None Include="wwwroot\js\packageratelog.js" />
     <None Include="wwwroot\js\packageRate.js" />
     <None Include="wwwroot\js\user.js" />

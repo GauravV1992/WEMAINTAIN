@@ -2,7 +2,7 @@
 
 namespace BusinessEntities.ResponseDto
 {
-    public class PackageRateResponse : BaseResponse
+    public class PurchaseDetailsResponse : BaseResponse
     {
         public int Id { get; set; }
         public int PackageId { get; set; }
@@ -15,7 +15,6 @@ namespace BusinessEntities.ResponseDto
         public decimal Discount { get; set; }
         public decimal PackageAmount { get; set; }
         public string AMCPeriod { get; set; }
-
-        public string TermsAndCondition { get; set; }
+      
     }
 }
