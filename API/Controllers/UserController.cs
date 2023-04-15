@@ -13,6 +13,7 @@ namespace API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _iUserService;
+
         public UserController(IUserService iUserService)
         {
             _iUserService = iUserService;
@@ -85,6 +86,41 @@ namespace API.Controllers
                 return BadRequest(ModelState.Values.ToArray());
             }
             var res = await _iUserService.Delete(viewModel.Id);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+
+            return NotFound(res);
+        }
+
+
+        [HttpPost]
+        [ActionName("CheckUserLogin")]
+        public async Task<IActionResult> CheckUserLogin([FromBody] UserRequest viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.Values.ToArray());
+            }
+            var res = await _iUserService.CheckUserLogin(viewModel);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+
+            return NotFound(res);
+        }
+
+        [HttpPost]
+        [ActionName("ForgetPassword")]
+        public async Task<IActionResult> ForgetPassword([FromBody] UserRequest viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.Values.ToArray());
+            }
+            var res = await _iUserService.ForgetPassword(viewModel);
             if (res.IsSuccess)
             {
                 return Ok(res);

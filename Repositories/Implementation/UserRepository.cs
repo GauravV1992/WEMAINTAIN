@@ -90,6 +90,34 @@ namespace Repositories.Implementation
                 return user;
             }
         }
- 
+
+        public async Task<long> CheckUserLogin(UserRequest viewModel)
+        {
+            var procedureName = "GetUserDetailByMobilenoPassword";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", viewModel.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("Password", viewModel.Password, DbType.String, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QuerySingleAsync<User>
+                (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user.Id;
+            }
+        }
+
+        public async Task<long> ForgetPassword(UserRequest viewModel)
+        {
+            var procedureName = "UserDetailForgetPassword";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", viewModel.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("Password", viewModel.Password, DbType.String, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QuerySingleAsync<User>
+                (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user.Id;
+            }
+        }
+
     }
 }

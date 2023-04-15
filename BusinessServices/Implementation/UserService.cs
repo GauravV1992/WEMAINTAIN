@@ -58,7 +58,6 @@ namespace BusinessServices.Implementation
             res.Data = response;
             return res;
         }
-
         public async Task<ResultDto<IEnumerable<UserResponse>>> GetAll()
         {
             var res = new ResultDto<IEnumerable<UserResponse>>()
@@ -89,7 +88,6 @@ namespace BusinessServices.Implementation
             }
             return res;
         }
-
         public async Task<ResultDto<UserResponse>> GetById(long Id)
         {
             var res = new ResultDto<UserResponse>()
@@ -109,6 +107,32 @@ namespace BusinessServices.Implementation
                 res.IsSuccess = true;
                 res.Data = _mapper.Map<User, UserResponse>(response);
             }
+            return res;
+        }
+        public async Task<ResultDto<long>> CheckUserLogin(UserRequest viewModel)
+        {
+            var res = new ResultDto<long>()
+            {
+                IsSuccess = false,
+                Data = 0,
+                Errors = new List<string>()
+            };
+            var response = await _IUserRepository.CheckUserLogin(viewModel);
+            res.IsSuccess = true;
+            res.Data = response;
+            return res;
+        }
+        public async Task<ResultDto<long>> ForgetPassword(UserRequest viewModel)
+        {
+            var res = new ResultDto<long>()
+            {
+                IsSuccess = false,
+                Data = 0,
+                Errors = new List<string>()
+            };
+            var response = await _IUserRepository.ForgetPassword(viewModel);
+            res.IsSuccess = true;
+            res.Data = response;
             return res;
         }
     }
