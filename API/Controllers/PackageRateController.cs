@@ -1,5 +1,8 @@
-﻿using BusinessEntities.Common;
+﻿using API.Helpers;
+using API.JWTMiddleware;
+using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
+using BusinessEntities.ResponseDto;
 using BusinessServices.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +10,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    //[Authorize]
+    [CustomAuthorize("Admin")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class PackageRateController : ControllerBase
@@ -50,6 +53,8 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
+            LoginResponse user = Common.GetSessionData(HttpContext);
+            viewModel.CreatedBy = user.Id;
             var res = await _iPackageRateService.Add(viewModel);
             if (res.IsSuccess)
             {
@@ -67,6 +72,8 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
+            LoginResponse user = Common.GetSessionData(HttpContext);
+            viewModel.ModifiedBy = user.Id;
             var res = await _iPackageRateService.Update(viewModel);
             if (res.IsSuccess)
             {
@@ -84,6 +91,7 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
+            LoginResponse user = Common.GetSessionData(HttpContext);
             var res = await _iPackageRateService.Delete(viewModel.Id);
             if (res.IsSuccess)
             {

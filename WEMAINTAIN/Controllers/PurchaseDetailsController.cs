@@ -2,6 +2,7 @@
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http.Json;
@@ -43,6 +44,8 @@ namespace WEMAINTAIN.Controllers
             if (ModelState.IsValid)
             {
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.PostAsJsonAsync("PurchaseDetails/Save", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
@@ -61,6 +64,8 @@ namespace WEMAINTAIN.Controllers
                 //var page = request.Start / request.Length + 1;
                 var purchaseDetails = new ResultDto<IEnumerable<PurchaseDetailsResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.GetAsync("PurchaseDetails/GetAll");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {

@@ -1,4 +1,5 @@
-﻿using BusinessEntities.Common;
+﻿using API.JWTMiddleware;
+using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
 using BusinessServices.Implementation;
 using BusinessServices.Interface;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    //[Authorize]
+    [CustomAuthorize("Admin")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class PackageRateLogController : ControllerBase

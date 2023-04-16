@@ -11,10 +11,50 @@ using System.IO;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using AutoMapper.Configuration;
+using Repositories.Interface;
+using Repositories.Implementation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Diagnostics;
+using BusinessServices.Interface;
+using BusinessServices.Implementation;
+using API.JWTMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+var appSettingsSection = builder.Configuration.GetSection("AppSettings");
+builder.Services.Configure<AppSettings>(appSettingsSection);
+var appSettings = appSettingsSection.Get<AppSettings>();
+var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+builder.Services.AddAuthentication(
+    x =>
+    {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+    {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        //x.Events = new JwtBearerEvents
+        //{
+        //    OnMessageReceived = context =>
+        //    {
+        //        var token = context.HttpContext.Request.Cookies["access_token"];
+        //        context.Token = token;
+        //        return Task.CompletedTask;
+        //    },
+
+        //};
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 builder.Services.AddSingleton<ApplicationDBContext>();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -35,17 +75,24 @@ var mapper = config.CreateMapper();
 builder.Services.AddSingleton(mapper);
 ServicesConfig.AddExtensionServices(builder.Services);
 
-var appSettingsSection = builder.Configuration.GetSection("AppSettings");
-builder.Services.Configure<AppSettings>(appSettingsSection);
+
+
 
 
 
 var app = builder.Build();
 //app.UseRouting();
+
 ServicesConfig.AddConfigure(app, builder.Environment);
+
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
-//app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseMiddleware<JWTMiddleware>();
+
+
 app.MapControllers();
+
 app.Run();
 

@@ -17,7 +17,7 @@ namespace API.Helpers
             services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
             services.AddScoped(typeof(IUserService), typeof(UserService));
-            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+            services.AddSingleton(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(IServiceRepository), typeof(ServiceRepository));
             services.AddScoped(typeof(IServiceService), typeof(ServiceService));
             services.AddScoped(typeof(ISubPackageRepository), typeof(SubPackageRepository));
@@ -31,6 +31,11 @@ namespace API.Helpers
 
             services.AddScoped(typeof(IPurchaseDetailsRepository), typeof(PurchaseDetailsRepository));
             services.AddScoped(typeof(IPurchaseDetailsService), typeof(PurchaseDetailsService));
+            services.AddSingleton(typeof(IJWTAuthenticaitonManagerRepository), typeof(JWTAuthenticaitonManagerRepository));
+
+            services.AddSingleton(typeof (IJWTAuthenticaitonManagerService),typeof(JWTAuthenticaitonManagerService));
+            //services.AddScoped<API.JWTMiddleware.JWTMiddleware>();
+            services.AddScoped(typeof(IUserService), typeof(UserService));
 
         }
         public static void AddConfigure(IApplicationBuilder app, IWebHostEnvironment env)

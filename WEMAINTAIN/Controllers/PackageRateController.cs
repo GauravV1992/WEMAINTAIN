@@ -2,6 +2,7 @@
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http.Json;
@@ -39,6 +40,8 @@ namespace WEMAINTAIN.Controllers
         {
             var PackageRates = new ResultDto<PackageRateResponse>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
             var httpResponseMessage = await httpClient.GetAsync("PackageRate/GetById/" + id + "");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -56,6 +59,8 @@ namespace WEMAINTAIN.Controllers
             if (ModelState.IsValid)
             {
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/Save", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
@@ -74,6 +79,8 @@ namespace WEMAINTAIN.Controllers
             if (ModelState.IsValid)
             {
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/Update", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
@@ -88,6 +95,8 @@ namespace WEMAINTAIN.Controllers
         {
             var response = new ResultDto<long>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
             ValueRequest objValue = new ValueRequest();
             objValue.Id = id;
             var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/Delete", objValue);
@@ -108,6 +117,8 @@ namespace WEMAINTAIN.Controllers
                 //var page = request.Start / request.Length + 1;
                 var PackageRates = new ResultDto<IEnumerable<PackageRateResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.GetAsync("PackageRate/GetAll");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {

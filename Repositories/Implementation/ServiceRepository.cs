@@ -21,6 +21,7 @@ namespace Repositories.Implementation
             var procedureName = "SaveService";
             var parameters = new DynamicParameters();
             parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", viewModel.CreatedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var Services = await connection.QuerySingleAsync<Service>
@@ -34,6 +35,8 @@ namespace Repositories.Implementation
             var parameters = new DynamicParameters();
             parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
             parameters.Add("Id", viewModel.Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var Services = await connection.QuerySingleAsync<Service>

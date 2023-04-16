@@ -45,6 +45,7 @@ namespace Repositories.Implementation
             parameters.Add("Address", viewModel.Address, DbType.String, ParameterDirection.Input);
             parameters.Add("Email", viewModel.Email, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", viewModel.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var user = await connection.QuerySingleAsync<User>

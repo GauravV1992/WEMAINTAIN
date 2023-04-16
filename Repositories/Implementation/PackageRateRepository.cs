@@ -31,6 +31,7 @@ namespace Repositories.Implementation
             parameters.Add("PackageAmount", viewModel.PackageAmount, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("AMCPeriod", viewModel.AMCPeriod, DbType.String, ParameterDirection.Input);
             parameters.Add("TermsAndCondition", viewModel.TermsAndCondition, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", viewModel.CreatedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var PackageRate = await connection.QuerySingleAsync<PackageRate>
@@ -51,6 +52,7 @@ namespace Repositories.Implementation
             parameters.Add("PackageAmount", viewModel.PackageAmount, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("AMCPeriod", viewModel.AMCPeriod, DbType.String, ParameterDirection.Input);
             parameters.Add("TermsAndCondition", viewModel.TermsAndCondition, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var PackageRate = await connection.QuerySingleAsync<PackageRate>

@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessEntities.RequestDto
 {
@@ -12,6 +13,7 @@ namespace BusinessEntities.RequestDto
         public decimal Discount { get; set; }
         public decimal PackageAmount { get; set; }
         public string AMCPeriod { get; set; }
-        public string TermsAndCondition { get; set; }
+        
+        public string? TermsAndCondition { get; set; }
     }
 }

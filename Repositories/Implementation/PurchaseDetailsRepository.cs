@@ -30,6 +30,7 @@ namespace Repositories.Implementation
             parameters.Add("Discount", viewModel.Discount, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("PackageAmount", viewModel.PackageAmount, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("AMCPeriod", viewModel.AMCPeriod, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", viewModel.CreatedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var purchaseDetails = await connection.QuerySingleAsync<PurchaseDetails>

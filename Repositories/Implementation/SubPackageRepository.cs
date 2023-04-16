@@ -22,6 +22,7 @@ namespace Repositories.Implementation
             parameters.Add("PackageId", viewModel.PackageId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
             parameters.Add("TermsAndCondition", viewModel.TermsAndCondition, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", viewModel.CreatedBy, DbType.Int32, ParameterDirection.Input);
 
             using (var connection = _context.CreateConnection())
             {
@@ -38,6 +39,7 @@ namespace Repositories.Implementation
             parameters.Add("Name", viewModel.Name, DbType.String, ParameterDirection.Input);
             parameters.Add("PackageId", viewModel.PackageId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("TermsAndCondition", viewModel.TermsAndCondition, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var packages = await connection.QuerySingleAsync<SubPackage>

@@ -2,6 +2,7 @@
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http.Json;
@@ -39,6 +40,8 @@ namespace WEMAINTAIN.Controllers
         {
             var Users = new ResultDto<UserResponse>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            httpClient.DefaultRequestHeaders.Add(
+              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
             var httpResponseMessage = await httpClient.GetAsync("User/GetById/" + id + "");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -56,6 +59,8 @@ namespace WEMAINTAIN.Controllers
             if (ModelState.IsValid)
             {
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Save", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
@@ -74,6 +79,8 @@ namespace WEMAINTAIN.Controllers
             if (ModelState.IsValid)
             {
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Update", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
@@ -83,11 +90,13 @@ namespace WEMAINTAIN.Controllers
             }
             return Json(response);
         }
-
+        [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {
             var response = new ResultDto<long>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
             ValueRequest objValue = new ValueRequest();
             objValue.Id = id;
             var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Delete", objValue);
@@ -98,8 +107,6 @@ namespace WEMAINTAIN.Controllers
             }
             return Json(response);
         }
-
-
         [HttpPost]
         public async Task<ActionResult> GetAll(UserRequest request)
         {
@@ -108,6 +115,8 @@ namespace WEMAINTAIN.Controllers
                 //var page = request.Start / request.Length + 1;
                 var Users = new ResultDto<IEnumerable<UserResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+                  HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.GetAsync("User/GetAll");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
@@ -126,5 +135,7 @@ namespace WEMAINTAIN.Controllers
                 throw ex;
             }
         }
+
+
     }
 }

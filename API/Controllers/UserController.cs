@@ -1,27 +1,75 @@
-﻿using BusinessEntities.Common;
+﻿using API.Helpers;
+using API.JWTMiddleware;
+using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
+using BusinessEntities.ResponseDto;
 using BusinessServices.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
+using Repositories;
+using Repositories.Interface;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection.PortableExecutable;
+using System.Security.Claims;
+using System.Text;
+
 
 namespace API.Controllers
 {
-    //[Authorize]
+   
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly AppSettings _appSettings;
         private readonly IUserService _iUserService;
-        public UserController(IUserService iUserService)
+        private readonly IJWTAuthenticaitonManagerService _iJWTAuthenticaitonManagerService;
+        public UserController(IUserService iUserService, IJWTAuthenticaitonManagerService iJWTAuthenticaitonManagerService, IOptions<AppSettings> appSettings)
         {
+            _iJWTAuthenticaitonManagerService = iJWTAuthenticaitonManagerService;
             _iUserService = iUserService;
+            _appSettings = appSettings.Value;
         }
-
-        [HttpGet] 
+        [AllowAnonymous]
+        [HttpPost]
+        [ActionName("Authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequest user)
+        {
+            var token = await _iJWTAuthenticaitonManagerService.Authentiate(user.MobileNo, user.Password);
+            if (token == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var tokenDescripter = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[] {
+                        new Claim(ClaimTypes.Name, token.FirstName + " " + token.LastName),
+                        new Claim("Id", token.Id.ToString()),
+                        new Claim("Email", token.Email),
+                        new Claim("MobileNo", token.MobileNo),
+                        new Claim("Address", token.Address)
+                    }),
+                    Expires = DateTime.UtcNow.AddHours(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var res = tokenHandler.CreateToken(tokenDescripter);
+                return Ok(tokenHandler.WriteToken(res));
+            }
+        }
+        [CustomAuthorize("Admin")]
+        [HttpGet]
         [ActionName("GetAll")]
         public async Task<IActionResult> GetAll()
         {
+           // LoginResponse user = Common.GetUserSessionData(HttpContext);
             var res = await _iUserService.GetAll();
             if (res.IsSuccess)
             {
@@ -41,7 +89,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ActionName("Save")]
         public async Task<IActionResult> Post([FromBody] UserRequest viewModel)
@@ -50,6 +98,7 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
+
             var res = await _iUserService.Add(viewModel);
             if (res.IsSuccess)
             {
@@ -60,6 +109,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize("Admin")]
         [ActionName("Update")]
         public async Task<IActionResult> Update([FromBody] UserRequest viewModel)
         {
@@ -67,6 +117,8 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
+            LoginResponse user = Common.GetSessionData(HttpContext);
+            viewModel.ModifiedBy = user.Id;
             var res = await _iUserService.Update(viewModel);
             if (res.IsSuccess)
             {
@@ -77,6 +129,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize("Admin")]
         [ActionName("Delete")]
         public async Task<IActionResult> Delete([FromBody] ValueRequest viewModel)
         {
