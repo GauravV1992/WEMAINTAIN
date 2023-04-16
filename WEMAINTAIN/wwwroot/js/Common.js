@@ -35,12 +35,13 @@ $(document).ready(function () {
 		var charCode = (e.which) ? e.which : e.keyCode
 		if (String.fromCharCode(charCode).match(/[^0-9]/g))
 			return false;
-	});    
+	});
 });
 
 
 function BindPackageNames() {
 	$('#loading').show();
+	$('#PackageId').select2({ placeholder: "Select Package" });
 	$.ajax({
 		type: "GET",
 		url: '/Category/GetPackageNames',
@@ -64,6 +65,7 @@ function BindPackageNames() {
 }
 function BindSubPackageNames(packageId) {
 	debugger;
+	$('#SubPackageId').select2({ placeholder: "Select Sub Package" });
 	var jsonObject = { packageId: packageId };
 	$.ajax({
 		type: "GET",
@@ -86,6 +88,7 @@ function BindSubPackageNames(packageId) {
 	});
 }
 function BindServiceNames(subPacakageId) {
+	$('#ServiceId').select2({ placeholder: "Select Service" });
 	var jsonObject = { SubPackageId: subPacakageId };
 	$.ajax({
 		type: "GET",

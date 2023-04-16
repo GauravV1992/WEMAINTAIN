@@ -6,6 +6,7 @@ function OnCreateEditPageLoad() {
 	BindServiceNames($('#SubPackageId').val());
 	GetSubPackageOnPackageChange();
 	$('#PackageId').on("change", GetSubPackageOnPackageChange);
+	$('#AMCPeriod').select2({ placeholder: "Select AMC Period" });
 }
 function AddPackageRate() {
 	$("#divPackageRate").empty();
