@@ -60,7 +60,7 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<CategoryResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<CategoryResponse>>> GetAll(CategoryRequest request)
         {
             var res = new ResultDto<IEnumerable<CategoryResponse>>()
             {
@@ -69,7 +69,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = await _iCategoryRepository.GetAll();
+            var response = await _iCategoryRepository.GetAll(request);
 
             if (response == null)
             {

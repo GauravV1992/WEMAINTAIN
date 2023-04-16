@@ -20,11 +20,11 @@ namespace API.Controllers
             _iPackageRateLogService = iPackageRateLogService;
         }
 
-        [HttpGet] 
+        [HttpPost] 
         [ActionName("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromBody] PackageRateLogRequest request)
         {
-            var res = await _iPackageRateLogService.GetAll();
+            var res = await _iPackageRateLogService.GetAll(request);
             if (res.IsSuccess)
             {
                 return Ok(res);

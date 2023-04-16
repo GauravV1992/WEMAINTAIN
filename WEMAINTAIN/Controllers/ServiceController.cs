@@ -170,10 +170,6 @@ namespace WEMAINTAIN.Controllers
             }
         }
 
-
-
-
-
         [HttpGet]
         public async Task<ActionResult> GetServiceNames(int subPackageId)
         {

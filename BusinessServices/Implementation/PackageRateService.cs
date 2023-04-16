@@ -59,7 +59,7 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<PackageRateResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<PackageRateResponse>>> GetAll(PackageRateRequest request)
         {
             var res = new ResultDto<IEnumerable<PackageRateResponse>>()
             {
@@ -68,7 +68,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = await _IPackageRateRepository.GetAll();
+            var response = await _IPackageRateRepository.GetAll(request);
 
             if (response == null)
             {

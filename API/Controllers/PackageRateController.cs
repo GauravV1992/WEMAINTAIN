@@ -21,11 +21,11 @@ namespace API.Controllers
             _iPackageRateService = iPackageRateService;
         }
 
-        [HttpGet] 
+        [HttpPost] 
         [ActionName("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromBody] PackageRateRequest request)
         {
-            var res = await _iPackageRateService.GetAll();
+            var res = await _iPackageRateService.GetAll(request);
             if (res.IsSuccess)
             {
                 return Ok(res);

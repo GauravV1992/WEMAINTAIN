@@ -114,21 +114,22 @@ namespace WEMAINTAIN.Controllers
         {
             try
             {
-                //var page = request.Start / request.Length + 1;
+                request.PageIndex = request.Start / request.Length + 1;
                 var PackageRates = new ResultDto<IEnumerable<PackageRateResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("PackageRate/GetAll");
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/GetAll", request);
+                //var httpResponseMessage = await httpClient.GetAsync("PackageRate/GetAll");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     PackageRates = JsonSerializer.Deserialize<ResultDto<IEnumerable<PackageRateResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                     //PackageRates = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<PackageRateResponse>>>(contentStream);
                 }
-               return Json(new
+                return Json(new
                 {
-                    recordsTotal = 1,
+                    recordsFiltered = PackageRates.Data == null ? 0 : PackageRates.Data.Select(x => x.TotalRecords).FirstOrDefault(),
                     data = PackageRates.Data.ToList()
                 });
             }

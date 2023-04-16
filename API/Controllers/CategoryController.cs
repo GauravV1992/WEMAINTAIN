@@ -21,11 +21,11 @@ namespace API.Controllers
             _iCategoryService = iCategoryService;
         }
 
-        [HttpGet] 
+        [HttpPost] 
         [ActionName("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromBody] CategoryRequest request)
         {
-            var res = await _iCategoryService.GetAll();
+            var res = await _iCategoryService.GetAll(request);
             if (res.IsSuccess)
             {
                 return Ok(res);

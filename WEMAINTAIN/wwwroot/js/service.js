@@ -200,6 +200,7 @@ function Delete(Id) {
 			success: function (data) {
 				debugger;
 				if (data.data > 0) {
+					RefreshGrid();
 					toastr.success(suceessMsgDelete);
 				} else {
 					toastr.error(errorMsg);

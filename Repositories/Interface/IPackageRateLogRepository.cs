@@ -4,6 +4,6 @@ namespace Repositories.Interface
 {
     public interface IPackageRateLogRepository
     {
-        Task<IEnumerable<PackageRateLog>> GetAll();
+        Task<IEnumerable<PackageRateLog>> GetAll(PackageRateLogRequest request);
     }
 }

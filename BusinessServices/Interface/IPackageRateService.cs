@@ -9,7 +9,7 @@ namespace BusinessServices.Interface
         Task<ResultDto<long>> Add(PackageRateRequest viewModel);
         Task<ResultDto<long>> Update(PackageRateRequest viewModel);
         Task<ResultDto<long>> Delete(long Id);
-        Task<ResultDto<IEnumerable<PackageRateResponse>>> GetAll();
+        Task<ResultDto<IEnumerable<PackageRateResponse>>> GetAll(PackageRateRequest request);
         Task<ResultDto<PackageRateResponse>> GetById(long Id);
     }
 }

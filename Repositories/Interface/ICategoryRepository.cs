@@ -7,7 +7,7 @@ namespace Repositories.Interface
         Task<long> Add(CategoryRequest viewModel);
         Task<long> Update(CategoryRequest viewModel);
         Task<long> Delete(long Id);
-        Task<IEnumerable<Package>> GetAll();
+        Task<IEnumerable<Package>> GetAll(CategoryRequest request);
         Task<Package> GetById(long Id);
         Task<IList<SelectListItem>> GetPackages();
     }

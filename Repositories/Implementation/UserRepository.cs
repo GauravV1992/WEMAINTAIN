@@ -66,15 +66,16 @@ namespace Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<User>> GetAll(UserRequest request)
         {
             var procedureName = "GetAllUser";
-            //var parameters = new DynamicParameters();
-            //parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var user = await connection.QueryAsync<User>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return user;
             }
         }

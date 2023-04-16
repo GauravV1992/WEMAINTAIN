@@ -7,7 +7,7 @@ namespace Repositories.Interface
         Task<long> Add(PackageRateRequest viewModel);
         Task<long> Update(PackageRateRequest viewModel);
         Task<long> Delete(long Id);
-        Task<IEnumerable<PackageRate>> GetAll();
+        Task<IEnumerable<PackageRate>> GetAll(PackageRateRequest request);
         Task<PackageRate> GetById(long Id);
     }
 }

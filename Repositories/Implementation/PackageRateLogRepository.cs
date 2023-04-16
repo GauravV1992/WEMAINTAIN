@@ -5,6 +5,7 @@ using Repositories.Interface;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Dapper;
 using System.Data;
+using Azure.Core;
 
 namespace Repositories.Implementation
 {
@@ -16,14 +17,17 @@ namespace Repositories.Implementation
             _context = context;
         }
         
-        public async Task<IEnumerable<PackageRateLog>> GetAll()
+        public async Task<IEnumerable<PackageRateLog>> GetAll(PackageRateLogRequest request)
         {
             var procedureName = "GetAllPackageRateLog";
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
-                var packages = await connection.QueryAsync<PackageRateLog>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
-                return packages;
+                var user = await connection.QueryAsync<PackageRateLog>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user;
             }
         }
    
