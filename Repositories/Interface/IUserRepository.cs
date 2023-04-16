@@ -9,5 +9,7 @@ namespace Repositories.Interface
         Task<long> Delete(long Id);
         Task<IEnumerable<User>> GetAll();
         Task<User> GetById(long Id);
+        //Task<long> CheckUserLogin(UserRequest viewModel);
+        Task<long> ForgetPassword(UserRequest viewModel);
     }
 }
