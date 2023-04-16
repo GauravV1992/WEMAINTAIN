@@ -8,7 +8,7 @@ namespace Repositories.Interface
         Task<long> Add(ServiceRequest viewModel);
         Task<long> Update(ServiceRequest viewModel);
         Task<long> Delete(long Id);
-        Task<IEnumerable<Service>> GetAll();
+        Task<IEnumerable<Service>> GetAll(ServiceRequest request);
         Task<Service> GetById(long Id);
 
         Task<IList<SelectListItem>> GetServiceNames(long id);

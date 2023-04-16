@@ -61,7 +61,7 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<ServiceResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<ServiceResponse>>> GetAll(ServiceRequest request)
         {
             var res = new ResultDto<IEnumerable<ServiceResponse>>()
             {
@@ -70,7 +70,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = await _iServiceRepository.GetAll();
+            var response = await _iServiceRepository.GetAll(request);
 
             if (response == null)
             {
@@ -91,6 +91,7 @@ namespace BusinessServices.Implementation
             }
             return res;
         }
+
 
         public async Task<ResultDto<ServiceResponse>> GetById(long Id)
         {

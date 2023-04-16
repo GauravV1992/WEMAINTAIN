@@ -10,7 +10,7 @@ namespace BusinessServices.Interface
         Task<ResultDto<long>> Add(ServiceRequest viewModel);
         Task<ResultDto<long>> Update(ServiceRequest viewModel);
         Task<ResultDto<long>> Delete(long Id);
-        Task<ResultDto<IEnumerable<ServiceResponse>>> GetAll();
+        Task<ResultDto<IEnumerable<ServiceResponse>>> GetAll(ServiceRequest request);
         Task<ResultDto<ServiceResponse>> GetById(long Id);
 
         Task<ResultDto<IList<SelectListItem>>> GetServiceNames(long id);

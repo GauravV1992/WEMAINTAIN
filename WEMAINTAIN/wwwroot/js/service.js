@@ -62,7 +62,7 @@ function BindServiceDatatable() {
 			"datatype": "json",
 			"data": function (d) {
 				d.RequestVerificationToken = $(document).find('input [name=__RequestVerificationToken]').val();
-			},
+			}
 		},
 		"columns": [{ "data": "id" },
 		{ "data": "name" },
@@ -85,8 +85,7 @@ function BindServiceDatatable() {
 		},
 		],
 		"FnDrawCallback": function (a, b, c) {
-
-		},
+		},	
 		"createdRow": function (row, data) {
 			var id = data.id;
 			$(row).prop('id', 'tr_' + id).data('id', id);

@@ -112,27 +112,56 @@ namespace WEMAINTAIN.Controllers
         }
 
 
+        //[HttpPost]
+        //public async Task<ActionResult> GetAll(ServiceRequest request)
+        //{
+        //    try
+        //    {
+        //        //var page = request.Start / request.Length + 1;
+        //        request.PageIndex = request.Start / request.Length + 1;
+        //        var Service = new ResultDto<IEnumerable<ServiceResponse>>();
+        //        var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+        //        httpClient.DefaultRequestHeaders.Add(
+        //        HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+        //        // var httpResponseMessage = await httpClient.GetAsync("Service/GetAll");
+        //        var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/GetAll", request);
+        //        if (httpResponseMessage.IsSuccessStatusCode)
+        //        {
+        //            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+        //            Service = JsonSerializer.Deserialize<ResultDto<IEnumerable<ServiceResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        //        }
+        //        return Json(new
+        //        {
+        //            recordsFiltered = Service.Data == null ? 0 : Service.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+        //            data = Service.Data.ToList()
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
         [HttpPost]
         public async Task<ActionResult> GetAll(ServiceRequest request)
         {
             try
             {
-                //var page = request.Start / request.Length + 1;
-                var Service = new ResultDto<IEnumerable<ServiceResponse>>();
+                request.PageIndex = request.Start / request.Length + 1;
+                var service = new ResultDto<IEnumerable<ServiceResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
-             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("Service/GetAll");
+                HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/GetAll", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    Service = JsonSerializer.Deserialize<ResultDto<IEnumerable<ServiceResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //Service = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<ServiceResponse>>>(contentStream);
+                    service = JsonSerializer.Deserialize<ResultDto<IEnumerable<ServiceResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
                 return Json(new
                 {
-                    recordsTotal = 1,
-                    data = Service.Data.ToList()
+                    recordsFiltered = service.Data == null ? 0 : service.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = service.Data.ToList()
                 });
             }
             catch (Exception ex)
@@ -140,6 +169,10 @@ namespace WEMAINTAIN.Controllers
                 throw ex;
             }
         }
+
+
+
+
 
         [HttpGet]
         public async Task<ActionResult> GetServiceNames(int subPackageId)
