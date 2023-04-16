@@ -10,7 +10,7 @@ namespace BusinessServices.Interface
         Task<ResultDto<long>> Add(SubPackageRequest viewModel);
         Task<ResultDto<long>> Update(SubPackageRequest viewModel);
         Task<ResultDto<long>> Delete(long Id);
-        Task<ResultDto<IEnumerable<SubPackageResponse>>> GetAll();
+        Task<ResultDto<IEnumerable<SubPackageResponse>>> GetAll(SubPackageRequest request);
         Task<ResultDto<SubPackageResponse>> GetById(long Id);
 
         Task<ResultDto<IList<SelectListItem>>> GetSubPackageNames(long Id);

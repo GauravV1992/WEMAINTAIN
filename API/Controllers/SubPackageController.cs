@@ -22,11 +22,11 @@ namespace API.Controllers
             _iSubPackageService = iSubPackageService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromBody] SubPackageRequest request)
         {
-            var res = await _iSubPackageService.GetAll();
+            var res = await _iSubPackageService.GetAll(request);
             if (res.IsSuccess)
             {
                 return Ok(res);

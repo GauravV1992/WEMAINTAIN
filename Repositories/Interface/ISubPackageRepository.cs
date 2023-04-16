@@ -8,7 +8,7 @@ namespace Repositories.Interface
         Task<long> Add(SubPackageRequest viewModel);
         Task<long> Update(SubPackageRequest viewModel);
         Task<long> Delete(long Id);
-        Task<IEnumerable<SubPackage>> GetAll();
+        Task<IEnumerable<SubPackage>> GetAll(SubPackageRequest request);
         Task<SubPackage> GetById(long Id);
         Task<IList<SelectListItem>> GetSubPackageNames(long id);
     }

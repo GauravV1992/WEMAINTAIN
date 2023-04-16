@@ -48,7 +48,7 @@ function BindCategoryDatatable() {
 			"infoPostFix": ""
 		},
 		"processing": false,
-		"serverside": true,
+		"serverSide": true,
 		"bLengthChange": false,
 		"pageLength": 10,
 		"filter": false,
@@ -200,6 +200,7 @@ function Delete(Id) {
 			success: function (data) {
 				debugger;
 				if (data.data > 0) {
+					RefreshGrid();
 					toastr.success(suceessMsgDelete);
 				} else {
 					toastr.error(errorMsg);

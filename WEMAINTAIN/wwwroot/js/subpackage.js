@@ -15,7 +15,7 @@ function AddSubPackage() {
 			$('#divSubPackage').html(response);
 		},
 		complete: function () {
-			
+
 			/*$('#loading').hide();*/
 		}
 	});
@@ -34,10 +34,10 @@ function EditSubPackage(id) {
 			$('#divSubPackage').html(response);
 		},
 		complete: function () {
-			
-			
+
+
 			ScrollToTop();
-	
+
 		}
 	});
 }
@@ -47,12 +47,12 @@ function OnCancel() {
 function BindSubPackageDatatable() {
 	$("#SubPackageGrid").DataTable({
 		"language": {
-			/*"zeroRecords": "No records found.",*/
+			"zeroRecords": "No records found.",
 			"infoFiltered": "",
 			"infoPostFix": ""
 		},
-		"processing": false,
-		"serverside": true,
+		"processing": true,
+		"serverSide": true,
 		"bLengthChange": false,
 		"pageLength": 10,
 		"filter": false,
@@ -66,12 +66,24 @@ function BindSubPackageDatatable() {
 			"datatype": "json",
 			"data": function (d) {
 				d.RequestVerificationToken = $(document).find('input [name=__RequestVerificationToken]').val();
-			},
+
+			}
+			//"dataSrc": function (d) {
+			//	debugger;
+			//	// Format API response for DataTables
+			//	var response = d;
+			//	if (typeof d.response != 'undefined') {
+			//		response = d.response;
+			//	}
+			//	console.log(JSON.stringify(response)); // Output from this is below...
+			//	return response;
+			//}
 		},
+
 		"columns": [{ "data": "id" },
 		{ "data": "packageName" },
 		{ "data": "name" },
-		{ "data":"termsAndCondition"},
+		{ "data": "termsAndCondition" },
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -91,7 +103,7 @@ function BindSubPackageDatatable() {
 		},
 		],
 		"FnDrawCallback": function (a, b, c) {
-
+			self.QtdOcorrenciasAgendadosHoje = this.api().page.info().recordsTotal;
 		},
 		"createdRow": function (row, data) {
 			var id = data.id;
@@ -117,11 +129,11 @@ function ValidateForm() {
 		toastr.error('Please Enter Sub-Package Name');
 		return false;
 	}
-	if ($("#PackageId").val()=="") {
+	if ($("#PackageId").val() == "") {
 		toastr.error('Please Select Package Name');
 		return false;
 	}
- 
+
 	if (CheckUndefinedBlankAndNull($("#TermsAndCondition").val())) {
 		toastr.error('Please Enter Terms And Condition');
 		return false;
@@ -212,8 +224,8 @@ function Delete(Id) {
 			async: false,
 			datatype: "json",
 			success: function (data) {
-				debugger;
 				if (data.data > 0) {
+					RefreshGrid();
 					toastr.success(suceessMsgDelete);
 				} else {
 					toastr.error(errorMsg);

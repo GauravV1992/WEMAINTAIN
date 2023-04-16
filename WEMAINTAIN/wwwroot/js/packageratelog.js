@@ -6,8 +6,8 @@ function BindPackageRateLogDatatable() {
 			"infoFiltered": "",
 			"infoPostFix": ""
 		},
-		"processing": false,
-		"serverside": true,
+		"processing": true,
+		"serverSide": true,
 		"bLengthChange": false,
 		"pageLength": 10,
 		"filter": false,

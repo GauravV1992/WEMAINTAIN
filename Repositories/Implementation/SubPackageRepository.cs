@@ -60,13 +60,16 @@ namespace Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<SubPackage>> GetAll()
+        public async Task<IEnumerable<SubPackage>> GetAll(SubPackageRequest request)
         {
             var procedureName = "GetAllSubPackage";
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var packages = await connection.QueryAsync<SubPackage>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return packages;
             }
         }

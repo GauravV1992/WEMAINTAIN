@@ -61,7 +61,7 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<SubPackageResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<SubPackageResponse>>> GetAll(SubPackageRequest request)
         {
             var res = new ResultDto<IEnumerable<SubPackageResponse>>()
             {
@@ -70,7 +70,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = await _iSubPackageRepository.GetAll();
+            var response = await _iSubPackageRepository.GetAll(request);
 
             if (response == null)
             {
