@@ -21,11 +21,11 @@ namespace API.Controllers
             _iPurchaseDetailsService = iPurchaseDetailsService;
         }
 
-        [HttpGet] 
+        [HttpPost] 
         [ActionName("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromBody] PurchaseDetailsRequest request)
         {
-            var res = await _iPurchaseDetailsService.GetAll();
+            var res = await _iPurchaseDetailsService.GetAll(request);
             if (res.IsSuccess)
             {
                 return Ok(res);

@@ -5,6 +5,7 @@ using Repositories.Interface;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Dapper;
 using System.Data;
+using Azure.Core;
 
 namespace Repositories.Implementation
 {
@@ -54,14 +55,17 @@ namespace Repositories.Implementation
                 return packages.Id;
             }
         }
-        public async Task<IEnumerable<Package>> GetAll()
+        public async Task<IEnumerable<Package>> GetAll(CategoryRequest request)
         {
             var procedureName = "GetAllPackage";
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
-                var packages = await connection.QueryAsync<Package>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
-                return packages;
+                var user = await connection.QueryAsync<Package>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user;
             }
         }
         public async Task<Package> GetById(long id)

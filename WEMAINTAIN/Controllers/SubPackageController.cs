@@ -116,7 +116,7 @@ namespace WEMAINTAIN.Controllers
                 var categories = new ResultDto<IEnumerable<SubPackageResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
-             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
                 var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/GetAll", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
@@ -135,6 +135,8 @@ namespace WEMAINTAIN.Controllers
                 throw ex;
             }
         }
+
+
         [HttpGet]
         public async Task<ActionResult> GetSubPackageNames(int packageId)
         {

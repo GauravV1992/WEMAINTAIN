@@ -117,21 +117,20 @@ namespace WEMAINTAIN.Controllers
         {
             try
             {
-                //var page = request.Start / request.Length + 1;
+                request.PageIndex = request.Start / request.Length + 1;
                 var categories = new ResultDto<IEnumerable<CategoryResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
-             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("Category/GetAll");
+                HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/GetAll", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<CategoryResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<CategoryResponse>>>(contentStream);
                 }
                 return Json(new
                 {
-                    recordsTotal = 1,
+                    recordsFiltered = categories.Data == null ? 0 : categories.Data.Select(x => x.TotalRecords).FirstOrDefault(),
                     data = categories.Data.ToList()
                 });
             }
@@ -140,8 +139,11 @@ namespace WEMAINTAIN.Controllers
                 throw ex;
             }
         }
+    
 
-        [HttpGet]
+
+
+    [HttpGet]
         public async Task<ActionResult> GetPackageNames()
         {
             try

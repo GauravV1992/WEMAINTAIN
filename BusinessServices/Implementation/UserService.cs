@@ -58,7 +58,7 @@ namespace BusinessServices.Implementation
             res.Data = response;
             return res;
         }
-        public async Task<ResultDto<IEnumerable<UserResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<UserResponse>>> GetAll(UserRequest request)
         {
             var res = new ResultDto<IEnumerable<UserResponse>>()
             {
@@ -67,7 +67,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = await _IUserRepository.GetAll();
+            var response = await _IUserRepository.GetAll(request);
 
             if (response == null)
             {

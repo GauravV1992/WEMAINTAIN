@@ -64,13 +64,14 @@ namespace API.Controllers
                 return Ok(tokenHandler.WriteToken(res));
             }
         }
+
         [CustomAuthorize("Admin")]
-        [HttpGet]
+        [HttpPost]
         [ActionName("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromBody] UserRequest request)
         {
            // LoginResponse user = Common.GetUserSessionData(HttpContext);
-            var res = await _iUserService.GetAll();
+            var res = await _iUserService.GetAll(request);
             if (res.IsSuccess)
             {
                 return Ok(res);

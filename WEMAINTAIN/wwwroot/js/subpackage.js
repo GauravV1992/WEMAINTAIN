@@ -47,7 +47,7 @@ function OnCancel() {
 function BindSubPackageDatatable() {
 	$("#SubPackageGrid").DataTable({
 		"language": {
-			"zeroRecords": "No records found.",
+			/*"zeroRecords": "No records found.",*/
 			"infoFiltered": "",
 			"infoPostFix": ""
 		},
@@ -103,7 +103,6 @@ function BindSubPackageDatatable() {
 		},
 		],
 		"FnDrawCallback": function (a, b, c) {
-			self.QtdOcorrenciasAgendadosHoje = this.api().page.info().recordsTotal;
 		},
 		"createdRow": function (row, data) {
 			var id = data.id;

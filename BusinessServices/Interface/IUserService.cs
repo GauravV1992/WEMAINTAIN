@@ -9,7 +9,7 @@ namespace BusinessServices.Interface
         Task<ResultDto<long>> Add(UserRequest viewModel);
         Task<ResultDto<long>> Update(UserRequest viewModel);
         Task<ResultDto<long>> Delete(long Id);
-        Task<ResultDto<IEnumerable<UserResponse>>> GetAll();
+        Task<ResultDto<IEnumerable<UserResponse>>> GetAll(UserRequest request);
         Task<ResultDto<UserResponse>> GetById(long Id);
         //Task<ResultDto<long>> CheckUserLogin(UserRequest viewModel);
         Task<ResultDto<long>> ForgetPassword(UserRequest viewModel);

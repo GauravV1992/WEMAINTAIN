@@ -22,7 +22,7 @@ namespace BusinessServices.Implementation
             _mapper = mapper;
         }
         
-        public async Task<ResultDto<IEnumerable<PackageRateLogResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<PackageRateLogResponse>>> GetAll(PackageRateLogRequest request)
         {
             var res = new ResultDto<IEnumerable<PackageRateLogResponse>>()
             {
@@ -31,7 +31,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = await _iPackageRateLogRepository.GetAll();
+            var response = await _iPackageRateLogRepository.GetAll(request);
 
             if (response == null)
             {

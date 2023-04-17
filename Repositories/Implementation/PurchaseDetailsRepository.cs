@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Dapper;
 using System.Data;
+using Azure.Core;
 
 namespace Repositories.Implementation
 {
@@ -39,16 +40,17 @@ namespace Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<PurchaseDetails>> GetAll()
+        public async Task<IEnumerable<PurchaseDetails>> GetAll(PurchaseDetailsRequest request)
         {
             var procedureName = "GetAllPurchaseDetails";
-            //var parameters = new DynamicParameters();
-            //parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
-                var purchaseDetails = await connection.QueryAsync<PurchaseDetails>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
-                return purchaseDetails;
+                var user = await connection.QueryAsync<PurchaseDetails>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user;
             }
         }
 

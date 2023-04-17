@@ -57,16 +57,22 @@ namespace Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<Service>> GetAll()
+        public async Task<IEnumerable<Service>> GetAll(ServiceRequest request)
         {
             var procedureName = "GetAllService";
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var Services = await connection.QueryAsync<Service>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return Services;
             }
         }
+
+
+
         public async Task<Service> GetById(long id)
         {
             var procedureName = "GetServiceById";

@@ -61,20 +61,20 @@ namespace WEMAINTAIN.Controllers
         {
             try
             {
-                //var page = request.Start / request.Length + 1;
+                request.PageIndex = request.Start / request.Length + 1;
                 var purchaseDetails = new ResultDto<IEnumerable<PurchaseDetailsResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("PurchaseDetails/GetAll");
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("PurchaseDetails/GetAll", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     purchaseDetails = JsonSerializer.Deserialize<ResultDto<IEnumerable<PurchaseDetailsResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
-               return Json(new
+                return Json(new
                 {
-                    recordsTotal = 1,
+                    recordsFiltered = purchaseDetails.Data == null ? 0 : purchaseDetails.Data.Select(x => x.TotalRecords).FirstOrDefault(),
                     data = purchaseDetails.Data.ToList()
                 });
             }

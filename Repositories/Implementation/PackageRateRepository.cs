@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Dapper;
 using System.Data;
+using Azure.Core;
 
 namespace Repositories.Implementation
 {
@@ -73,16 +74,17 @@ namespace Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<PackageRate>> GetAll()
+        public async Task<IEnumerable<PackageRate>> GetAll(PackageRateRequest request)
         {
             var procedureName = "GetAllPackageRate";
-            //var parameters = new DynamicParameters();
-            //parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
-                var PackageRate = await connection.QueryAsync<PackageRate>
-           (procedureName, null, commandType: CommandType.StoredProcedure);
-                return PackageRate;
+                var user = await connection.QueryAsync<PackageRate>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user;
             }
         }
 

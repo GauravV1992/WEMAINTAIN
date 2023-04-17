@@ -107,27 +107,56 @@ namespace WEMAINTAIN.Controllers
             }
             return Json(response);
         }
+        //[HttpPost]
+        //public async Task<ActionResult> GetAll(UserRequest request)
+        //{
+        //    try
+        //    {
+        //        //var page = request.Start / request.Length + 1;
+        //        var Users = new ResultDto<IEnumerable<UserResponse>>();
+        //        var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+        //        httpClient.DefaultRequestHeaders.Add(
+        //          HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+        //        var httpResponseMessage = await httpClient.GetAsync("User/GetAll");
+        //        if (httpResponseMessage.IsSuccessStatusCode)
+        //        {
+        //            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+        //            Users = JsonSerializer.Deserialize<ResultDto<IEnumerable<UserResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        //            //Users = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<UserResponse>>>(contentStream);
+        //        }
+        //        return Json(new
+        //        {
+        //            recordsTotal = 1,
+        //            data = Users.Data.ToList()
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
         [HttpPost]
         public async Task<ActionResult> GetAll(UserRequest request)
         {
             try
             {
-                //var page = request.Start / request.Length + 1;
-                var Users = new ResultDto<IEnumerable<UserResponse>>();
+                request.PageIndex = request.Start / request.Length + 1;
+                var user = new ResultDto<IEnumerable<UserResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
-                  HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("User/GetAll");
+                HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("User/GetAll", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    Users = JsonSerializer.Deserialize<ResultDto<IEnumerable<UserResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //Users = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<UserResponse>>>(contentStream);
+                    user = JsonSerializer.Deserialize<ResultDto<IEnumerable<UserResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                     
                 }
                 return Json(new
                 {
-                    recordsTotal = 1,
-                    data = Users.Data.ToList()
+                    recordsFiltered = user.Data == null ? 0 : user.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = user.Data.ToList()
                 });
             }
             catch (Exception ex)

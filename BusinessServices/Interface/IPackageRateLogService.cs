@@ -8,6 +8,6 @@ namespace BusinessServices.Interface
 {
     public interface IPackageRateLogService
     {
-        Task<ResultDto<IEnumerable<PackageRateLogResponse>>> GetAll();
+        Task<ResultDto<IEnumerable<PackageRateLogResponse>>> GetAll(PackageRateLogRequest request);
     }
 }

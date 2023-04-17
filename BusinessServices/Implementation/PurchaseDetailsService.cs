@@ -33,7 +33,7 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<PurchaseDetailsResponse>>> GetAll()
+        public async Task<ResultDto<IEnumerable<PurchaseDetailsResponse>>> GetAll(PurchaseDetailsRequest request)
         {
             var res = new ResultDto<IEnumerable<PurchaseDetailsResponse>>()
             {
@@ -42,7 +42,7 @@ namespace BusinessServices.Implementation
                 Errors = new List<string>()
             };
 
-            var response = await _IPurchaseDetailsRepository.GetAll();
+            var response = await _IPurchaseDetailsRepository.GetAll(request);
 
             if (response == null)
             {
