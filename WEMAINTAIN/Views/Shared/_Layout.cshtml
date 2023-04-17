@@ -41,11 +41,12 @@
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Service" asp-action="Index">Services</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PackageRate" asp-action="Index">Manage Package Rate</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PackageRateLog" asp-action="Index">Package Rate Log</a>
+                        <li class="nav-item dropdown" id="myDropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" data-bs-toggle="dropdown">Package Rate</a>
+                            <ul class="dropdown-menu">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PackageRate" asp-action="Index">Package Rate</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PackageRateLog" asp-action="Index">Package Rate Log</a>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User Details</a>
