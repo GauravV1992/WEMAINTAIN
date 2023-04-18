@@ -72,10 +72,12 @@ namespace Repositories.Implementation
             var parameters = new DynamicParameters();
             parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Startdate", request.StartDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Enddate", request.EndDate, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var user = await connection.QueryAsync<User>
-           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return user;
             }
         }

@@ -36,6 +36,22 @@ $(document).ready(function () {
 		if (String.fromCharCode(charCode).match(/[^0-9]/g))
 			return false;
 	});
+
+	var date = new Date();
+	var ST = new Date(date.getFullYear(), date.getMonth()-1, date.getDate());
+	var ED = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+	$('.StartDate').datepicker({
+		format: 'dd/mm/yyyy',
+		todayBtn: 'linked'
+	});
+	$('.EndDate').datepicker({
+		format: 'dd/mm/yyyy',
+		todayBtn: 'linked'
+	});
+	$('.StartDate').datepicker('setDate', ST);
+	$('.EndDate').datepicker('setDate', ED);
+
 });
 
 
