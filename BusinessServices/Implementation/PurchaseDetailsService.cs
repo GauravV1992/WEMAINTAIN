@@ -6,6 +6,7 @@ using AutoMapper.Mappers;
 using Repositories;
 using BusinessEntities.Common;
 using AutoMapper;
+using Azure.Core;
 //using AutoMapper;
 
 namespace BusinessServices.Implementation
@@ -33,9 +34,9 @@ namespace BusinessServices.Implementation
             return res;
         }
 
-        public async Task<ResultDto<IEnumerable<PurchaseDetailsResponse>>> GetAll(PurchaseDetailsRequest request)
+        public async Task<ResultDto<PurchaseDetailsWithServicesResponse>> GetAll(PurchaseDetailsRequest request)
         {
-            var res = new ResultDto<IEnumerable<PurchaseDetailsResponse>>()
+            var res = new ResultDto<PurchaseDetailsWithServicesResponse>()
             {
                 IsSuccess = false,
                 Data = null,
@@ -53,7 +54,7 @@ namespace BusinessServices.Implementation
                 res.IsSuccess = true;
                 try
                 {
-                    res.Data = _mapper.Map<IEnumerable<PurchaseDetails>, IEnumerable<PurchaseDetailsResponse>>(response);
+                    res.Data = response;
 
                 }
                 catch (Exception ex)
@@ -82,6 +83,36 @@ namespace BusinessServices.Implementation
             {
                 res.IsSuccess = true;
                 res.Data = _mapper.Map<PurchaseDetails, PurchaseDetailsResponse>(response);
+            }
+            return res;
+        }
+
+        public async Task<ResultDto<IEnumerable<PurchaseServicesResponse>>> PurchaseServicesById(long Id)
+        {
+            var res = new ResultDto<IEnumerable<PurchaseServicesResponse>>()  
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
+
+            var response = await _IPurchaseDetailsRepository.PurchaseServicesById(Id);
+
+            if (response == null)
+            {
+                res.Errors.Add("Data Not Found !!");
+            }
+            else
+            {
+                res.IsSuccess = true;
+                try
+                {
+                    res.Data  = _mapper.Map<IEnumerable<PurchaseServices>, IEnumerable<PurchaseServicesResponse>>(response);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             return res;
         }

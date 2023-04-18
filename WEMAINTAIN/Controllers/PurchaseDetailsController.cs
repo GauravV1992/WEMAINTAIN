@@ -35,7 +35,8 @@ namespace WEMAINTAIN.Controllers
             var PurchaseDetails = new PurchaseDetailsRequest();
             return PartialView("~/views/PurchaseDetails/create.cshtml", PurchaseDetails);
         }
-         
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(PurchaseDetailsRequest request)
@@ -62,7 +63,7 @@ namespace WEMAINTAIN.Controllers
             try
             {
                 request.PageIndex = request.Start / request.Length + 1;
-                var purchaseDetails = new ResultDto<IEnumerable<PurchaseDetailsResponse>>();
+                var purchaseDetails = new ResultDto<PurchaseDetailsWithServicesResponse>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
@@ -70,13 +71,37 @@ namespace WEMAINTAIN.Controllers
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    purchaseDetails = JsonSerializer.Deserialize<ResultDto<IEnumerable<PurchaseDetailsResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    purchaseDetails = JsonSerializer.Deserialize<ResultDto<PurchaseDetailsWithServicesResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
                 return Json(new
                 {
-                    recordsFiltered = purchaseDetails.Data == null ? 0 : purchaseDetails.Data.Select(x => x.TotalRecords).FirstOrDefault(),
-                    data = purchaseDetails.Data.ToList()
-                });
+                    recordsFiltered = purchaseDetails.Data.PurchaseDetails == null ? 0 : purchaseDetails.Data.PurchaseDetails.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = purchaseDetails
+                }); ;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> PurchaseServicesById(long id)
+        {
+            try
+            {
+                var purchaseDetails = new ResultDto<IEnumerable<PurchaseServicesResponse>>();
+                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                var httpResponseMessage = await httpClient.GetAsync("PurchaseDetails/PurchaseServicesById/" + id + "");
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                    purchaseDetails = JsonSerializer.Deserialize<ResultDto<IEnumerable<PurchaseServicesResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                }
+                return PartialView("~/views/PurchaseDetails/purchaseservicedetails.cshtml", purchaseDetails.Data);
             }
             catch (Exception ex)
             {

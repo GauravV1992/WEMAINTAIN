@@ -9,6 +9,7 @@ function OnCreateEditPageLoad() {
 	$('#AMCPeriod').select2({ placeholder: "Select AMC Period" });
 }
 function AddPackageRate() {
+	debugger;
 	$("#divPackageRate").empty();
 	$.ajax({
 		type: "Get",

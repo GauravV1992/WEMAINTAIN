@@ -21,10 +21,38 @@ function AddPurchaseDetails() {
 		}
 	});
 }
- 
+
 function OnCancel() {
 	$("#divPurchaseDetails").empty();
 }
+
+$('#PurchaseDetailsGrid').on('click', '.viewcs', function () {
+	debugger;
+
+	var tr = $(this).closest('tr');
+	var row = $('#PurchaseDetailsGrid').DataTable().row(tr);
+	var rowData = row.data();
+	//$('.edit-row' + rowData.id + '').remove();
+	$('.edit-row').remove();
+	$.ajax({
+		type: "Get",
+		url: '/PurchaseDetails/PurchaseServicesById/?id=' + rowData.id + '',
+		data: null,
+		datatype: "json",
+		success: function (response) {
+			debugger;
+			$('#divPurchaseServices').html(response);
+		},
+		complete: function () {
+			/*$('#loading').hide();*/
+		}
+	});
+
+	$('<tr class="edit-row"><td colspan="7"><div id="divPurchaseServices"></div></td></tr>').insertAfter(tr);
+})
+
+
+
 function BindPurchaseDetailsDatatable() {
 	$("#PurchaseDetailsGrid").DataTable({
 
@@ -48,15 +76,24 @@ function BindPurchaseDetailsDatatable() {
 			"data": function (d) {
 				d.RequestVerificationToken = $(document).find('input [name=__RequestVerificationToken]').val();
 			},
+			"dataSrc": function (response) {
+				debugger;
+				return response.data.data.purchaseDetails;
+			}
 		},
 		"columns": [{ "data": "id" },
+		{
+			"name": "View",
+			render: function (data, type, row) {
+				return CreateActionButton(row.id);
+			}
+		},
+		{ "data": "mobileNo" },
+		{ "data": "userName" },
 		{ "data": "packageName" },
 		{ "data": "subPackageName" },
-		{ "data": "serviceName" },
-		{ "data": "rate" },
-		{ "data": "discount" },
 		{ "data": "packageAmount" },
-		{ "data": "amcPeriod" },
+		{ "data": "createdOn" },
 		],
 		"columnDefs": [{
 			"defaultContent": "-",
@@ -78,9 +115,10 @@ function BindPurchaseDetailsDatatable() {
 		}
 	});
 }
+
 function CreateActionButton(id) {
 	var html = '';
-	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditPackageRate(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
+	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><a class='viewcs' href='#'>Services</></div>"
 	return html;
 }
 
@@ -153,8 +191,8 @@ function OnCreatePageLoad() {
 			});
 	});
 }
- 
- 
+
+
 function ClearControl() {
 	$("#divPurchaseDetails").empty();
 }

@@ -1,4 +1,5 @@
-﻿var suceessMsg = "Record Saved Successfully!"
+﻿
+var suceessMsg = "Record Saved Successfully!"
 var updateMsg = "Record Updated Successfully!"
 var suceessMsgDelete = "Record Deleted Successfully!"
 var emailConfirm = "Are you sure you want to send email?";
@@ -37,9 +38,12 @@ $(document).ready(function () {
 			return false;
 	});
 });
-
+function OnCloseDatatableEditRow() {
+	$('.edit-row').remove();
+}
 
 function BindPackageNames() {
+	debugger;
 	$('#loading').show();
 	$('#PackageId').select2({ placeholder: "Select Package" });
 	$.ajax({
