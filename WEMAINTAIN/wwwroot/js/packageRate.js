@@ -43,6 +43,11 @@ function EditPackageRate(id) {
 function OnCancel() {
 	$("#divPackageRate").empty();
 }
+
+function OnSearch() {
+	BindPackageRateDatatable();
+}
+
 function BindPackageRateDatatable() {
 	$("#PackageRateGrid").DataTable({
 
