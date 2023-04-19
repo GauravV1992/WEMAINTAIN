@@ -3,6 +3,7 @@ using API.JWTMiddleware;
 using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
+using BusinessServices.Implementation;
 using BusinessServices.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,18 @@ namespace API.Controllers
         public async Task<IActionResult> GetAll([FromBody] PurchaseDetailsRequest request)
         {
             var res = await _iPurchaseDetailsService.GetAll(request);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return NotFound(res);
+        }
+
+        [HttpGet("{Id}")]
+        [ActionName("PurchaseServicesById")]
+        public async Task<IActionResult> PurchaseServicesById(long id)
+        {
+            var res = await _iPurchaseDetailsService.PurchaseServicesById(id);
             if (res.IsSuccess)
             {
                 return Ok(res);
