@@ -80,6 +80,11 @@ namespace Repositories.Implementation
             var parameters = new DynamicParameters();
             parameters.Add("@PageIndex", request.PageIndex, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@PageSize", request.Length, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PackageId", request.PackageId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubPackageId", request.SubPackageId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ServiceId", request.ServiceId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@StartDate", request.StartDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("@EndDate", request.EndDate, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var user = await connection.QueryAsync<PackageRate>

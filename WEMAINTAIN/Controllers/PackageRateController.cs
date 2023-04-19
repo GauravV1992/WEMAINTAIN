@@ -26,7 +26,8 @@ namespace WEMAINTAIN.Controllers
         }
         public IActionResult Index()
         {
-            return View("PackageRates");
+            PackageRateRequest obj = new PackageRateRequest();
+            return View("PackageRates", obj);
         }
 
         [HttpGet]

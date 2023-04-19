@@ -9,7 +9,7 @@ function OnCreateEditPageLoad() {
 	$('#AMCPeriod').select2({ placeholder: "Select AMC Period" });
 }
 function AddPackageRate() {
-	debugger;
+	
 	$("#divPackageRate").empty();
 	$.ajax({
 		type: "Get",
@@ -57,14 +57,20 @@ function BindPackageRateDatatable() {
 		"filter": false,
 		"orderMulti": false,
 		"bSort": false,
-		"bDestroy": false,
+		"bDestroy": true,
 		"searching": false,
 		"ajax": {
 			"url": "/PackageRate/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
+				debugger;
 				d.RequestVerificationToken = $(document).find('input [name=__RequestVerificationToken]').val();
+				d.PackageId = $("#PackageId").val();
+				d.SubPackageId = $("#SubPackageId").val();
+				d.ServiceId = $("#ServiceId").val();
+				d.StartDate = $("#StartDate").val();
+				d.EndDate = $("#EndDate").val();
 			},
 		},
 		"columns": [{ "data": "id" },
@@ -109,7 +115,7 @@ function CreateActionButton(id) {
 }
 
 function GetSubPackageOnPackageChange() {
-	debugger;
+	
 	BindSubPackageNames($('#PackageId').val());
 }
 function ValidateForm() {
@@ -193,7 +199,7 @@ function OnEditPageLoad() {
 				url: $(this).attr('action'),
 				data: $(this).serialize(),
 				success: function (data) {
-					debugger;
+					
 					if (data.data > 0) {
 						toastr.success(suceessMsg);
 					} else {
@@ -219,7 +225,7 @@ function Delete(Id) {
 			async: false,
 			datatype: "json",
 			success: function (data) {
-				debugger;
+				
 				if (data.data > 0) {
 					RefreshGrid();
 					toastr.success(suceessMsgDelete);

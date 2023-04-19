@@ -9,6 +9,23 @@ var emailSucc = "Mail Sent Successfully!";
 var errorMsg = "Oops! Something went wrong, Please Contact Admin!"
 var confirmDeleteRecord = "Are you sure you want delete record?"
 var confirmDeleteRecord = "Are you sure you want delete record?"
+
+var startdt = "";
+var enddt = "";
+function SetDateFormat() {
+	
+	var stdate = $("#StartDate").val();
+	if (!CheckUndefinedBlankAndNull(stdate)) {
+		stdate = stdate.split('/');
+		startdt = stdate[1] + '/' + stdate[0] + '/' + stdate[2];
+	}
+	var eddate = $("#EndDate").val();
+	if (!CheckUndefinedBlankAndNull(stdate)) {
+		eddate = eddate.split('/');
+		enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
+	}
+}
+
 function showLoader(divId) {
 	if (divId != '') {
 		debugger;
@@ -129,4 +146,11 @@ function BindServiceNames(subPacakageId) {
 		complete: function () {
 		}
 	});
+}
+
+function OnFilterPageLoad() {
+	BindPackageNames();
+	BindSubPackageNames($('#PackageId').val());
+	BindServiceNames("0");
+	SetDateFormat();
 }

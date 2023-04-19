@@ -90,6 +90,11 @@ namespace BusinessServices.Implementation
             return res;
         }
 
+        //public Task<ResultDto<IEnumerable<PackageRateResponse>>> GetAll()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public async Task<ResultDto<PackageRateResponse>> GetById(long Id)
         {
             var res = new ResultDto<PackageRateResponse>()
@@ -111,5 +116,7 @@ namespace BusinessServices.Implementation
             }
             return res;
         }
+
+        
     }
 }
