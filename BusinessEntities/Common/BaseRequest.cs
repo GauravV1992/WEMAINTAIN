@@ -19,6 +19,6 @@ namespace BusinessEntities.Common
 
         public int Length { get; set; }
 
-            public int PageIndex { get; set; }
+        public int PageIndex { get; set; }
     }
 }

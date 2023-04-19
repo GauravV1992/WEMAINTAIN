@@ -38,10 +38,14 @@ function OnCancel() {
 	$("#divUser").empty();
 }
 function BindUserDatatable() {
-	$("#UserGrid").DataTable({
+	debugger;
+	var stdate = $("#StartDate").val().split('/');
+	var eddate = $("#EndDate").val().split('/');
+	var startdt = stdate[1] + '/' + stdate[0] + '/' + stdate[2];
+	var enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
 
+	$("#UserGrid").DataTable({
 		"language": {
-			/*"zeroRecords": "No records found.",*/
 			"infoFiltered": "",
 			"infoPostFix": ""
 		},
@@ -52,7 +56,7 @@ function BindUserDatatable() {
 		"filter": false,
 		"orderMulti": false,
 		"bSort": false,
-		"bDestroy": false,
+		"bDestroy": true,
 		"searching": false,
 		"ajax": {
 			"url": "/User/GetAll",
@@ -60,6 +64,8 @@ function BindUserDatatable() {
 			"datatype": "json",
 			"data": function (d) {
 				d.RequestVerificationToken = $(document).find('input [name=__RequestVerificationToken]').val();
+				d.StartDate = startdt;
+				d.EndDate = enddt;
 			},
 		},
 		"columns": [{ "data": "id" },
