@@ -40,14 +40,13 @@ $('#PurchaseDetailsGrid').on('click', '.viewcs', function () {
 		data: null,
 		datatype: "json",
 		success: function (response) {
-			debugger;
 			$('#divPurchaseServices').html(response);
 		},
 		complete: function () {
 			/*$('#loading').hide();*/
 		}
 	});
-
+	
 	$('<tr class="edit-row"><td colspan="7"><div id="divPurchaseServices"></div></td></tr>').insertAfter(tr);
 })
 
@@ -118,7 +117,9 @@ function BindPurchaseDetailsDatatable() {
 
 function CreateActionButton(id) {
 	var html = '';
-	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><a class='viewcs' href='#'>Services</></div>"
+
+	
+	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><a class='viewcs' href='#' data-bs-toggle='collapse'>Services</></div>"
 	return html;
 }
 
