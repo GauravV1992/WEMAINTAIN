@@ -9,26 +9,34 @@ var emailSucc = "Mail Sent Successfully!";
 var errorMsg = "Oops! Something went wrong, Please Contact Admin!"
 var confirmDeleteRecord = "Are you sure you want delete record?"
 var confirmDeleteRecord = "Are you sure you want delete record?"
-
-var startdt = "";
-var enddt = "";
+var sdate = '';
+var edate = '';
 function SetDateFormat() {
-	
-	var stdate = $("#StartDate").val();
-	if (!CheckUndefinedBlankAndNull(stdate)) {
-		stdate = stdate.split('/');
-		startdt = stdate[1] + '/' + stdate[0] + '/' + stdate[2];
-	}
-	var eddate = $("#EndDate").val();
-	if (!CheckUndefinedBlankAndNull(stdate)) {
-		eddate = eddate.split('/');
-		enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
-	}
+	debugger;
+	var startdt = "";
+	var enddt = "";
+	var date = new Date();
+	startdt = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+	 enddt = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	$('.StartDate').datepicker({
+		format: 'dd/mm/yyyy',
+		todayBtn: 'linked'
+	});
+	$('.EndDate').datepicker({
+		format: 'dd/mm/yyyy',
+		todayBtn: 'linked'
+	});
+	$('.StartDate').datepicker('setDate', startdt);
+	$('.EndDate').datepicker('setDate', enddt);
+
+	sdate = $('.StartDate').val().split('/');
+	sdate = sdate[1] + '/' + sdate[0] + '/' + sdate[2];
+	edate = edate = $('.EndDate').val().split('/');
+	edate = edate[1] + '/' + edate[0] + '/' + edate[2];
 }
 
 function showLoader(divId) {
 	if (divId != '') {
-		debugger;
 		jQuery("#" + divId).append("<div id='preloaded'><div class='preloaded'><img src='" + loaderPath + "'/></div></div>");
 		$("#preloaded").css("display", "block");
 	}
@@ -55,38 +63,22 @@ $(document).ready(function () {
 			return false;
 	});
 
-	var date = new Date();
-	var ST = new Date(date.getFullYear(), date.getMonth()-1, date.getDate());
-	var ED = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-	$('.StartDate').datepicker({
-		format: 'dd/mm/yyyy',
-		todayBtn: 'linked'
-	});
-	$('.EndDate').datepicker({
-		format: 'dd/mm/yyyy',
-		todayBtn: 'linked'
-	});
-	$('.StartDate').datepicker('setDate', ST);
-	$('.EndDate').datepicker('setDate', ED);
+	
 
 });
 function OnCloseDatatableEditRow() {
 	$('.edit-row').remove();
 }
 
-function BindPackageNames() {
-	debugger;
+function BindPackageNames(controlId) {
 	$('#loading').show();
-	$('#PackageId').select2({ placeholder: "Select Package" });
+	controlId.select2({ placeholder: "Select Package" });
 	$.ajax({
 		type: "GET",
 		url: '/Category/GetPackageNames',
 		data: null,
 		datatype: "json",
 		success: function (result) {
-			debugger;
-			var controlId = $('#PackageId');
 			controlId.empty();
 			$.each(result.data, function (i, data) {
 				controlId.append(new Option(data.text, data.value));
@@ -100,9 +92,8 @@ function BindPackageNames() {
 		}
 	});
 }
-function BindSubPackageNames(packageId) {
-	debugger;
-	$('#SubPackageId').select2({ placeholder: "Select Sub Package" });
+function BindSubPackageNames(controlId, packageId) {
+	controlId.select2({ placeholder: "Select Sub Package" });
 	var jsonObject = { packageId: packageId };
 	$.ajax({
 		type: "GET",
@@ -110,12 +101,10 @@ function BindSubPackageNames(packageId) {
 		data: jsonObject,
 		datatype: "json",
 		success: function (result) {
-			var controlId = $('#SubPackageId');
 			controlId.empty();
 			$.each(result.data, function (i, data) {
 				controlId.append(new Option(data.text, data.value));
 			});
-			debugger;
 			if (!CheckUndefinedBlankAndNull(subPackageId)) {
 				controlId.val(subPackageId);
 			}
@@ -124,17 +113,15 @@ function BindSubPackageNames(packageId) {
 		}
 	});
 }
-function BindServiceNames(subPacakageId) {
-	$('#ServiceId').select2({ placeholder: "Select Service" });
-	var jsonObject = { SubPackageId: subPacakageId };
+function BindServiceNames(controlId) {
+	controlId.select2({ placeholder: "Select Service" });
+	var jsonObject = { SubPackageId: 0 };
 	$.ajax({
 		type: "GET",
 		url: '/Service/GetServiceNames',
 		data: jsonObject,
 		datatype: "json",
 		success: function (result) {
-			debugger;
-			var controlId = $('#ServiceId');
 			controlId.empty();
 			$.each(result.data, function (i, data) {
 				controlId.append(new Option(data.text, data.value));
@@ -149,8 +136,8 @@ function BindServiceNames(subPacakageId) {
 }
 
 function OnFilterPageLoad() {
-	BindPackageNames();
-	BindSubPackageNames($('#PackageId').val());
-	BindServiceNames("0");
+	BindPackageNames($('#FPackageId'));
+	BindSubPackageNames($('#FSubPackageId'), $('#FPackageId').val());
+	BindServiceNames($('#FServiceId'));
 	SetDateFormat();
 }

@@ -1,21 +1,23 @@
 ﻿@Html.AntiForgeryToken()
 @using BusinessEntities.RequestDto
 @model PackageRateRequest
-<div class="row">
-    <div class="col-md-12">
-        @Html.Partial("_Filters",Model)
-    </div>
-</div>
+<h5>Package Rate List</h5>
 <div class="row">
     <div class="col-md-12">
         <input value="Create" onclick="AddPackageRate()" class="btn btn-primary btn-sm float-end" type="button" />
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        @Html.Partial("_Filters",Model)
+    </div>
+</div>
+
 <div class="pt-2" id="divPackageRate">
   
 </div>
-<h5>Package Rate List</h5>
+
 <div class="row">
     <div class="col-md-12 pt-2">
         <section id="header">

@@ -14,11 +14,11 @@ namespace BusinessEntities.Common
         public DateTime CreatedOn { get; set; }
         public int? ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
-
         public int Start { get; set; }
-
         public int Length { get; set; }
-
         public int PageIndex { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+
     }
 }

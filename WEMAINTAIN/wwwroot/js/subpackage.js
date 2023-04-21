@@ -120,7 +120,7 @@ function CreateActionButton(id) {
 function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
 	OnEditPageLoad();
-	BindPackageNames();
+	BindPackageNames($("#PackageId"));
 }
 
 function ValidateForm() {

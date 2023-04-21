@@ -38,12 +38,6 @@ function OnCancel() {
 	$("#divUser").empty();
 }
 function BindUserDatatable() {
-	debugger;
-	var stdate = $("#StartDate").val().split('/');
-	var eddate = $("#EndDate").val().split('/');
-	var startdt = stdate[1] + '/' + stdate[0] + '/' + stdate[2];
-	var enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
-
 	$("#UserGrid").DataTable({
 		"language": {
 			"infoFiltered": "",
@@ -63,9 +57,10 @@ function BindUserDatatable() {
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
+				debugger;
 				d.RequestVerificationToken = $(document).find('input [name=__RequestVerificationToken]').val();
-				d.StartDate = startdt;
-				d.EndDate = enddt;
+				d.StartDate = sdate;
+				d.EndDate = edate;
 			},
 		},
 		"columns": [{ "data": "id" },
@@ -111,6 +106,7 @@ function CreateActionButton(id) {
 function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
 	OnEditPageLoad();
+	
 }
 
 function ValidateForm() {
