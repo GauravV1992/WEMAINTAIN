@@ -1,9 +1,10 @@
 
 function OnCreateEditPageLoad() {
+	debugger;
 	OnCreatePageLoad();
 	OnEditPageLoad();
-	BindPackageNames();
-	BindServiceNames($('#SubPackageId').val());
+	BindPackageNames($('#PackageId'));
+	BindServiceNames($('#ServiceId'));
 	GetSubPackageOnPackageChange();
 	$('#PackageId').on("change", GetSubPackageOnPackageChange);
 	$('#AMCPeriod').select2({ placeholder: "Select AMC Period" });
@@ -69,13 +70,13 @@ function BindPackageRateDatatable() {
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
-				debugger;
 				d.RequestVerificationToken = $(document).find('input [name=__RequestVerificationToken]').val();
-				d.PackageId = $("#PackageId").val();
-				d.SubPackageId = $("#SubPackageId").val();
-				d.ServiceId = $("#ServiceId").val();
-				d.StartDate = $("#StartDate").val();
-				d.EndDate = $("#EndDate").val();
+				d.StartDate = sdate;
+				d.EndDate = edate;
+				d.PackageId = $("#FPackageId").val();
+				d.SubPackageId = $("#FSubPackageId").val();
+				d.ServiceId = $("#FServiceId").val();
+				
 			},
 		},
 		"columns": [{ "data": "id" },
@@ -120,8 +121,7 @@ function CreateActionButton(id) {
 }
 
 function GetSubPackageOnPackageChange() {
-	
-	BindSubPackageNames($('#PackageId').val());
+	BindSubPackageNames($('#SubPackageId') ,$('#PackageId').val());
 }
 function ValidateForm() {
 	if (CheckUndefinedBlankAndNull($("#PackageId").val())) {

@@ -20,10 +20,6 @@ namespace BusinessEntities.RequestDto
         public decimal? PackageAmount { get; set; }
         public string? AMCPeriod { get; set; }
         public string? TermsAndCondition { get; set; }
-        public string? StartDate { get;}
-        public string? EndDate { get; }
-
-
 
     }
 }

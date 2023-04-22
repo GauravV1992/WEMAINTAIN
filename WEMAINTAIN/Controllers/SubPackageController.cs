@@ -162,5 +162,32 @@ namespace WEMAINTAIN.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetSubPackageNames()
+        {
+            try
+            {
+                var categories = new ResultDto<IEnumerable<SelectListItem>>();
+                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackageNames");
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<CategoryResponse>>>(contentStream);
+                }
+                return Json(new
+                {
+                    data = categories.Data.ToList()
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -1,36 +1,34 @@
 ﻿@using BusinessEntities.RequestDto
 @model PackageRateRequest
-<div class="card" >
-    <div class="card-body">
+
         <div class="row">
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-md-3">
                 <label for="exampleFormControlInput1" class="form-label">Package Name</label>
-                @Html.DropDownListFor(model=>model.PackageId,new List<SelectListItem>(),new {@Class="form-select"})
+                @Html.DropDownListFor(model=>model.PackageId,new List<SelectListItem>(),new {@id="FPackageId", @Class="form-select"})
             </div>
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-md-3">
                 <label for="exampleFormControlInput1" class="form-label">Sub Package Name</label>
-                @Html.DropDownListFor(model=>model.SubPackageId,new List<SelectListItem>(),new {@Class="form-select"})
+                @Html.DropDownListFor(model=>model.SubPackageId,new List<SelectListItem>(),new {@id="FSubPackageId",  @Class="form-select"})
             </div>
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-md-3">
                 <label for="exampleFormControlInput1" class="form-label">Service Name</label>
-                @Html.DropDownListFor(model=>model.ServiceId,new List<SelectListItem>(),new {@Class="form-select"})
+                @Html.DropDownListFor(model=>model.ServiceId,new List<SelectListItem>(),new {@id="FServiceId", @Class="form-select"})
             </div>
-        </div>
-        <div class="row">
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-md-3">
                 <label for="exampleFormControlInput1" class="form-label">StartDate</label>
                 @Html.TextBoxFor(model=>model.StartDate, new { @Class = "form-control StartDate" })
             </div>
-            <div class="mb-3 col-md-4">
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-3">
                 <label for="exampleFormControlInput1" class="form-label">EndDate</label>
                 @Html.TextBoxFor(model=>model.EndDate, new { @Class = "form-control EndDate " })
+                <span>  </span>
             </div>
-            <div class="mb-3 col-md-4">
-                <label for="exampleFormControlInput1" class="form-label" style="visibility:hidden">Buttonn</label>
-                <input value="Search" onclick="OnSearch()" class="btn btn-primary btn-sm float-end" type="button" />
+            <div class="mb-3 col-md-1">
+                <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
+                <input value="Search" onclick="OnSearch()" class="btn form-control btn-primary" type="button" />
             </div>
-        </div>
-    </div>
 </div>
 <script type="text/javascript">
     var packageId = '';

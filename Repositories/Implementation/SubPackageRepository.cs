@@ -104,7 +104,17 @@ namespace Repositories.Implementation
                 return dataList;
             }
         }
-
-
+        public async Task<IEnumerable<SubPackage>> GetSubPackageSection(long id)
+        {
+            var procedureName = "GetSubPackageSection";
+            var parameters = new DynamicParameters();
+            parameters.Add("PackageId", id, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QueryAsync<SubPackage>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user;
+            }
+        }
     }
 }

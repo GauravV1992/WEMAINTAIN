@@ -142,5 +142,35 @@ namespace BusinessServices.Implementation
             }
             return res;
         }
+        public async Task<ResultDto<IEnumerable<SubPackageResponse>>> GetSubPackageSection(long id)
+        {
+            var res = new ResultDto<IEnumerable<SubPackageResponse>>()
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
+
+            var response = await _iSubPackageRepository.GetSubPackageSection(id);
+
+            if (response == null)
+            {
+                res.Errors.Add("Data Not Found !!");
+            }
+            else
+            {
+                res.IsSuccess = true;
+                try
+                {
+                    res.Data = _mapper.Map<IEnumerable<SubPackage>, IEnumerable<SubPackageResponse>>(response);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return res;
+        }
     }
 }

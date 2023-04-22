@@ -1,0 +1,36 @@
+﻿@using BusinessEntities.ResponseDto
+@model IEnumerable<CategoryResponse>
+<!-- Category area starts -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-7 col-md-10">
+                <div class="section-title">
+                    <h2 class="title"> Browse <span class="title-color"> Package </span> </h2>
+                    <span class="section-para"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </span>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top-50">
+            <div class="col-lg-12">
+                <div class="category-slider dot-style-one">
+                    @if(Model!=null && Model.Any())
+                    {
+                    foreach (var package in Model)
+                    {
+                    <div class="single-category-item">
+                        <div class="single-category">
+                            <div class="icon">
+                                <i class="flaticon-mop"></i>
+                            </div>
+                            <div class="category-contents">
+                                <h4 class="category-title"> <a href="#"  onClick="LoadSubPackageSection(@package.Id)"> @package.Name </a> </h4>
+                                <span class="category-para"> 5+ Service </span>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
