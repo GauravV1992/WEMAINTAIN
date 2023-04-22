@@ -1,0 +1,42 @@
+﻿@Html.AntiForgeryToken()
+@using BusinessEntities.RequestDto
+@model RequestLabourRequest
+<h5>Request Labour List</h5>
+<div class="row">
+    <div class="col-md-12">
+        <input value="Create" onclick="AddRequestLabour()" class="btn btn-primary btn-sm float-end d-none" type="button" />
+    </div>
+</div>
+
+<div class="pt-2" id="divRequestLabour">
+</div>
+<div class="row">
+    <div class="col-md-12 pt-2">
+        <section id="header">
+            <table id="RequestLabourGrid" class="table table-bordered  table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Package Name</th>
+                        <th>Sub Package Name</th>
+                        <th>Service Name</th>
+                        <th>User Name</th>
+                        <th>Labour Count</th>
+                        <th>Assign Date</th>
+                        <th>Status</th>
+                        <th>Completed Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+<script src="~/js/requestlabour.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        BindRequestLabourDatatable();
+    });
+</script>

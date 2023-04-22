@@ -21,6 +21,8 @@ namespace BusinessServices.Automapper
             CreateMap<PackageRate, PackageRateResponse>();
             CreateMap<User, LoginResponse>();
             CreateMap<User, UserResponse>();
+            CreateMap<RequestLabour, RequestLabourResponse>();
+            //0CreateMap<, UserResponse>();
         }
     }
 }
