@@ -37,6 +37,9 @@ namespace API.Helpers
             //services.AddScoped<API.JWTMiddleware.JWTMiddleware>();
             services.AddScoped(typeof(IUserService), typeof(UserService));
 
+            services.AddScoped(typeof(ICouponRepository), typeof(CouponRepository));
+            services.AddScoped(typeof(ICouponService), typeof(CouponService));
+
         }
         public static void AddConfigure(IApplicationBuilder app, IWebHostEnvironment env)
         {
