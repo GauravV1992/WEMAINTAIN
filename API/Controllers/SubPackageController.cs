@@ -111,6 +111,19 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
+        [HttpGet("{Id}")]
+        [ActionName("GetSubPackageSection")]
+        public async Task<IActionResult> GetSubPackageSection(long Id)
+        {
+            var res = await _iSubPackageService.GetSubPackageSection(Id);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return NotFound(res);
+        }
+
+
 
     }
 }
