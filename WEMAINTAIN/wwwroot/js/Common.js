@@ -24,6 +24,18 @@ function SetDateFormat() {
 		eddate = eddate.split('/');
 		enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
 	}
+
+	var stdate = $("#CouponStartDate").val();
+	if (!CheckUndefinedBlankAndNull(stdate)) {
+		stdate = stdate.split('/');
+		startdt = stdate[1] + '/' + stdate[0] + '/' + stdate[2];
+	}
+	var eddate = $("#CouponEndDate").val();
+	if (!CheckUndefinedBlankAndNull(stdate)) {
+		eddate = eddate.split('/');
+		enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
+	}
+
 }
 
 function showLoader(divId) {
@@ -73,6 +85,31 @@ $(document).ready(function () {
 });
 function OnCloseDatatableEditRow() {
 	$('.edit-row').remove();
+}
+
+function BindUserNames() {
+	$('#loading').show();
+	$('#UserId').select2({ placeholder: "Select User" });
+	$.ajax({
+		type: "GET",
+		url: '/Coupon/GetUserNames',
+		data: null,
+		datatype: "json",
+		success: function (result) {
+			debugger;
+			var controlId = $('#UserId');
+			controlId.empty();
+			$.each(result.data, function (i, data) {
+				controlId.append(new Option(data.text, data.value));
+			});
+			if (!CheckUndefinedBlankAndNull(UserId)) {
+				controlId.val(UserId);
+			}
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
 }
 
 function BindPackageNames() {
@@ -149,6 +186,7 @@ function BindServiceNames(subPacakageId) {
 }
 
 function OnFilterPageLoad() {
+	BindUserNames();
 	BindPackageNames();
 	BindSubPackageNames($('#PackageId').val());
 	BindServiceNames("0");
