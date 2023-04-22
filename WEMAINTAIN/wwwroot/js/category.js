@@ -5,7 +5,7 @@ function AddPackage() {
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Category/Create',
+		url: '/Client/Index',
 		data: null,
 		datatype: "json",
 		success: function (response) {

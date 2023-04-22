@@ -4,11 +4,12 @@ namespace BusinessEntities.Common
 {
    public class BaseRequest
     {
-        //public BaseRequest()
-        //{
-        //    CreatedBy = 101;
-
-        //}
+        public BaseRequest()
+        {
+            CreatedBy = 101;
+            StartDate = string.Empty;
+            EndDate = string.Empty;
+        }
         public bool IsActive { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

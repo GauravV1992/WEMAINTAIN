@@ -50,48 +50,9 @@
     </div>
 </div>
 <!-- Banner area end -->
-<!-- Category area starts -->
-<section class="category-area section-bg-1 padding-top-100 padding-bottom-100">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-7 col-md-10">
-                <div class="section-title">
-                    <h2 class="title"> Browse <span class="title-color"> Package </span> </h2>
-                    <span class="section-para"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </span>
-                </div>
-            </div>
-        </div>
-        <div class="row margin-top-50">
-            <div class="col-lg-12">
-                <div class="category-slider dot-style-one">
-                    <div class="single-category-item">
-                        <div class="single-category">
-                            <div class="icon">
-                                <i class="flaticon-mop"></i>
-                            </div>
-                            <div class="category-contents">
-                                <h4 class="category-title"> <a data-toggle="modal" data-target="#exampleModal" href="category.html"> Residential Package </a> </h4>
-                                <span class="category-para"> 5+ Service </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-category-item">
-                        <div class="single-category">
-                            <div class="icon">
-                                <i class="flaticon-electrician"></i>
-                            </div>
-                            <div class="category-contents">
-                                <h4 class="category-title"> <a data-toggle="modal" data-target="#exampleModal" href="category.html">Organization Package </a> </h4>
-                                <span class="category-para"> 5+ Service </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Category area end -->
+<section id="divCategroy"  class="category-area section-bg-1 padding-top-100 padding-bottom-100">
+    </section>
+
 <!-- Marketplace area end -->
 <section class="margketplace-area padding-top-100 padding-bottom-100">
     <div class="container">
@@ -256,62 +217,12 @@
 <!-- Professional Service area end -->
 <!-- Modal Start -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="title" id="exampleModalLabel">Choose Package Type</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Category area starts -->
-                <section class="category-area padding-top-10 padding-bottom-100">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-3 col-md-3 col-sm-6 margin-top-30 category-child">
-                                <a asp-area="Client" asp-controller="OrderDetails" asp-action="Index">
-                                        <div class="single-category style-02">
-                                            <div class="icon">
-                                                <img src="assets/img/category/c1.png" alt="">
-                                            </div>
-                                            <div class="category-contents">
-                                                <span class="category-para"> 1 BHK </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                            </div>
-                            <div class="col-xl-3 col-md-3 col-sm-6 margin-top-30 category-child">
-
-                                <a asp-area="Client" asp-controller="OrderDetails" asp-action="Index">
-                                    <div class="single-category style-02">
-                                        <div class="icon">
-                                            <img src="assets/img/category/c2.png" alt="">
-                                        </div>
-                                        <div class="category-contents">
-                                            <span class="category-para"> 2 BHK </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xl-3 col-md-3 col-sm-6 margin-top-30 category-child">
-                                <a asp-area="Client" asp-controller="OrderDetails" asp-action="Index">
-                                    <div class="single-category style-02">
-                                        <div class="icon">
-                                            <img src="assets/img/category/c3.png" alt="">
-                                        </div>
-                                        <div class="category-contents">
-                                            <span class="category-para"> 3 BHK </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Category area end -->
-            </div>
-        </div>
-    </div>
+    
 </div>
+<script src="~/js/client/home.js" asp-append-version="true"></script>
 <!-- Modal End -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        OnHomePageLoad();
+    })
+</script>

@@ -10,5 +10,7 @@ namespace Repositories.Interface
         Task<IEnumerable<Package>> GetAll(CategoryRequest request);
         Task<Package> GetById(long Id);
         Task<IList<SelectListItem>> GetPackages();
+        Task<IEnumerable<Package>> GetPackageSection();
+        
     }
 }

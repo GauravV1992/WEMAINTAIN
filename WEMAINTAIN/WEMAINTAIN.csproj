@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\client\home.js" />
     <Content Remove="wwwroot\js\packageRate.js" />
     <Content Remove="wwwroot\js\packageratelog.js" />
     <Content Remove="wwwroot\js\purchasedetails.js" />
@@ -87,6 +88,7 @@
     <None Include="wwwroot\client\assets\sass\sections\_widgets.scss" />
     <None Include="wwwroot\client\assets\sass\style.scss" />
     <None Include="wwwroot\css\styles.css" />
+    <None Include="wwwroot\js\client\home.js" />
     <None Include="wwwroot\js\purchasedetails.js" />
     <None Include="wwwroot\js\packageratelog.js" />
     <None Include="wwwroot\js\packageRate.js" />

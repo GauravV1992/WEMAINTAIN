@@ -14,5 +14,7 @@ namespace BusinessServices.Interface
         Task<ResultDto<IEnumerable<CategoryResponse>>> GetAll(CategoryRequest request);
         Task<ResultDto<CategoryResponse>> GetById(long Id);
         Task<ResultDto<IList<SelectListItem>>> GetPackages();
+        Task<ResultDto<IEnumerable<CategoryResponse>>> GetPackageSection();
+        
     }
 }

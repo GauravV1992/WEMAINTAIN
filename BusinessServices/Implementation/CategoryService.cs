@@ -142,7 +142,38 @@ namespace BusinessServices.Implementation
             }
             return res;
         }
+        public async Task<ResultDto<IEnumerable<CategoryResponse>>> GetPackageSection()
+        {
+            var res = new ResultDto<IEnumerable<CategoryResponse>>()
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
 
-       
+            var response = await _iCategoryRepository.GetPackageSection();
+
+            if (response == null)
+            {
+                res.Errors.Add("Data Not Found !!");
+            }
+            else
+            {
+                res.IsSuccess = true;
+                try
+                {
+                    res.Data = _mapper.Map<IEnumerable<Package>, IEnumerable<CategoryResponse>>(response);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return res;
+        }
+
+
+
     }
 }
