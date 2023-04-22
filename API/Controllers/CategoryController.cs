@@ -111,6 +111,18 @@ namespace API.Controllers
             return NotFound(res);
         }
 
+        [HttpGet]
+        [ActionName("GetPackageSection")]
+        public async Task<IActionResult> GetPackageSection()
+        {
+            var res = await _iCategoryService.GetPackageSection();
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return NotFound(res);
+        }
+
 
     }
 }
