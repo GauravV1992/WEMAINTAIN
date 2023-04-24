@@ -11,7 +11,7 @@ function AddPurchaseDetails() {
 	$("#divPurchaseDetails").empty();
 	$.ajax({
 		type: "Get",
-		url: '/PurchaseDetails/Create',
+		url: '/Admin/PurchaseDetails/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -36,7 +36,7 @@ $('#PurchaseDetailsGrid').on('click', '.viewcs', function () {
 	$('.edit-row').remove();
 	$.ajax({
 		type: "Get",
-		url: '/PurchaseDetails/PurchaseServicesById/?id=' + rowData.id + '',
+		url: '/Admin/PurchaseDetails/PurchaseServicesById/?id=' + rowData.id + '',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -69,7 +69,7 @@ function BindPurchaseDetailsDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/PurchaseDetails/GetAll",
+			"url": "/Admin/PurchaseDetails/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -123,10 +123,6 @@ function CreateActionButton(id) {
 	return html;
 }
 
-function GetSubPackageOnPackageChange() {
-	debugger;
-	BindSubPackageNames($('#PackageId').val());
-}
 function ValidateForm() {
 	if (CheckUndefinedBlankAndNull($("#PackageId").val())) {
 		toastr.error('Please Select Package Name');

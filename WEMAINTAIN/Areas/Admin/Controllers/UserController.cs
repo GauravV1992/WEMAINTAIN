@@ -10,11 +10,9 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
-
-
-
-namespace WEMAINTAIN.Controllers
+namespace WEMAINTAIN.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -26,14 +24,14 @@ namespace WEMAINTAIN.Controllers
         }
         public IActionResult Index()
         {
-            return View("Users");
+            return View("~/areas/admin/views/User/Users.cshtml");
         }
 
         [HttpGet]
         public ActionResult Create(UserRequest request)
         {
             var Users = new UserRequest();
-            return PartialView("~/views/User/create.cshtml", Users);
+            return PartialView("~/areas/admin/views/User/create.cshtml", Users);
         }
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
@@ -48,7 +46,7 @@ namespace WEMAINTAIN.Controllers
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                 Users = JsonSerializer.Deserialize<ResultDto<UserResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return PartialView("~/views/User/edit.cshtml", Users.Data);
+            return PartialView("~/areas/admin/views/User/edit.cshtml", Users?.Data);
         }
 
         [HttpPost]
@@ -151,12 +149,12 @@ namespace WEMAINTAIN.Controllers
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     user = JsonSerializer.Deserialize<ResultDto<IEnumerable<UserResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                     
+
                 }
                 return Json(new
                 {
-                    recordsFiltered = user.Data == null ? 0 : user.Data.Select(x => x.TotalRecords).FirstOrDefault(),
-                    data = user.Data.ToList()
+                    recordsFiltered = user?.Data == null ? 0 : user.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = user?.Data.ToList()
                 });
             }
             catch (Exception ex)

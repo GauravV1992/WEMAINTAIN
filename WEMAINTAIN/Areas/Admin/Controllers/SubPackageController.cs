@@ -9,54 +9,50 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-
-
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
-
-
-
-namespace WEMAINTAIN.Controllers
+namespace WEMAINTAIN.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    [Area("Admin")]
+    public class SubPackageController : Controller
     {
-        private readonly ILogger<CategoryController> _logger;
+        private readonly ILogger<SubPackageController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public CategoryController(ILogger<CategoryController> logger, IHttpClientFactory httpClientFactory)
+        public SubPackageController(ILogger<SubPackageController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
         }
         public IActionResult Index()
         {
-            return View("Categories");
+            return View("~/areas/admin/views/SubPackage/SubPackage.cshtml");
         }
 
         [HttpGet]
-        public ActionResult Create(CategoryRequest request)
+        public ActionResult Create(SubPackageRequest request)
         {
-            var categories = new CategoryRequest();
-            return PartialView("~/views/category/create.cshtml", categories);
+            var categories = new SubPackageRequest();
+            return PartialView("~/areas/admin/views/SubPackage/create.cshtml", categories);
         }
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var categories = new ResultDto<CategoryResponse>();
+            var categories = new ResultDto<SubPackageResponse>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
             httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-            var httpResponseMessage = await httpClient.GetAsync("Category/GetById/" + id + "");
+            var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetById/" + id + "");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                categories = JsonSerializer.Deserialize<ResultDto<CategoryResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                categories = JsonSerializer.Deserialize<ResultDto<SubPackageResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return PartialView("~/views/category/edit.cshtml", categories.Data);
+            return PartialView("~/areas/admin/views/SubPackage/edit.cshtml", categories?.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Save(CategoryRequest request)
+        public async Task<ActionResult> Save(SubPackageRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
@@ -64,7 +60,7 @@ namespace WEMAINTAIN.Controllers
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/Save", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/Save", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -76,7 +72,7 @@ namespace WEMAINTAIN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(CategoryRequest request)
+        public async Task<ActionResult> Update(SubPackageRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
@@ -84,7 +80,7 @@ namespace WEMAINTAIN.Controllers
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/Update", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/Update", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -102,7 +98,7 @@ namespace WEMAINTAIN.Controllers
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
             ValueRequest objValue = new ValueRequest();
             objValue.Id = id;
-            var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/Delete", objValue);
+            var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/Delete", objValue);
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -113,25 +109,26 @@ namespace WEMAINTAIN.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> GetAll(CategoryRequest request)
+        public async Task<ActionResult> GetAll(SubPackageRequest request)
         {
             try
             {
                 request.PageIndex = request.Start / request.Length + 1;
-                var categories = new ResultDto<IEnumerable<CategoryResponse>>();
+                var categories = new ResultDto<IEnumerable<SubPackageResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
                 HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Category/GetAll", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/GetAll", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<CategoryResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SubPackageResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<SubPackageResponse>>>(contentStream);
                 }
                 return Json(new
                 {
-                    recordsFiltered = categories.Data == null ? 0 : categories.Data.Select(x => x.TotalRecords).FirstOrDefault(),
-                    data = categories.Data.ToList()
+                    recordsFiltered = categories?.Data == null ? 0 : categories.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = categories?.Data.ToList()
                 });
             }
             catch (Exception ex)
@@ -139,29 +136,26 @@ namespace WEMAINTAIN.Controllers
                 throw ex;
             }
         }
-    
 
 
-
-    [HttpGet]
-        public async Task<ActionResult> GetPackageNames()
+        [HttpGet]
+        public async Task<ActionResult> GetSubPackageNames(int packageId)
         {
             try
             {
-                var categories = new ResultDto<IEnumerable<SelectListItem>>();
+                var subPackages = new ResultDto<IEnumerable<SelectListItem>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("Category/GetPackageNames");
+                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackageNames/" + packageId + "");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<CategoryResponse>>>(contentStream);
+                    subPackages = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
                 return Json(new
                 {
-                    data = categories.Data.ToList()
+                    data = subPackages?.Data.ToList()
                 });
             }
             catch (Exception ex)
@@ -169,5 +163,7 @@ namespace WEMAINTAIN.Controllers
                 throw ex;
             }
         }
+
+        
     }
 }

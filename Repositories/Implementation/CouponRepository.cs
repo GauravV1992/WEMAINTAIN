@@ -22,8 +22,8 @@ namespace Repositories.Implementation
             var parameters = new DynamicParameters();
             parameters.Add("CouponCode", viewModel.CouponCode, DbType.String, ParameterDirection.Input);
             parameters.Add("UserId", viewModel.UserId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CouponStartDate", viewModel.CouponStartDate, DbType.String, ParameterDirection.Input);
-            parameters.Add("CouponEndDate", viewModel.CouponEndDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("StartDate", viewModel.StartDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("EndDate", viewModel.EndDate, DbType.String, ParameterDirection.Input);
             parameters.Add("DiscountPercentage", viewModel.DiscountPercentage, DbType.String, ParameterDirection.Input);
             parameters.Add("CreatedBy", viewModel.CreatedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
@@ -40,8 +40,8 @@ namespace Repositories.Implementation
             parameters.Add("Id", viewModel.Id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("CouponCode", viewModel.CouponCode, DbType.String, ParameterDirection.Input);
             parameters.Add("UserId", viewModel.UserId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CouponStartDate", viewModel.CouponStartDate, DbType.String, ParameterDirection.Input);
-            parameters.Add("CouponEndDate", viewModel.CouponEndDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("StartDate", viewModel.StartDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("EndDate", viewModel.EndDate, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DiscountPercentage", viewModel.DiscountPercentage, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
@@ -102,7 +102,7 @@ namespace Repositories.Implementation
                 dataList.Add(new SelectListItem() { Text = "All", Value = "0" });
                 foreach (var item in packages)
                 {
-                    dataList.Add(new SelectListItem { Text = item.FirstName.ToString()+' '+item.LastName.ToString(), Value = Convert.ToInt32(item.Id).ToString() });
+                    dataList.Add(new SelectListItem { Text = item.FirstName + " " + item.LastName + "(" + item.MobileNo + ")", Value = Convert.ToInt32(item.Id).ToString() });
                 }
                 return dataList;
             }

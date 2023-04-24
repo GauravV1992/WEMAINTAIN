@@ -8,14 +8,13 @@ using Microsoft.Net.Http.Headers;
 using WEMAINTAIN.Models;
 using BusinessEntities.RequestDto;
 
-namespace WEMAINTAIN.User.Controllers
+namespace WEMAINTAIN.Areas.Client.Controllers
 {
-    [Area("Client")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-       
+
         public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
@@ -24,7 +23,7 @@ namespace WEMAINTAIN.User.Controllers
 
         public IActionResult Index()
         {
-            return View("~/views/client/home.cshtml");
+            return View("~/areas/client/views/home.cshtml");
         }
         public async Task<IActionResult> GetCategorySection()
         {
@@ -38,7 +37,7 @@ namespace WEMAINTAIN.User.Controllers
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                 categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<CategoryResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return PartialView("~/views/client/_category.cshtml", categories.Data.ToList());
+            return PartialView("~/views/client/_category.cshtml", categories?.Data.ToList());
         }
         public async Task<IActionResult> GetSubPackageSection(int packageId)
         {
@@ -46,13 +45,13 @@ namespace WEMAINTAIN.User.Controllers
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
             httpClient.DefaultRequestHeaders.Add(
             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-            var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackageSection/"+ packageId + "");
+            var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackageSection/" + packageId + "");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                 categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SubPackageResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return PartialView("~/views/client/_subpackage.cshtml", categories.Data.ToList());
+            return PartialView("~/views/client/_subpackage.cshtml", categories?.Data.ToList());
         }
 
     }

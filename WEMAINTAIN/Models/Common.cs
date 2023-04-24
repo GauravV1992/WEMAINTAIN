@@ -3,6 +3,12 @@ namespace WEMAINTAIN.Models
 {
     public static class Common
     {
+        public static string GetMMDDYYYDate(string date)
+        {
+            string[] dateSplit = date.Split('/');
+            return dateSplit[1] + "/" + dateSplit[0] + "/"+ dateSplit[2];
+
+        }
         public static string GetAccessToken(HttpContext context)
         {
             string accessToken = string.Empty;

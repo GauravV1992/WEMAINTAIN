@@ -16,7 +16,7 @@ function BindPackageRateLogDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/PackageRateLog/GetAll",
+			"url": "/Admin/PackageRateLog/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {

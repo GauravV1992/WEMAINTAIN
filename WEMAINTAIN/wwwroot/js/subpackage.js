@@ -7,7 +7,7 @@ function AddSubPackage() {
 
 	$.ajax({
 		type: "Get",
-		url: '/SubPackage/Create',
+		url: '/Admin/SubPackage/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -26,7 +26,7 @@ function EditSubPackage(id) {
 
 	$.ajax({
 		type: "Get",
-		url: '/SubPackage/Edit',
+		url: '/Admin/SubPackage/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
@@ -61,7 +61,7 @@ function BindSubPackageDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/SubPackage/GetAll",
+			"url": "/Admin/SubPackage/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -218,7 +218,7 @@ function Delete(Id) {
 		//$('#loading').show();
 		$.ajax({
 			type: "POST",
-			url: "/SubPackage/Delete",
+			url: "/Admin/SubPackage/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",

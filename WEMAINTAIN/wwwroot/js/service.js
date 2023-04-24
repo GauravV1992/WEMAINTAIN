@@ -5,7 +5,7 @@ function AddService() {
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Service/Create',
+		url: '/Admin/Service/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -24,7 +24,7 @@ function EditService(id) {
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Service/Edit',
+		url: '/Admin/Service/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
@@ -57,7 +57,7 @@ function BindServiceDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/Service/GetAll",
+			"url": "/Admin/Service/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -193,7 +193,7 @@ function Delete(Id) {
 		//$('#loading').show();
 		$.ajax({
 			type: "POST",
-			url: "/Service/Delete",
+			url: "/Admin/Service/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",

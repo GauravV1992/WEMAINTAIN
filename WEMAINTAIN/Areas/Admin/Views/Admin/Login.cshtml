@@ -4,7 +4,7 @@
 @using BusinessEntities.RequestDto
 @model LoginRequest
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @id = "frmCreate" }))
+@using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @id = "frmCreate" }))
 {
     @Html.AntiForgeryToken()
     <!DOCTYPE html>
@@ -28,7 +28,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">WEMAINTAIN</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">FIXMYSPACE</h3></div>
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-12">

@@ -1,4 +1,5 @@
 function OnCreateEditPageLoad() {
+	SetDateFormat();
 	OnCreatePageLoad();
 	OnEditPageLoad();
 	BindUserNames();
@@ -8,7 +9,7 @@ function AddCoupon() {
 	$("#divCoupon").empty();
 	$.ajax({
 		type: "Get",
-		url: '/Coupon/Create',
+		url: '/Admin/Coupon/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -21,13 +22,13 @@ function AddCoupon() {
 	});
 }
 function EditCoupon(id) {
-	debugger;
+
 	$("#divCoupon").empty();
 	var jsonObject = { Id: id };
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Coupon/Edit',
+		url: '/Admin/Coupon/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
@@ -60,7 +61,7 @@ function BindCouponDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/Coupon/GetAll",
+			"url": "/Admin/Coupon/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -69,8 +70,8 @@ function BindCouponDatatable() {
 		},
 		"columns": [{ "data": "id" },
 			{ "data": "couponCode" },
-			{ "data": "couponStartDate" },
-			{ "data": "couponEndDate" },
+			{ "data": "startDate" },
+			{ "data": "endDate" },
 			{ "data": "isRedeem" },
 			{ "data": "discountPercentage" },
 			{ "data": "userName" },
@@ -119,11 +120,11 @@ function ValidateForm() {
 		toastr.error('Please Select User');
 		return false;
 	}
-	if (CheckUndefinedBlankAndNull($("#CouponStartDate").val())) {
+	if (CheckUndefinedBlankAndNull($("#StartDate").val())) {
 		toastr.error('Please Select Start Date');
 		return false;
 	}
-	if (CheckUndefinedBlankAndNull($("#CouponEndDate").val())) {
+	if (CheckUndefinedBlankAndNull($("#EndDate").val())) {
 		toastr.error('Please Select End Date');
 		return false;
 	}
@@ -213,7 +214,7 @@ function Delete(Id) {
 		//$('#loading').show();
 		$.ajax({
 			type: "POST",
-			url: "/Coupon/Delete",
+			url: "/Admin/Coupon/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",

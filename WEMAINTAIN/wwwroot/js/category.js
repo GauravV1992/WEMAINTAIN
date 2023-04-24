@@ -5,7 +5,7 @@ function AddPackage() {
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Client/Index',
+		url: '/Admin/Category/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -24,7 +24,7 @@ function EditPackage(id) {
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/Category/Edit',
+		url: '/Admin/Category/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
@@ -57,7 +57,7 @@ function BindCategoryDatatable() {
 		"bDestroy": false,
 		"searching": false,
 		"ajax": {
-			"url": "/Category/GetAll",
+			"url": "/Admin/Category/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -193,7 +193,7 @@ function Delete(Id) {
 		//$('#loading').show();
 		$.ajax({
 			type: "POST",
-			url: "/Category/Delete",
+			url: "/Admin/Category/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",

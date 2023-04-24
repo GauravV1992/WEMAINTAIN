@@ -5,8 +5,10 @@ function OnCreateEditPageLoad() {
 	OnEditPageLoad();
 	BindPackageNames($('#PackageId'));
 	BindServiceNames($('#ServiceId'));
-	GetSubPackageOnPackageChange();
-	$('#PackageId').on("change", GetSubPackageOnPackageChange);
+	BindSubPackageNames($('#SubPackageId'), packageId);
+	$('#PackageId').change(function () {
+		BindSubPackageNames($('#SubPackageId'), $('#PackageId').val());
+	});
 	$('#AMCPeriod').select2({ placeholder: "Select AMC Period" });
 }
 function AddPackageRate() {
@@ -14,7 +16,7 @@ function AddPackageRate() {
 	$("#divPackageRate").empty();
 	$.ajax({
 		type: "Get",
-		url: '/PackageRate/Create',
+		url: '/Admin/PackageRate/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -30,7 +32,7 @@ function EditPackageRate(id) {
 	var jsonObject = { Id: id };
 	$.ajax({
 		type: "Get",
-		url: '/PackageRate/Edit',
+		url: '/Admin/PackageRate/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
@@ -66,7 +68,7 @@ function BindPackageRateDatatable() {
 		"bDestroy": true,
 		"searching": false,
 		"ajax": {
-			"url": "/PackageRate/GetAll",
+			"url": "/Admin/PackageRate/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -120,9 +122,6 @@ function CreateActionButton(id) {
 	return html;
 }
 
-function GetSubPackageOnPackageChange() {
-	BindSubPackageNames($('#SubPackageId') ,$('#PackageId').val());
-}
 function ValidateForm() {
 	if (CheckUndefinedBlankAndNull($("#PackageId").val())) {
 		toastr.error('Please Select Package Name');
@@ -225,7 +224,7 @@ function Delete(Id) {
 		var jsonObject = { Id: Id };
 		$.ajax({
 			type: "POST",
-			url: "/PackageRate/Delete",
+			url: "/Admin/PackageRate/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",

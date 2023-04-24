@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using WEMAINTAIN.Models;
 
-namespace WEMAINTAIN.User.Controllers
+namespace WEMAINTAIN.Areas.Client.Controllers
 {
     [Area("Client")]
     public class OrderDetailsController : Controller

@@ -8,5 +8,7 @@
         public int? ModifiedBy { get; set; }
         public string ModifiedOn { get; set; }
         public int TotalRecords { get; set; }
+
+       
     }
 }

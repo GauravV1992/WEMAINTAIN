@@ -9,15 +9,11 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-
-
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
-
-
-
-namespace WEMAINTAIN.Controllers
+namespace WEMAINTAIN.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class PackageRateLogController : Controller
     {
         private readonly ILogger<PackageRateLogController> _logger;
@@ -29,7 +25,7 @@ namespace WEMAINTAIN.Controllers
         }
         public IActionResult Index()
         {
-            return View("PackageRateLogs");
+            return View("~/areas/admin/views/PackageRateLog/PackageRateLogs.cshtml");
         }
 
         [HttpPost]
@@ -50,8 +46,8 @@ namespace WEMAINTAIN.Controllers
                 }
                 return Json(new
                 {
-                    recordsFiltered = packagerateLog.Data == null ? 0 : packagerateLog.Data.Select(x => x.TotalRecords).FirstOrDefault(),
-                    data = packagerateLog.Data.ToList()
+                    recordsFiltered = packagerateLog?.Data == null ? 0 : packagerateLog.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = packagerateLog?.Data.ToList()
                 });
             }
             catch (Exception ex)

@@ -1,29 +1,29 @@
-﻿@using BusinessEntities.ResponseDto
-@model CouponResponse
-@using (Html.BeginForm("Update", "Coupon", FormMethod.Post, new { @id = "frmEdit" }))
+﻿@using BusinessEntities.RequestDto
+@model CouponRequest
+@using (Html.BeginForm("Save", "Coupon", FormMethod.Post, new { @id = "frmCreate" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
 
-    <div class="card" id="divEdit">
+    <div class="card" id="divCreate">
         <div class="card-header">
             Create @*Coupon*@
         </div>
-        <div class="card-body">
-            <div class="row">
+         <div class="card-body">
+             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Coupon Code</label>
                     @Html.TextBoxFor(model => model.CouponCode, new { @Class = "form-control" })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Coupon Start Date</label>
-                    @Html.TextBoxFor(model => model.CouponStartDate, new { @Class = "form-control StartDate" })
+                    @Html.TextBoxFor(model => model.StartDate, new { @Class = "form-control StartDate" })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Coupon End Date</label>
-                    @Html.TextBoxFor(model => model.CouponEndDate, new { @Class = "form-control EndDate" })
+                    @Html.TextBoxFor(model => model.EndDate, new { @Class = "form-control EndDate" })
                 </div>
-            </div>
+             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">User</label>
@@ -34,8 +34,8 @@
                     @Html.TextBoxFor(model => model.DiscountPercentage, new { @Class = "form-control" })
                 </div>
             </div>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+             
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
                 <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
             </div>
@@ -43,9 +43,8 @@
     </div>
 }
 
-
 <script type="text/javascript">
-    var UserId = '@Model.UserId';
+    var UserId = '';
     $(document).ready(function () {
         OnCreateEditPageLoad();
     })

@@ -2,7 +2,7 @@ function AddUser() {
 	$("#divUser").empty();
 	$.ajax({
 		type: "Get",
-		url: '/User/Create',
+		url: '/Admin/User/Create',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -21,7 +21,7 @@ function EditUser(id) {
 	/*$('#loading').show();*/
 	$.ajax({
 		type: "Get",
-		url: '/User/Edit',
+		url: '/Admin/User/Edit',
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
@@ -53,7 +53,7 @@ function BindUserDatatable() {
 		"bDestroy": true,
 		"searching": false,
 		"ajax": {
-			"url": "/User/GetAll",
+			"url": "/Admin/User/GetAll",
 			"type": "POST",
 			"datatype": "json",
 			"data": function (d) {
@@ -214,7 +214,7 @@ function Delete(Id) {
 		//$('#loading').show();
 		$.ajax({
 			type: "POST",
-			url: "/User/Delete",
+			url: "/Admin/User/Delete",
 			data: jsonObject,
 			async: false,
 			datatype: "json",

@@ -10,11 +10,9 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
-
-
-
-namespace WEMAINTAIN.Controllers
+namespace WEMAINTAIN.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class PurchaseDetailsController : Controller
     {
         private readonly ILogger<PurchaseDetailsController> _logger;
@@ -26,14 +24,14 @@ namespace WEMAINTAIN.Controllers
         }
         public IActionResult Index()
         {
-            return View("PurchaseDetails");
+            return View("~/areas/admin/views/PurchaseDetails/PurchaseDetails.cshtml");
         }
 
         [HttpGet]
         public ActionResult Create(PurchaseDetailsRequest request)
         {
             var PurchaseDetails = new PurchaseDetailsRequest();
-            return PartialView("~/views/PurchaseDetails/create.cshtml", PurchaseDetails);
+            return PartialView("~/areas/admin/views/PurchaseDetails/create.cshtml", PurchaseDetails);
         }
 
 
@@ -75,7 +73,7 @@ namespace WEMAINTAIN.Controllers
                 }
                 return Json(new
                 {
-                    recordsFiltered = purchaseDetails.Data.PurchaseDetails == null ? 0 : purchaseDetails.Data.PurchaseDetails.Select(x => x.TotalRecords).FirstOrDefault(),
+                    recordsFiltered = purchaseDetails?.Data.PurchaseDetails == null ? 0 : purchaseDetails.Data.PurchaseDetails.Select(x => x.TotalRecords).FirstOrDefault(),
                     data = purchaseDetails
                 }); ;
             }
@@ -101,7 +99,7 @@ namespace WEMAINTAIN.Controllers
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     purchaseDetails = JsonSerializer.Deserialize<ResultDto<IEnumerable<PurchaseServicesResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
-                return PartialView("~/views/PurchaseDetails/purchaseservicedetails.cshtml", purchaseDetails.Data);
+                return PartialView("~/areas/admin/views/PurchaseDetails/purchaseservicedetails.cshtml", purchaseDetails?.Data);
             }
             catch (Exception ex)
             {

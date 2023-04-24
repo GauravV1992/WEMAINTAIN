@@ -8,6 +8,7 @@ using BusinessEntities.Common;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repositories.Implementation;
+using System.Security.AccessControl;
 //using AutoMapper;
 
 namespace BusinessServices.Implementation
@@ -29,6 +30,7 @@ namespace BusinessServices.Implementation
                 Data = 0,
                 Errors = new List<string>()
             };
+          
             var response = await _iCouponRepository.Add(viewModel);
             res.IsSuccess = true;
             res.Data = response;

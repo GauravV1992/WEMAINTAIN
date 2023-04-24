@@ -7,7 +7,7 @@ function LoadPackageSection() {
 	$("#divCategroy").empty();
 	$.ajax({
 		type: "Get",
-		url: '/Client/Home/GetCategorySection',
+		url: '/Home/GetCategorySection',
 		data: null,
 		datatype: "json",
 		success: function (response) {
@@ -22,7 +22,7 @@ function LoadSubPackageSection(packageId) {
 	$("#exampleModal").empty();
 	$.ajax({
 		type: "Get",
-		url: '/Client/Home/GetSubPackageSection?packageId=' + packageId + '',
+		url: '/Home/GetSubPackageSection?packageId=' + packageId + '',
 		data: null,
 		datatype: "json",
 		success: function (response) {

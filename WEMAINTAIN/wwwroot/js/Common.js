@@ -17,7 +17,7 @@ function SetDateFormat() {
 	var enddt = "";
 	var date = new Date();
 	startdt = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
-	 enddt = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	enddt = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	$('.StartDate').datepicker({
 		format: 'dd/mm/yyyy',
 		todayBtn: 'linked'
@@ -33,36 +33,9 @@ function SetDateFormat() {
 	sdate = sdate[1] + '/' + sdate[0] + '/' + sdate[2];
 	edate = edate = $('.EndDate').val().split('/');
 	edate = edate[1] + '/' + edate[0] + '/' + edate[2];
-}
 
-var startdt = "";
-var enddt = "";
-function SetDateFormat() {
-	
-	var stdate = $("#StartDate").val();
-	if (!CheckUndefinedBlankAndNull(stdate)) {
-		stdate = stdate.split('/');
-		startdt = stdate[1] + '/' + stdate[0] + '/' + stdate[2];
-	}
-	var eddate = $("#EndDate").val();
-	if (!CheckUndefinedBlankAndNull(stdate)) {
-		eddate = eddate.split('/');
-		enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
-	}
-
-	var stdate = $("#CouponStartDate").val();
-	if (!CheckUndefinedBlankAndNull(stdate)) {
-		stdate = stdate.split('/');
-		startdt = stdate[1] + '/' + stdate[0] + '/' + stdate[2];
-	}
-	var eddate = $("#CouponEndDate").val();
-	if (!CheckUndefinedBlankAndNull(stdate)) {
-		eddate = eddate.split('/');
-		enddt = eddate[1] + '/' + eddate[0] + '/' + eddate[2];
-	}
 
 }
-
 function showLoader(divId) {
 	if (divId != '') {
 		jQuery("#" + divId).append("<div id='preloaded'><div class='preloaded'><img src='" + loaderPath + "'/></div></div>");
@@ -90,9 +63,6 @@ $(document).ready(function () {
 		if (String.fromCharCode(charCode).match(/[^0-9]/g))
 			return false;
 	});
-
-	
-
 });
 function OnCloseDatatableEditRow() {
 	$('.edit-row').remove();
@@ -103,7 +73,7 @@ function BindUserNames() {
 	$('#UserId').select2({ placeholder: "Select User" });
 	$.ajax({
 		type: "GET",
-		url: '/Coupon/GetUserNames',
+		url: '/Admin/Coupon/GetUserNames',
 		data: null,
 		datatype: "json",
 		success: function (result) {
@@ -123,13 +93,13 @@ function BindUserNames() {
 	});
 }
 
-function BindPackageNames() {
+function BindPackageNames(controlId) {
 	debugger;
 	$('#loading').show();
 	controlId.select2({ placeholder: "Select Package" });
 	$.ajax({
 		type: "GET",
-		url: '/Category/GetPackageNames',
+		url: '/Admin/Category/GetPackageNames',
 		data: null,
 		datatype: "json",
 		success: function (result) {
@@ -147,11 +117,12 @@ function BindPackageNames() {
 	});
 }
 function BindSubPackageNames(controlId, packageId) {
+	debugger;
 	controlId.select2({ placeholder: "Select Sub Package" });
 	var jsonObject = { packageId: packageId };
 	$.ajax({
 		type: "GET",
-		url: '/SubPackage/GetSubPackageNames',
+		url: '/Admin/SubPackage/GetSubPackageNames',
 		data: jsonObject,
 		datatype: "json",
 		success: function (result) {
@@ -172,7 +143,7 @@ function BindServiceNames(controlId) {
 	var jsonObject = { SubPackageId: 0 };
 	$.ajax({
 		type: "GET",
-		url: '/Service/GetServiceNames',
+		url: '/Admin/Service/GetServiceNames',
 		data: jsonObject,
 		datatype: "json",
 		success: function (result) {
@@ -188,14 +159,12 @@ function BindServiceNames(controlId) {
 		}
 	});
 }
-
 function OnFilterPageLoad() {
 	BindPackageNames($('#FPackageId'));
-	BindSubPackageNames($('#FSubPackageId'), $('#FPackageId').val());
 	BindServiceNames($('#FServiceId'));
-	BindUserNames();
-	BindPackageNames();
-	BindSubPackageNames($('#PackageId').val());
-	BindServiceNames("0");
+	BindSubPackageNames($('#FSubPackageId'), packageId);
+	$('#FPackageId').change(function () {
+		BindSubPackageNames($('#FSubPackageId'), $('#FPackageId').val());
+	});
 	SetDateFormat();
 }

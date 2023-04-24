@@ -11,47 +11,48 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
-namespace WEMAINTAIN.Controllers
+namespace WEMAINTAIN.Areas.Admin.Controllers
 {
-    public class SubPackageController : Controller
+    [Area("Admin")]
+    public class ServiceController : Controller
     {
-        private readonly ILogger<SubPackageController> _logger;
+        private readonly ILogger<ServiceController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public SubPackageController(ILogger<SubPackageController> logger, IHttpClientFactory httpClientFactory)
+        public ServiceController(ILogger<ServiceController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
         }
         public IActionResult Index()
         {
-            return View("SubPackage");
+            return View("~/areas/admin/views/Service/Service.cshtml");
         }
 
         [HttpGet]
-        public ActionResult Create(SubPackageRequest request)
+        public ActionResult Create(ServiceRequest request)
         {
-            var categories = new SubPackageRequest();
-            return PartialView("~/views/SubPackage/create.cshtml", categories);
+            var Service = new ServiceRequest();
+            return PartialView("~/areas/admin/views/Service/create.cshtml", Service);
         }
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var categories = new ResultDto<SubPackageResponse>();
+            var Service = new ResultDto<ServiceResponse>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
             httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-            var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetById/" + id + "");
+            var httpResponseMessage = await httpClient.GetAsync("Service/GetById/" + id + "");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                categories = JsonSerializer.Deserialize<ResultDto<SubPackageResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                Service = JsonSerializer.Deserialize<ResultDto<ServiceResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return PartialView("~/views/SubPackage/edit.cshtml", categories.Data);
+            return PartialView("~/areas/admin/views/Service/edit.cshtml", Service?.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Save(SubPackageRequest request)
+        public async Task<ActionResult> Save(ServiceRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
@@ -59,7 +60,7 @@ namespace WEMAINTAIN.Controllers
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/Save", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/Save", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -71,7 +72,7 @@ namespace WEMAINTAIN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(SubPackageRequest request)
+        public async Task<ActionResult> Update(ServiceRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
@@ -79,7 +80,7 @@ namespace WEMAINTAIN.Controllers
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/Update", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/Update", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -97,7 +98,7 @@ namespace WEMAINTAIN.Controllers
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
             ValueRequest objValue = new ValueRequest();
             objValue.Id = id;
-            var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/Delete", objValue);
+            var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/Delete", objValue);
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -107,54 +108,56 @@ namespace WEMAINTAIN.Controllers
         }
 
 
+        //[HttpPost]
+        //public async Task<ActionResult> GetAll(ServiceRequest request)
+        //{
+        //    try
+        //    {
+        //        //var page = request.Start / request.Length + 1;
+        //        request.PageIndex = request.Start / request.Length + 1;
+        //        var Service = new ResultDto<IEnumerable<ServiceResponse>>();
+        //        var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+        //        httpClient.DefaultRequestHeaders.Add(
+        //        HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+        //        // var httpResponseMessage = await httpClient.GetAsync("Service/GetAll");
+        //        var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/GetAll", request);
+        //        if (httpResponseMessage.IsSuccessStatusCode)
+        //        {
+        //            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+        //            Service = JsonSerializer.Deserialize<ResultDto<IEnumerable<ServiceResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        //        }
+        //        return Json(new
+        //        {
+        //            recordsFiltered = Service.Data == null ? 0 : Service.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+        //            data = Service.Data.ToList()
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
         [HttpPost]
-        public async Task<ActionResult> GetAll(SubPackageRequest request)
+        public async Task<ActionResult> GetAll(ServiceRequest request)
         {
             try
             {
                 request.PageIndex = request.Start / request.Length + 1;
-                var categories = new ResultDto<IEnumerable<SubPackageResponse>>();
+                var service = new ResultDto<IEnumerable<ServiceResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
                 HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("SubPackage/GetAll", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("Service/GetAll", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SubPackageResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<SubPackageResponse>>>(contentStream);
+                    service = JsonSerializer.Deserialize<ResultDto<IEnumerable<ServiceResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
                 return Json(new
                 {
-                    recordsFiltered = categories.Data == null ? 0 : categories.Data.Select(x => x.TotalRecords).FirstOrDefault(),
-                    data = categories.Data.ToList()
-                });
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-
-        [HttpGet]
-        public async Task<ActionResult> GetSubPackageNames(int packageId)
-        {
-            try
-            {
-                var subPackages = new ResultDto<IEnumerable<SelectListItem>>();
-                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                httpClient.DefaultRequestHeaders.Add(
-             HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackageNames/" + packageId + "");
-                if (httpResponseMessage.IsSuccessStatusCode)
-                {
-                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    subPackages = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                }
-                return Json(new
-                {
-                    data = subPackages.Data.ToList()
+                    recordsFiltered = service?.Data == null ? 0 : service?.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = service?.Data.ToList()
                 });
             }
             catch (Exception ex)
@@ -164,24 +167,23 @@ namespace WEMAINTAIN.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetSubPackageNames()
+        public async Task<ActionResult> GetServiceNames(int subPackageId)
         {
             try
             {
-                var categories = new ResultDto<IEnumerable<SelectListItem>>();
+                var services = new ResultDto<IEnumerable<SelectListItem>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackageNames");
+                var httpResponseMessage = await httpClient.GetAsync("Service/GetServiceNames/" + subPackageId + "");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<CategoryResponse>>>(contentStream);
+                    services = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
                 return Json(new
                 {
-                    data = categories.Data.ToList()
+                    data = services?.Data.ToList()
                 });
             }
             catch (Exception ex)

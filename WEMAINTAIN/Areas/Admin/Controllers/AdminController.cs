@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-namespace WEMAINTAIN.Controllers
+namespace WEMAINTAIN.Areas.Admin.Controllers
 {
-    public class LoginController : Controller
+    [Area("Admin")]
+    public class AdminController : Controller
     {
-        private readonly ILogger<LoginController> _logger;
+        private readonly ILogger<AdminController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public LoginController(ILogger<LoginController> logger, IHttpClientFactory httpClientFactory)
+        public AdminController(ILogger<AdminController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
@@ -30,7 +31,7 @@ namespace WEMAINTAIN.Controllers
                 SameSite = SameSiteMode.Strict,
                 Secure = true
             });
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Admin");
         }
 
         [HttpPost]
@@ -43,6 +44,7 @@ namespace WEMAINTAIN.Controllers
             var token = string.Empty;
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
             var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Authenticate", model);
+
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 token = await httpResponseMessage.Content.ReadAsStringAsync();

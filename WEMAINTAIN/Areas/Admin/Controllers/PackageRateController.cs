@@ -2,61 +2,57 @@
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-
-
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
-
-
-
-namespace WEMAINTAIN.Controllers
+namespace WEMAINTAIN.Areas.Admin.Controllers
 {
-    public class CouponController : Controller
+    [Area("Admin")]
+    public class PackageRateController : Controller
     {
-        private readonly ILogger<CouponController> _logger;
+        private readonly ILogger<PackageRateController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public CouponController(ILogger<CouponController> logger, IHttpClientFactory httpClientFactory)
+        public PackageRateController(ILogger<PackageRateController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
         }
         public IActionResult Index()
         {
-            return View("Coupon");
+            PackageRateRequest obj = new PackageRateRequest();
+            return View("PackageRates", obj);
         }
 
         [HttpGet]
-        public ActionResult Create(CouponRequest request)
+        public ActionResult Create(PackageRateRequest request)
         {
-            var categories = new CouponRequest();
-            return PartialView("~/views/Coupon/create.cshtml", categories);
+            var PackageRates = new PackageRateRequest();
+            return PartialView("~/areas/admin/views/PackageRate/create.cshtml", PackageRates);
         }
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var coupons = new ResultDto<CouponResponse>();
+            var PackageRates = new ResultDto<PackageRateResponse>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
             httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-            var httpResponseMessage = await httpClient.GetAsync("Coupon/GetById/" + id + "");
+            var httpResponseMessage = await httpClient.GetAsync("PackageRate/GetById/" + id + "");
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                coupons = JsonSerializer.Deserialize<ResultDto<CouponResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                PackageRates = JsonSerializer.Deserialize<ResultDto<PackageRateResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return PartialView("~/views/Coupon/edit.cshtml", coupons.Data);
+            return PartialView("~/areas/admin/views/PackageRate/edit.cshtml", PackageRates?.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Save(CouponRequest request)
+        public async Task<ActionResult> Save(PackageRateRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
@@ -64,7 +60,7 @@ namespace WEMAINTAIN.Controllers
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Coupon/Save", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/Save", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -76,7 +72,7 @@ namespace WEMAINTAIN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(CouponRequest request)
+        public async Task<ActionResult> Update(PackageRateRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
@@ -84,7 +80,7 @@ namespace WEMAINTAIN.Controllers
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Coupon/Update", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/Update", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -102,7 +98,7 @@ namespace WEMAINTAIN.Controllers
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
             ValueRequest objValue = new ValueRequest();
             objValue.Id = id;
-            var httpResponseMessage = await httpClient.PostAsJsonAsync("Coupon/Delete", objValue);
+            var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/Delete", objValue);
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
@@ -113,52 +109,27 @@ namespace WEMAINTAIN.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> GetAll(CouponRequest request)
+        public async Task<ActionResult> GetAll(PackageRateRequest request)
         {
             try
             {
                 request.PageIndex = request.Start / request.Length + 1;
-                var Coupons = new ResultDto<IEnumerable<CouponResponse>>();
-                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                httpClient.DefaultRequestHeaders.Add(
-                HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("Coupon/GetAll", request);
-                if (httpResponseMessage.IsSuccessStatusCode)
-                {
-                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    Coupons = JsonSerializer.Deserialize<ResultDto<IEnumerable<CouponResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                }
-                return Json(new
-                {
-                    recordsFiltered = Coupons.Data == null ? 0 : Coupons.Data.Select(x => x.TotalRecords).FirstOrDefault(),
-                    data = Coupons.Data.ToList()
-                });
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> GetUserNames()
-        {
-            try
-            {
-                var users = new ResultDto<IEnumerable<SelectListItem>>();
+                var PackageRates = new ResultDto<IEnumerable<PackageRateResponse>>();
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.GetAsync("Coupon/GetUserNames");
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("PackageRate/GetAll", request);
+                //var httpResponseMessage = await httpClient.GetAsync("PackageRate/GetAll");
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    users = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    //categories = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<CategoryResponse>>>(contentStream);
+                    PackageRates = JsonSerializer.Deserialize<ResultDto<IEnumerable<PackageRateResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    //PackageRates = await JsonConvert.DeserializeObject<ResultDto<IEnumerable<PackageRateResponse>>>(contentStream);
                 }
                 return Json(new
                 {
-                    data = users.Data.ToList()
+                    recordsFiltered = PackageRates?.Data == null ? 0 : PackageRates.Data.Select(x => x.TotalRecords).FirstOrDefault(),
+                    data = PackageRates?.Data.ToList()
                 });
             }
             catch (Exception ex)
