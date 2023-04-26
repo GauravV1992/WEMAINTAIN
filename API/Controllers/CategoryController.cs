@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    [CustomAuthorize("Admin")]
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -20,7 +20,7 @@ namespace API.Controllers
         {
             _iCategoryService = iCategoryService;
         }
-
+        [CustomAuthorize("Admin")]
         [HttpPost] 
         [ActionName("GetAll")]
         public async Task<IActionResult> GetAll([FromBody] CategoryRequest request)
@@ -32,7 +32,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [CustomAuthorize("Admin")]
         [HttpGet("{Id}")]
         [ActionName("GetById")]
         public async Task<IActionResult> GetById(long Id)
@@ -44,7 +44,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("Save")]
         public async Task<IActionResult> Post([FromBody] CategoryRequest viewModel)
@@ -63,7 +63,7 @@ namespace API.Controllers
 
             return NotFound(res);
         }
-
+        [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("Update")]
         public async Task<IActionResult> Update([FromBody] CategoryRequest viewModel)
@@ -82,7 +82,7 @@ namespace API.Controllers
 
             return NotFound(res);
         }
-
+        [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("Delete")]
         public async Task<IActionResult> Delete([FromBody] ValueRequest viewModel)
@@ -99,6 +99,7 @@ namespace API.Controllers
 
             return NotFound(res);
         }
+        [CustomAuthorize("Admin")]
         [HttpGet]
         [ActionName("GetPackageNames")]
         public async Task<IActionResult> GetPackageNames()
@@ -110,7 +111,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [AllowAnonymous]
         [HttpGet]
         [ActionName("GetPackageSection")]
         public async Task<IActionResult> GetPackageSection()
@@ -122,7 +123,5 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
-
     }
 }

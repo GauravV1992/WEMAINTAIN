@@ -18,11 +18,11 @@ namespace WEMAINTAIN.Areas.Client.Controllers
 
         public IActionResult Index()
         {
-            return View("Login");
+            return View("~/Areas/Client/Views/Login.cshtml");
         }
 
-        [HttpGet("SignOut1")]
-        public ActionResult SignOut1()
+        [HttpGet("SignOut")]
+        public ActionResult SignOut()
         {
             Response.Cookies.Delete("access_token", new CookieOptions()
             {
@@ -38,7 +38,7 @@ namespace WEMAINTAIN.Areas.Client.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return RedirectToAction("Index", "Login");
             }
             var token = string.Empty;
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
@@ -55,7 +55,7 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 });
                 return RedirectToAction("Index", "Home");
             }
-            return View(model);
+            return RedirectToAction("Index", "Login");
 
 
         }

@@ -9,12 +9,15 @@ namespace API.Helpers
             var email = context.User.Claims.First(c => c.Type == "Email");
             var mobileNo = context.User.Claims.First(c => c.Type == "MobileNo");
             var Address = context.User.Claims.First(c => c.Type == "Address");
+            var name = context.User.Identity?.Name;
             return new LoginResponse
             {
                 Id = Convert.ToInt16(id.Value),
                 Email = email.Value,
                 MobileNo = mobileNo.Value,
-                Address = Address.Value
+                Address = Address.Value,
+                FirstName = name
+
             };
         }
      

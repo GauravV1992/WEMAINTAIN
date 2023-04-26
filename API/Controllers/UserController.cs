@@ -20,7 +20,7 @@ using System.Text;
 
 namespace API.Controllers
 {
-   
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -70,7 +70,7 @@ namespace API.Controllers
         [ActionName("GetAll")]
         public async Task<IActionResult> GetAll([FromBody] UserRequest request)
         {
-           // LoginResponse user = Common.GetUserSessionData(HttpContext);
+            // LoginResponse user = Common.GetUserSessionData(HttpContext);
             var res = await _iUserService.GetAll(request);
             if (res.IsSuccess)
             {
@@ -180,6 +180,16 @@ namespace API.Controllers
             }
 
             return NotFound(res);
+        }
+        [HttpGet]
+        [CustomAuthorize("Admin")]
+        [ActionName("GetUserDetails")]
+        public IActionResult GetUserDetails()
+        {
+            LoginResponse user = Common.GetSessionData(HttpContext);
+            if (user != null)
+                return Ok(user);
+            else return NotFound();
         }
 
     }

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    [CustomAuthorize("Admin")]
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class SubPackageController : ControllerBase
@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             _iSubPackageService = iSubPackageService;
         }
-
+        [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("GetAll")]
         public async Task<IActionResult> GetAll([FromBody] SubPackageRequest request)
@@ -33,7 +33,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [CustomAuthorize("Admin")]
         [HttpGet("{Id}")]
         [ActionName("GetById")]
         public async Task<IActionResult> GetById(long Id)
@@ -45,7 +45,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("Save")]
         public async Task<IActionResult> Post([FromBody] SubPackageRequest viewModel)
@@ -83,7 +83,7 @@ namespace API.Controllers
 
             return NotFound(res);
         }
-
+        [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("Delete")]
         public async Task<IActionResult> Delete([FromBody] ValueRequest viewModel)
@@ -100,6 +100,7 @@ namespace API.Controllers
 
             return NotFound(res);
         }
+        [CustomAuthorize("Admin")]
         [HttpGet("{Id}")]
         [ActionName("GetSubPackageNames")]
         public async Task<IActionResult> GetSubPackageNames(long Id)
@@ -111,6 +112,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
+        [AllowAnonymous]
         [HttpGet("{Id}")]
         [ActionName("GetSubPackageSection")]
         public async Task<IActionResult> GetSubPackageSection(long Id)

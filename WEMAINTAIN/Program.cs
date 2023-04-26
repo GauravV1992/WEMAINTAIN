@@ -8,6 +8,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpClient("WEMAINTAIN", httpClient =>
 {
     httpClient.BaseAddress = new Uri("https://api.fixmyspace.org/api/");
+    //httpClient.BaseAddress = new Uri("https://localhost:7019/api/");
     //httpClient.DefaultRequestHeaders.Add(
     //    HeaderNames.Accept, "application/vnd.github.v3+json");
     //httpClient.DefaultRequestHeaders.Add(

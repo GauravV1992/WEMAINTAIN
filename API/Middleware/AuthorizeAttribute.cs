@@ -25,8 +25,6 @@ namespace API.JWTMiddleware
                     // not logged in
                     context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
                 }
-           
-
         }
     }
 }
