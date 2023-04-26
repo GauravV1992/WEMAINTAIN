@@ -1,4 +1,5 @@
 ﻿@using BusinessEntities.ResponseDto
+@inject CustomIDataProtection protector
 @model IEnumerable<SubPackageResponse>
 <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -18,10 +19,8 @@
                     {
                     foreach (var subpackage in Model)
                     {
-
-
                             <div class="col-xl-3 col-md-3 col-sm-6 margin-top-30 category-child">
-                                <a asp-area="Client" asp-controller="OrderDetails" asp-action="Index">
+                                    <a asp-route-id="@protector.Decode(subpackage.Id.ToString())" asp-area="" asp-controller="OrderDetails" asp-action="Index">
                                         <div class="single-category style-02">
                                             <div class="icon">
                                                 <img src="assets/img/category/c1.png" alt="">

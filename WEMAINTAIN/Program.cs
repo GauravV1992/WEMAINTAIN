@@ -1,4 +1,6 @@
 using Microsoft.Net.Http.Headers;
+using WEMAINTAIN.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,6 +16,8 @@ builder.Services.AddHttpClient("WEMAINTAIN", httpClient =>
     //httpClient.DefaultRequestHeaders.Add(
     //    HeaderNames.UserAgent, "HttpRequestsSample");
 });
+builder.Services.AddSingleton<UniqueCode>();
+builder.Services.AddSingleton<CustomIDataProtection>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

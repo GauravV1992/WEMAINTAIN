@@ -21,8 +21,6 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="service_list.html">Service List</a></li>
                     <li><a href="contact.html">contact</a></li>
-                    <li><a href="contact.html">My Profile</a></li>
-                    <li><a href="contact.html">Ordered Details</a></li>
                 </ul>
                </div> </div>
     </nav>
@@ -44,59 +42,36 @@
                                                 <img src="assets/img/service/overview2.jpg" alt="">
                                             </div>
                                             <div class="overview-contents">
-                                                <h4 class="overview-title"> <a href="javascript:void(0)"> Lorem ipsum dolor sit amet, consectetur adipiscing about Aelit</a> </h4>
-                                                <span class="overview-review"> <i class="las la-star"></i> 4.9 <b>(438)</b> </span>
+                                                <h4 class="overview-title"> <a href="javascript:void(0)">Individual Package</a> </h4>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="overview-single padding-top-40">
-                                        <h4 class="title"> What's Included </h4>
+                                     <div class="overview-single padding-top-40">
+                                        <h4 class="title"> AMC Period for 1 BHK Package </h4>
                                         <div class="include-contents margin-top-30">
-                                            <div class="single-include">
-                                                <ul class="include-list">
-                                                    <li class="lists">
-                                                        <div class="list-single">
-                                                            <span class="rooms"> AC Service </span>
-                                                        </div>
-                                                        <div class="list-single">
-                                                            <span class="values"> $50 </span>
-                                                            <span class="value-input"> <input type="text" value="1"> </span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="lists"> <a class="remove" href="javascript:void(0)">Remove</a> </li>
-                                                </ul>
-                                            </div>
-                                            <div class="single-include">
-                                                <ul class="include-list">
-                                                    <li class="lists">
-                                                        <div class="list-single">
-                                                            <span class="rooms"> Fridge Service </span>
-                                                        </div>
-                                                        <div class="list-single">
-                                                            <span class="values"> $40 </span>
-                                                            <span class="value-input"> <input type="text" value="2"> </span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="lists"> <a class="remove" href="javascript:void(0)">Remove</a> </li>
-                                                </ul>
-                                            </div>
+                                            @Html.DropDownList("AMCPeriod",new List<SelectListItem>{
+                                            new SelectListItem{ Text="Daily", Value = "Daily" },
+                                            new SelectListItem{ Text="Monthly", Value = "Monthly" },
+                                            new SelectListItem{ Text="Quarterly", Value = "Quarterly" },
+                                            new SelectListItem{ Text="Half Yearly", Value = "Half Yearly" },
+                                            new SelectListItem{ Text="Yearly", Value = "Yearly",Selected=true }
+                                            },new {@Class="form-select select2"})
                                         </div>
                                     </div>
                                     <div class="overview-single padding-top-60">
-                                        <h4 class="title"> Upgrade your order with extras </h4>
+                                        <h4 class="title margin-top-30"> Choose services you need </h4>
                                         <div class="row">
                                             <div class="col-lg-6 margin-top-30">
                                                 <div class="overview-extra style-02">
                                                     <div class="overview-extra-service">
                                                         <div class="checkbox-inlines">
                                                             <input class="check-input" type="checkbox" id="check4">
-                                                            <label class="checkbox-label" for="check4"> Ac Cleaning </label>
+                                                            <label class="checkbox-label" for="check4">Carperntry </label>
                                                         </div>
                                                         <div class="overview-extra-flex-content">
-                                                            <span class="price-value"> $75 </span>
+                                                            <span class="price-value">Rate: $75 </span>
                                                             <div class="list-single">
-                                                                <span class="values"> $25 </span>
-                                                                <span class="value-input"> <input type="text" value="3"> </span>
+                                                                <span class="values">Discount: $25 </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,13 +85,12 @@
                                                     <div class="overview-extra-service">
                                                         <div class="checkbox-inlines">
                                                             <input class="check-input" type="checkbox" id="check5">
-                                                            <label class="checkbox-label" for="check5"> Plug Change </label>
+                                                            <label class="checkbox-label" for="check5"> Electrical </label>
                                                         </div>
                                                         <div class="overview-extra-flex-content">
-                                                            <span class="price-value"> $75 </span>
+                                                            <span class="price-value">Rate: $75 </span>
                                                             <div class="list-single">
-                                                                <span class="values"> $25 </span>
-                                                                <span class="value-input"> <input type="text" value="3"> </span>
+                                                                <span class="values">Discount: $25 </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,50 +99,29 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 margin-top-30">
-                                                <div class="overview-extra style-02">
-                                                    <div class="overview-extra-service">
-                                                        <div class="checkbox-inlines">
-                                                            <input class="check-input" type="checkbox" id="check6">
-                                                            <label class="checkbox-label" for="check6"> Performance Check </label>
-                                                        </div>
-                                                        <div class="overview-extra-flex-content">
-                                                            <span class="price-value"> $75  </span>
-                                                            <div class="list-single">
-                                                                <span class="values"> $25 </span>
-                                                                <span class="value-input"> <input type="text" value="3"> </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="overview-extra-thumb">
-                                                        <img src="assets/img/service/extra3.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 margin-top-30">
-                                                <div class="overview-extra style-02">
-                                                    <div class="overview-extra-service">
-                                                        <div class="checkbox-inlines">
-                                                            <input class="check-input" type="checkbox" id="check7">
-                                                            <label class="checkbox-label" for="check7"> Dust Cleaning </label>
-                                                        </div>
-                                                        <div class="overview-extra-flex-content">
-                                                            <span class="price-value"> $75 </span>
-                                                            <div class="list-single">
-                                                                <span class="values"> $25 </span>
-                                                                <span class="value-input"> <input type="text" value="3"> </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="overview-extra-thumb">
-                                                        <img src="assets/img/service/extra4.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="overview-single padding-top-60">
-                                        <h4 class="title"> Benifits of the Package: </h4>
+                                        <h4 class="title"> Apply Coupon to get more discount </h4>
+                                        <div class="include-contents margin-top-30">
+                                            <div class="single-include">
+                                                <ul class="include-list">
+                                                    <li class="lists">
+                                                        <div class="list-single">
+                                                            <span class="rooms">Enter coupon</span>
+                                                        </div>
+                                                        <div class="list-single">
+                                                            @Html.TextBox("Rate",null, new { @Class = "form-control" })
+                                                        </div>
+                                                    </li>
+                                                    <li class="lists"> <a class="remove" href="javascript:void(0)">Apply</a> </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="overview-single padding-top-60">
+                                        <h4 class="title"> Terms & Conditions: </h4>
                                         <ul class="overview-benefits margin-top-30">
                                             <li class="list"> Professional Service at your Doorstep</li>
                                             <li class="list"> Refreshing new look</li>
@@ -183,29 +136,6 @@
                                 <div class="service-overview-summery">
                                     <h4 class="title"> Booking Summery </h4>
                                     <div class="overview-summery-contents">
-                                        <div class="single-summery">
-                                            <span class="summery-title"> Appointment Package Service </span>
-                                            <div class="summery-list-all">
-                                                <ul class="summery-list">
-                                                    <li class="list">
-                                                        <span class="rooms"> AC Service</span>
-                                                        <span class="room-count">1</span>
-                                                        <span class="value-count">$50</span>
-                                                    </li>
-                                                    <li class="list">
-                                                        <span class="rooms"> Fridge </span>
-                                                        <span class="room-count">2</span>
-                                                        <span class="value-count">$80</span>
-                                                    </li>
-                                                </ul>
-                                                <ul class="summery-result-list">
-                                                    <li class="result-list">
-                                                        <span class="rooms"> Pagckage Fee</span>
-                                                        <span class="value-count">$130</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
                                         <div class="single-summery">
                                             <span class="summery-title"> Extra Service </span>
                                             <div class="summery-list-all">
@@ -253,8 +183,6 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="button" name="next" class="next action-button" value="Pay">
-                        <input type="button" name="previous" class="previous action-button-previous" value="Back">
                     </fieldset>
                 </form>
             </div>

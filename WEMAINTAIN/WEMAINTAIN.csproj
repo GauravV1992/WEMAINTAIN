@@ -104,6 +104,7 @@
 
   <ItemGroup>
     <!--<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />-->
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="8.0.0-preview.3.23177.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
@@ -120,11 +121,7 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="Areas\Client\Views\OrderDetails\OrderDetails.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Client\Views\OrderDetails\_ViewStart.cshtml">
+    <Content Update="Areas\Client\Views\OrderDetails.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
