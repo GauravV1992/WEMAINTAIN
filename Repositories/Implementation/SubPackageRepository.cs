@@ -5,6 +5,7 @@ using Repositories.Interface;
 using Dapper;
 using System.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using BusinessEntities.ResponseDto;
 
 namespace Repositories.Implementation
 {
@@ -114,6 +115,23 @@ namespace Repositories.Implementation
                 var user = await connection.QueryAsync<SubPackage>
            (procedureName, parameters, commandType: CommandType.StoredProcedure);
                 return user;
+            }
+        }
+        public async Task<SubPackagePriceDetailsResponse> GetSubPackagePriceDetails(long id, string amcPeriod)
+        {
+            SubPackagePriceDetailsResponse objResp = new SubPackagePriceDetailsResponse();
+            var procedureName = "GetSubPackagePriceDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("SubPackageId", id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("AMCPeriod", amcPeriod, DbType.String, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                using (var multi = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure))
+                {
+                    objResp.SubPackages = await multi.ReadFirstOrDefaultAsync<SubPackageResponse>();
+                    objResp.SubPackageServicePrices = await multi.ReadAsync<SubPackageServicePriceRequest>();
+                }
+                return objResp;
             }
         }
     }

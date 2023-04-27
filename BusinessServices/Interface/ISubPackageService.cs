@@ -16,5 +16,6 @@ namespace BusinessServices.Interface
         Task<ResultDto<IList<SelectListItem>>> GetSubPackageNames(long Id);
 
         Task<ResultDto<IEnumerable<SubPackageResponse>>> GetSubPackageSection(long Id);
+        Task<ResultDto<SubPackagePriceDetailsResponse>> GetSubPackagePriceDetails(long id, string amcPeriod);
     }
 }

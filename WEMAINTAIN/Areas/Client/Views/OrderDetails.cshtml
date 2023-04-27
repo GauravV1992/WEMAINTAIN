@@ -1,4 +1,11 @@
-﻿<header class="header-style-01">
+﻿@using BusinessEntities.ResponseDto
+@model SubPackagePriceDetailsResponse
+@{
+
+    var servicePrice = Model.SubPackageServicePrices;
+
+}
+<header class="header-style-01">
     <!-- Menu area Starts -->
     <nav class="navbar navbar-area navbar-two navbar-expand-lg section-bg-2">
         <div class="container container-two nav-container">
@@ -15,14 +22,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-                       <div class="collapse navbar-collapse" id="bizcoxx_main_menu">
-                  <ul class="navbar-nav">
-                 <li>  <a href="home">Home</a></li>
+            <div class="collapse navbar-collapse" id="bizcoxx_main_menu">
+                <ul class="navbar-nav">
+                    <li>  <a href="home">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="service_list.html">Service List</a></li>
                     <li><a href="contact.html">contact</a></li>
                 </ul>
-               </div> </div>
+            </div>
+        </div>
     </nav>
     <!-- Menu area end -->
 </header>
@@ -46,59 +54,49 @@
                                             </div>
                                         </div>
                                     </div>
-                                     <div class="overview-single padding-top-40">
-                                        <h4 class="title"> AMC Period for 1 BHK Package </h4>
+                                    <div class="overview-single padding-top-40">
+                                        <h4 class="title"> AMC Period for @Model.SubPackages.Name Package </h4>
                                         <div class="include-contents margin-top-30">
                                             @Html.DropDownList("AMCPeriod",new List<SelectListItem>{
                                             new SelectListItem{ Text="Daily", Value = "Daily" },
                                             new SelectListItem{ Text="Monthly", Value = "Monthly" },
-                                            new SelectListItem{ Text="Quarterly", Value = "Quarterly" },
+                                            new SelectListItem{ Text="Quarterly", Value = "Quarterly" ,Selected=true  },
                                             new SelectListItem{ Text="Half Yearly", Value = "Half Yearly" },
-                                            new SelectListItem{ Text="Yearly", Value = "Yearly",Selected=true }
+                                            new SelectListItem{ Text="Yearly", Value = "Yearly"}
                                             },new {@Class="form-select select2"})
                                         </div>
                                     </div>
                                     <div class="overview-single padding-top-60">
                                         <h4 class="title margin-top-30"> Choose services you need </h4>
                                         <div class="row">
-                                            <div class="col-lg-6 margin-top-30">
-                                                <div class="overview-extra style-02">
-                                                    <div class="overview-extra-service">
-                                                        <div class="checkbox-inlines">
-                                                            <input class="check-input" type="checkbox" id="check4">
-                                                            <label class="checkbox-label" for="check4">Carperntry </label>
-                                                        </div>
-                                                        <div class="overview-extra-flex-content">
-                                                            <span class="price-value">Rate: $75 </span>
-                                                            <div class="list-single">
-                                                                <span class="values">Discount: $25 </span>
+
+                                            @if (servicePrice != null && servicePrice.Any())
+                                            {
+                                                foreach (var item in servicePrice)
+                                                {
+                                                    <div class="col-lg-6 margin-top-30">
+                                                        <div class="overview-extra style-02">
+                                                            <div id="div_@item.ServiceId" class="overview-extra-service">
+                                                                <div class="checkbox-inlines">
+                                                                    <input id="hdnServiceId" type="hidden" value="@item.ServiceId" />
+                                                                    <input class="check-input" type="checkbox" id="check4">
+                                                                    <label class="checkbox-label" for="check4">@item.ServiceName </label>
+                                                                </div>
+                                                                <div class="overview-extra-flex-content">
+                                                                    <span class="price-value">₹<label id="lblRate">@item.PackageAmount</label></span>
+                                                                    <div class="list-single">
+                                                                        <span class="values">Discount: <label id="lblDiscount">@item.Discount</label></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="overview-extra-thumb">
+                                                                <img src="assets/img/service/extra1.jpg" alt="">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="overview-extra-thumb">
-                                                        <img src="assets/img/service/extra1.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 margin-top-30">
-                                                <div class="overview-extra style-02">
-                                                    <div class="overview-extra-service">
-                                                        <div class="checkbox-inlines">
-                                                            <input class="check-input" type="checkbox" id="check5">
-                                                            <label class="checkbox-label" for="check5"> Electrical </label>
-                                                        </div>
-                                                        <div class="overview-extra-flex-content">
-                                                            <span class="price-value">Rate: $75 </span>
-                                                            <div class="list-single">
-                                                                <span class="values">Discount: $25 </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="overview-extra-thumb">
-                                                        <img src="assets/img/service/extra2.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                                }
+                                            }
                                         </div>
                                     </div>
                                     <div class="overview-single padding-top-60">
@@ -119,15 +117,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                     <div class="overview-single padding-top-60">
                                         <h4 class="title"> Terms & Conditions: </h4>
                                         <ul class="overview-benefits margin-top-30">
-                                            <li class="list"> Professional Service at your Doorstep</li>
-                                            <li class="list"> Refreshing new look</li>
-                                            <li class="list"> High quality products from renowned brands. </li>
-                                            <li class="list"> 100+ hour trained salon experts in specific fields. </li>
-                                            <li class="list"> High quality salon instruments and techniques. </li>
+                                            <li class="list"> @Model.SubPackages.TermsAndCondition</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -137,24 +131,9 @@
                                     <h4 class="title"> Booking Summery </h4>
                                     <div class="overview-summery-contents">
                                         <div class="single-summery">
-                                            <span class="summery-title"> Extra Service </span>
+                                            <span class="summery-title">Services </span>
                                             <div class="summery-list-all">
-                                                <ul class="summery-list">
-                                                    <li class="list">
-                                                        <span class="rooms"> AC Clean</span>
-                                                        <span class="room-count">1</span>
-                                                        <span class="value-count">$10</span>
-                                                    </li>
-                                                    <li class="list">
-                                                        <span class="rooms"> Fridge</span>
-                                                        <span class="room-count">1</span>
-                                                        <span class="value-count">$15</span>
-                                                    </li>
-                                                    <li class="list">
-                                                        <span class="rooms"> Performance</span>
-                                                        <span class="room-count">1</span>
-                                                        <span class="value-count">$10</span>
-                                                    </li>
+                                                <ul id="ulItem" class="summery-list">
                                                 </ul>
                                                 <ul class="summery-result-list result-border padding-bottom-20">
                                                     <li class="result-list">
@@ -189,3 +168,10 @@
         </div>
     </div>
 </section>
+<script src="~/js/PackageRate.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    var subPackageId = '@Model.SubPackages.Id';
+    $(document).ready(function () {
+        OnPackageRateChange();OnServiceChecked();
+    })
+</script>

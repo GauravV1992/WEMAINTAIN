@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class SubPackageController : ControllerBase
@@ -124,7 +124,18 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [HttpGet("{Id}/{amcPeriod}")]
+        [AllowAnonymous]
+        [ActionName("GetSubPackagePriceDetails")]
+        public async Task<IActionResult> GetSubPackagePriceDetails(long Id, string amcPeriod)
+        {
+            var res = await _iSubPackageService.GetSubPackagePriceDetails(Id, amcPeriod);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return NotFound(res);
+        }
 
 
     }

@@ -13,5 +13,7 @@ namespace Repositories.Interface
         Task<SubPackage> GetById(long Id);
         Task<IList<SelectListItem>> GetSubPackageNames(long id);
         Task<IEnumerable<SubPackage>> GetSubPackageSection(long id);
+
+        Task<SubPackagePriceDetailsResponse> GetSubPackagePriceDetails(long id, string amcPeriod);
     }
 }

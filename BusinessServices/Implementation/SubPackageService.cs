@@ -172,5 +172,36 @@ namespace BusinessServices.Implementation
             }
             return res;
         }
+
+        public async Task<ResultDto<SubPackagePriceDetailsResponse>> GetSubPackagePriceDetails(long id, string amcPeriod)
+        {
+            var res = new ResultDto<SubPackagePriceDetailsResponse>()
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
+
+            var response = await _iSubPackageRepository.GetSubPackagePriceDetails(id, amcPeriod);
+
+            if (response == null)
+            {
+                res.Errors.Add("Data Not Found !!");
+            }
+            else
+            {
+                res.IsSuccess = true;
+                try
+                {
+                    res.Data = response;
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return res;
+        }
     }
 }

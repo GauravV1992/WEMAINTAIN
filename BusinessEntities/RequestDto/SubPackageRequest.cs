@@ -1,5 +1,4 @@
 ﻿using BusinessEntities.Common;
-
 namespace BusinessEntities.RequestDto
 {
     public class SubPackageRequest : BaseRequest

@@ -1,4 +1,4 @@
-
+﻿
 function OnCreateEditPageLoad() {
 	debugger;
 	OnCreatePageLoad();
@@ -12,7 +12,7 @@ function OnCreateEditPageLoad() {
 	$('#AMCPeriod').select2({ placeholder: "Select AMC Period" });
 }
 function AddPackageRate() {
-	
+
 	$("#divPackageRate").empty();
 	$.ajax({
 		type: "Get",
@@ -78,7 +78,7 @@ function BindPackageRateDatatable() {
 				d.PackageId = $("#FPackageId").val();
 				d.SubPackageId = $("#FSubPackageId").val();
 				d.ServiceId = $("#FServiceId").val();
-				
+
 			},
 		},
 		"columns": [{ "data": "id" },
@@ -151,7 +151,7 @@ function ValidateForm() {
 		toastr.error('Please Select Service Name');
 		return false;
 	}
-	
+
 	return true;
 }
 function OnCreatePageLoad() {
@@ -203,7 +203,7 @@ function OnEditPageLoad() {
 				url: $(this).attr('action'),
 				data: $(this).serialize(),
 				success: function (data) {
-					
+
 					if (data.data > 0) {
 						toastr.success(suceessMsg);
 					} else {
@@ -229,7 +229,7 @@ function Delete(Id) {
 			async: false,
 			datatype: "json",
 			success: function (data) {
-				
+
 				if (data.data > 0) {
 					RefreshGrid();
 					toastr.success(suceessMsgDelete);
@@ -249,4 +249,69 @@ function ClearControl() {
 function RefreshGrid() {
 	var oTable = $('#PackageRateGrid').DataTable();
 	oTable.ajax.reload();
+}
+
+
+function OnPackageRateChange() {
+	$('#AMCPeriod').change(function () {
+		GetSubPackagePriceDetails($('#AMCPeriod').val(), subPackageId);
+	});
+}
+function OnServiceChecked() {
+	debugger;
+	$(".check-input").change(function () {
+		if (this.checked) {
+			/*var serviceName = $(this).next().text();*/
+			var serviceId = $(this).parent().find("#hdnServiceId").val();
+			/*var rate = $(this).parent().next().find("#lblRate").text()*/
+			var jsonObject = { subPackageId: subPackageId, amcPeriod: $('#AMCPeriod').val() };
+			$.ajax({
+				type: "Get",
+				url: '/OrderDetails/GetServiceRate',
+				data: jsonObject,
+				datatype: "json",
+				success: function (response) {
+					debugger;
+					let packageAmount = response.data.subPackageServicePrices.find(x => x.serviceId == serviceId).packageAmount;
+					let serviceName = response.data.subPackageServicePrices.find(x => x.serviceId == serviceId).serviceName;
+					$("#ulItem").append('<li id=li_' + serviceName + ' class="list"><span class="rooms">' + serviceName + '</span><span class="value-count">₹' + packageAmount + '</span></li>');
+				},
+				complete: function () {
+					//OnServiceChecked();
+				}
+			});
+
+
+		}
+		else {
+			$('#ulItem #li_' + $(this).next().text() + '').remove();
+		}
+	});
+
+}
+function GetSubPackagePriceDetails(amcPeriod, subPackageId) {
+
+	var jsonObject = { subPackageId: subPackageId, amcPeriod: amcPeriod };
+	$.ajax({
+		type: "Get",
+		url: '/OrderDetails/GetServiceRate',
+		data: jsonObject,
+		datatype: "json",
+		success: function (response) {
+			debugger;
+			$('.overview-extra-service').each(function (index, value) {
+				debugger;
+				let serviceId = $(this).find('#hdnServiceId').val();
+				let packageAmount = response.data.subPackageServicePrices.find(x => x.serviceId == serviceId).packageAmount;
+				let discount = response.data.subPackageServicePrices.find(x => x.serviceId == serviceId).discount;
+				$(this).find('#lblRate').text(packageAmount);
+				$(this).find('#lblDiscount').text(discount);
+			});
+
+
+		},
+		complete: function () {
+			//OnServiceChecked();
+		}
+	});
 }

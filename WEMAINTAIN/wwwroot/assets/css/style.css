@@ -5144,11 +5144,11 @@ code {
 .overview-single .overview-extra .overview-extra-flex-content .list-single .values {
   position: relative;
 }
-.overview-single .overview-extra .overview-extra-flex-content .list-single .values::after {
+/*.overview-single .overview-extra .overview-extra-flex-content .list-single .values::after {
   font-family: "Line Awesome Free";
   font-weight: 900;
   content: "";
-}
+}*/
 .overview-single .overview-extra .overview-extra-flex-content .list-single .value-input {
   display: inline-block;
   max-width: 40px;

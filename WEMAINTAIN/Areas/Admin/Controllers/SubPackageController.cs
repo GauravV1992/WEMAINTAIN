@@ -164,6 +164,30 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
             }
         }
 
-        
+        [HttpGet]
+        public async Task<ActionResult> GetSubPackagePriceDetails(int packageId, string amcPeriod)
+        {
+            try
+            {
+                var subPackagePriceDetails = new ResultDto<SubPackagePriceDetailsResponse>();
+                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackagePriceDetails/" + packageId + "?amcPeriod=" + amcPeriod + "");
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                    subPackagePriceDetails = JsonSerializer.Deserialize<ResultDto<SubPackagePriceDetailsResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                }
+                return Json(new
+                {
+                    data = subPackagePriceDetails?.Data
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

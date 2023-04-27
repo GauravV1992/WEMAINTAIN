@@ -16,11 +16,12 @@ namespace WEMAINTAIN.Models
         }
         public string Decode(string data)
         {
-            return protector.Protect(data);
+            return protector.Unprotect(data);
         }
         public string Encode(string data)
         {
-            return protector.Unprotect(data);
+            return protector.Protect(data);
+           
         }
     }
 }

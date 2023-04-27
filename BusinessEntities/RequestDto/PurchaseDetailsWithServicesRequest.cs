@@ -10,6 +10,7 @@ namespace BusinessEntities.RequestDto
             PurchaseServices = new List<PurchaseServicesRequest>();
             PurchaseDetails = new List<PurchaseDetailsRequest>();
         }
+       
         public IEnumerable<PurchaseServicesRequest> PurchaseServices { get; set; }
         public IEnumerable<PurchaseDetailsRequest> PurchaseDetails { get; set; }
 
