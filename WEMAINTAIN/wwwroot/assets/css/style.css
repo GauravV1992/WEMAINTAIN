@@ -4967,16 +4967,16 @@ code {
   padding-top: 25px;
 }
 .overview-single .include-contents .single-include .include-list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: unset;
+    -ms-flex-pack: unset;
+    justify-content: space-between;
+    padding: 0;
 }
 .overview-single .include-contents .single-include .include-list .lists {
   display: -webkit-box;
@@ -4991,6 +4991,7 @@ code {
   font-size: 14px;
   line-height: 26px;
   font-style: italic;
+  margin-left:20px;
 }
 .overview-single .include-contents .single-include .include-list .lists .list-single:not(:last-child) {
   margin-right: 50px;

@@ -30,10 +30,11 @@
         </div>
     </div>
 }
-
+<script type="text/javascript" src="~/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
     var packageId = '@Model.PackageId';
     $(document).ready(function () {
         OnCreateEditPageLoad();
+        CKEDITOR.replace("TermsAndCondition");
     })
 </script>

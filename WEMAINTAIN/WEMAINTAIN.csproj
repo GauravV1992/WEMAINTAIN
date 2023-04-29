@@ -104,6 +104,7 @@
 
   <ItemGroup>
     <!--<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />-->
+    <PackageReference Include="CKEditor" Version="3.6.4" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="8.0.0-preview.3.23177.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>

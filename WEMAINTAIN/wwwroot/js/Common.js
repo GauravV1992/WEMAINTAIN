@@ -63,6 +63,11 @@ $(document).ready(function () {
 		if (String.fromCharCode(charCode).match(/[^0-9]/g))
 			return false;
 	});
+	//$('.modal').on('shown.bs.modal', function () {
+	//	$('html').css('overflow', 'hidden');
+	//}).on('hidden.bs.modal', function () {
+	//	$('html').css('overflow', 'auto');
+	//});
 });
 function OnCloseDatatableEditRow() {
 	$('.edit-row').remove();
@@ -168,3 +173,5 @@ function OnFilterPageLoad() {
 	});
 	SetDateFormat();
 }
+
+

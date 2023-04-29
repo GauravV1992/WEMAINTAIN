@@ -21,9 +21,8 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Terms & Condition</label>
                 @Html.TextAreaFor(model => model.TermsAndCondition, new { @Class = "form-control" })
-
             </div>
-            
+           
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
                 <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
@@ -31,10 +30,11 @@
         </div>
     </div>
 }
-
+<script type="text/javascript" src="~/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
     var packageId = '';
     $(document).ready(function () {
         OnCreateEditPageLoad();
+        CKEDITOR.replace("TermsAndCondition");
     })
 </script>

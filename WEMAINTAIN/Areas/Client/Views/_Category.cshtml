@@ -11,13 +11,13 @@
             </div>
         </div>
         <div class="row margin-top-50">
-            <div class="col-lg-12">
-                <div class="category-slider dot-style-one">
+          @*<div class="col-lg-12">*@
+                @*<div class="category-slider dot-style-one">*@
                     @if(Model!=null && Model.Any())
                     {
                     foreach (var package in Model)
                     {
-                    <div class="single-category-item">
+                    <div class="single-category-item col-lg-4">
                         <div class="single-category">
                             <div class="icon">
                                 <i class="flaticon-mop"></i>
@@ -30,7 +30,7 @@
                     </div>
                     }
                     }
-                </div>
-            </div>
+              @*  </div>*@
+           @*</div>*@
         </div>
     </div>
