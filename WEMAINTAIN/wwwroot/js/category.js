@@ -67,11 +67,17 @@ function BindCategoryDatatable() {
 		"columns": [{ "data": "id" },
 		{ "data": "name" },
 		{
+			"name": "Image",
+			render: function (data, type, row) {
+				return CreateImage(row.id, row.ext);
+			}
+		},
+		{
 			"name": "Action",
 			render: function (data, type, row) {
 				return CreateActionButton(row.id);
 			}
-		}
+		},
 		],
 		"columnDefs": [{
 			"defaultContent": "-",
@@ -93,13 +99,19 @@ function BindCategoryDatatable() {
 		}
 	});
 }
+
+function CreateImage(id, ext) {
+	var html = '';
+	html = CheckUndefinedBlankAndNull(ext) ? "" : html + "<img height='100px' width='150px' src=" + imagePath + id + ext + "></img>";
+	return html;
+}
 function CreateActionButton(id) {
 	var html = '';
 	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditPackage(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
 	return html;
 }
 
- 
+
 function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
 	OnEditPageLoad();
@@ -117,11 +129,16 @@ function ValidateForm() {
 
 function OnCreatePageLoad() {
 	$("#frmCreate").on("submit", function (e) {
-		debugger;
 		e.preventDefault();
 		if (!ValidateForm()) {
 			return;
 		}
+		var data = new FormData();
+		var files = $("#Image").get(0).files;
+		if (files.length > 0) {
+			data.append("Image", files[0]);
+		}
+		data.append("Name", $("#Name").val());
 		$(':submit', this).attr('disabled', 'disabled');
 		showLoader("divCreate");
 		$.ajax(
@@ -129,22 +146,25 @@ function OnCreatePageLoad() {
 				cache: false,
 				async: true,
 				type: "POST",
+				processData: false,
+				contentType: false,
 				url: $(this).attr('action'),
-				data: $(this).serialize(),
+				data: data,
 				success: function (data) {
+					debugger;
 					if (data.data > 0) {
 						toastr.success(suceessMsg);
+						RefreshGrid();
+						ClearControl();
 					} else if (data.data < 0) {
 						toastr.warning(dataExists);
 					} else {
-						toastr.error(errorMsg);
+						toastr.error(data);
 					}
 				},
 				complete: function () {
-					/*$('#loading').hide();*/
 					$(':submit').prop('disabled', false);
-					ClearControl();
-					RefreshGrid();
+
 					hideLoader();
 				}
 			});
@@ -156,6 +176,13 @@ function OnEditPageLoad() {
 		if (!ValidateForm()) {
 			return;
 		}
+		var data = new FormData();
+		var files = $("#Image").get(0).files;
+		if (files.length > 0) {
+			data.append("Image", files[0]);
+		}
+		data.append("Name", $("#Name").val());
+		data.append("Id", $("#Id").val());
 		$(':submit', this).attr('disabled', 'disabled');
 		showLoader("divEdit");
 		$.ajax(
@@ -163,20 +190,22 @@ function OnEditPageLoad() {
 				cache: false,
 				async: true,
 				type: "POST",
+				processData: false,
+				contentType: false,
 				url: $(this).attr('action'),
-				data: $(this).serialize(),
+				data: data,
 				success: function (data) {
-					debugger;
 					if (data.data > 0) {
 						toastr.success(suceessMsg);
+						RefreshGrid();
+						ClearControl();
 					} else {
-						toastr.error(errorMsg);
+						toastr.error(data);
 					}
 				},
 				complete: function () {
 					$(':submit').prop('disabled', false);
-					ClearControl();
-					RefreshGrid();
+
 					hideLoader();
 				}
 			});
@@ -198,7 +227,6 @@ function Delete(Id) {
 			async: false,
 			datatype: "json",
 			success: function (data) {
-				debugger;
 				if (data.data > 0) {
 					RefreshGrid();
 					toastr.success(suceessMsgDelete);

@@ -51,12 +51,14 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(CategoryRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
             {
+                var file = Request.Form.Files != null && Request.Form.Files.Any() ? Request.Form.Files[0] : null;
+                if (file != null)
+                    request.Ext = Common.GetExtention(file);
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
@@ -65,18 +67,28 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    if (response != null && response.Data > 0 && file != null)
+                        Common.UplaodFile(file, "categoryImage", Convert.ToString(response.Data));
                 }
+            }
+            else
+            {
+                var errros = Common.GetErrorListFromModelState(ModelState).FirstOrDefault();
+                return Json(errros);
             }
             return Json(response);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Update(CategoryRequest request)
         {
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
             {
+                var file = Request.Form.Files != null && Request.Form.Files.Any() ? Request.Form.Files[0] : null;
+                if (file != null)
+                    request.Ext = Common.GetExtention(file);
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
@@ -85,6 +97,8 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    if (response != null && response.Data > 0 && file != null)
+                        Common.UplaodFile(file, "categoryImage", Convert.ToString(response.Data));
                 }
             }
             return Json(response);
