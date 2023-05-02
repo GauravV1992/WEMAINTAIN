@@ -73,6 +73,12 @@ function BindCategoryDatatable() {
 			}
 		},
 		{
+			"name": "Download",
+			render: function (data, type, row) {
+				return CreateDownloadIcon(row.id, row.ext);
+			}
+		},
+		{
 			"name": "Action",
 			render: function (data, type, row) {
 				return CreateActionButton(row.id);
@@ -105,19 +111,21 @@ function CreateImage(id, ext) {
 	html = CheckUndefinedBlankAndNull(ext) ? "" : html + "<img height='100px' width='150px' src=" + imagePath + id + ext + "></img>";
 	return html;
 }
+function CreateDownloadIcon(id, ext) {
+	var html = '';
+	html = CheckUndefinedBlankAndNull(ext) ? "" : html + '<a href="#" onclick="Download(' + id + ',\'' + ext + '\',\'Category\' )">download</a>';
+	return html;
+}
 function CreateActionButton(id) {
 	var html = '';
 	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditPackage(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
 	return html;
 }
-
-
 function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
 	OnEditPageLoad();
 
 }
-
 function ValidateForm() {
 	if (CheckUndefinedBlankAndNull($("#Name").val())) {
 		toastr.error('Please Enter Package Name');

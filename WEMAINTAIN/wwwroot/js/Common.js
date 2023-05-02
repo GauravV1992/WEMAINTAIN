@@ -170,3 +170,28 @@ function OnFilterPageLoad() {
 	});
 	SetDateFormat();
 }
+function Download(id, ext, controller) {
+	$.ajax({
+		method: "GET",
+		xhrFields: { responseType: 'blob' },
+		url: '/Admin/' + controller + '/Download?id=' + id + '&ext=' + ext,
+		contentType: 'application/json; charset=utf-8',
+		data: null,
+		datatype: "json",
+		success: function (data) {
+			var a = document.createElement('a');
+			var url = window.URL.createObjectURL(data);
+			a.href = url;
+			var today = new Date();
+			var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+			var time = today.getHours() + "." + today.getMinutes() + "." + today.getSeconds();
+			var currentDateTime = date + ' ' + time;
+			var fileName = id + '_' + currentDateTime + ext;
+			a.download = fileName;
+			document.body.append(a);
+			a.click();
+			a.remove();
+			window.URL.revokeObjectURL(url);
+		}
+	});
+}
