@@ -1,5 +1,7 @@
 ﻿using BusinessEntities.ResponseDto;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -51,7 +53,7 @@ namespace WEMAINTAIN.Models
             FileInfo fileInfo = new FileInfo(file.FileName);
             return fileInfo.Extension;
         }
-        public static void UplaodFile(IFormFile file, string folderName,string fileName)
+        public static void UplaodFile(IFormFile file, string folderName, string fileName)
         {
 
             var FolderName = @"wwwroot\" + folderName + "";
@@ -63,5 +65,7 @@ namespace WEMAINTAIN.Models
                 file.CopyTo(stream);
             }
         }
+
+       
     }
 }

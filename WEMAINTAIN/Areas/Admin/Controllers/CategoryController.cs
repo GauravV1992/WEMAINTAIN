@@ -3,7 +3,9 @@ using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Net.Http.Headers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http.Json;
@@ -11,17 +13,21 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
+using static System.Net.WebRequestMethods;
+
 namespace WEMAINTAIN.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CategoryController : Controller
     {
+
         private readonly ILogger<CategoryController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
         public CategoryController(ILogger<CategoryController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
+
         }
         public IActionResult Index()
         {
@@ -178,6 +184,14 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
             {
                 throw ex;
             }
+        }
+        [HttpGet]
+        public FileResult Download(int id, string ext)
+        {
+            var FolderName = @"wwwroot\categoryImage\" + id + ext;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), FolderName);
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            return File(bytes.ToArray(), "application/octet-stream");
         }
     }
 }
