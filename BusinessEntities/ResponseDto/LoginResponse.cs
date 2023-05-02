@@ -16,5 +16,6 @@ namespace BusinessEntities.ResponseDto
         public string Email { get; set; }
 
         public string accessToken { get; set; }
+        public string Username { get; set; }
     }
 }

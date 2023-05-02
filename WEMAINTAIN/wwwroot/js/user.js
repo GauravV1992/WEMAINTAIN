@@ -69,6 +69,7 @@ function BindUserDatatable() {
 		{ "data": "address" },
 		{ "data": "email" },
 		{ "data": "mobileNo" },
+		{ "data": "username" },
 		{
 			"name": "Action",
 			render: function (data, type, row) {
@@ -134,6 +135,10 @@ function ValidateForm() {
 		toastr.error('Invalid EmailAddress!');
 		return false;
 	}
+	//else if (!CheckEmailAddress($("#Username").val())) {
+	//	toastr.error('Please Enter Username!');
+	//	return false;
+	//}
 	
 	return true;
 }

@@ -13,5 +13,6 @@ namespace BusinessEntities.ResponseDto
         public string Password { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string Username { get; set; }
     }
 }

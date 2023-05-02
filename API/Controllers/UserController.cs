@@ -39,7 +39,7 @@ namespace API.Controllers
         [ActionName("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequest user)
         {
-            var token = await _iJWTAuthenticaitonManagerService.Authentiate(user.MobileNo, user.Password);
+            var token = await _iJWTAuthenticaitonManagerService.Authentiate(user.Username, user.Password);
             if (token == null)
             {
                 return Unauthorized();
@@ -55,7 +55,8 @@ namespace API.Controllers
                         new Claim("Id", token.Id.ToString()),
                         new Claim("Email", token.Email),
                         new Claim("MobileNo", token.MobileNo),
-                        new Claim("Address", token.Address)
+                        new Claim("Address", token.Address),
+                        new Claim("Username", token.Username)
                     }),
                     Expires = DateTime.UtcNow.AddHours(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

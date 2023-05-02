@@ -33,6 +33,10 @@
                     <label for="exampleFormControlInput1" class="form-label">Email</label>
                     @Html.TextBoxFor(model => model.Email, new {maxlength=100, @Class = "form-control" })
                 </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Username</label>
+                    @Html.TextBoxFor(model => model.Username, new {maxlength=20, @Class = "form-control" })
+                </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>

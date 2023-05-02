@@ -10,6 +10,7 @@ namespace API.Helpers
             var mobileNo = context.User.Claims.First(c => c.Type == "MobileNo");
             var Address = context.User.Claims.First(c => c.Type == "Address");
             var name = context.User.Identity?.Name;
+            //var username = context.User.Claims.First(c => c.Type == "Username");
             return new LoginResponse
             {
                 Id = Convert.ToInt16(id.Value),
@@ -17,6 +18,7 @@ namespace API.Helpers
                 MobileNo = mobileNo.Value,
                 Address = Address.Value,
                 FirstName = name
+               // Username = username.Value,
 
             };
         }

@@ -5,6 +5,6 @@ namespace Repositories.Interface
 {
     public interface IJWTAuthenticaitonManagerRepository
     {
-       Task<User> Authentiate(string mobileNo,string password);
+       Task<User> Authentiate(string username,string password);
     }
 }
