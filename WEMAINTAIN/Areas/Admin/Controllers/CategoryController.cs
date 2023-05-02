@@ -13,6 +13,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Net.WebRequestMethods;
 
 namespace WEMAINTAIN.Areas.Admin.Controllers
@@ -110,7 +111,7 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
             return Json(response);
         }
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id, string ext)
         {
             var response = new ResultDto<long>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
@@ -123,6 +124,13 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                 response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                if (response?.Data > 0)
+                {
+                    var FolderName = @"wwwroot\categoryImage\" + id + ext;
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), FolderName);
+                    System.IO.File.Delete(path);
+                }
+
             }
             return Json(response);
         }

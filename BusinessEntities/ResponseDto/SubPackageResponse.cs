@@ -9,5 +9,6 @@ namespace BusinessEntities.ResponseDto
         public int PackageId { get; set; }
         public string PackageName { get; set; }
         public string TermsAndCondition { get; set; }
+        public string Ext { get; set; }
     }
 }

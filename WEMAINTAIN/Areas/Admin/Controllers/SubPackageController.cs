@@ -1,6 +1,7 @@
 ﻿using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Net.Http.Headers;
@@ -11,6 +12,8 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using WEMAINTAIN.Models;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace WEMAINTAIN.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -51,9 +54,12 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(SubPackageRequest request)
         {
+            var file = Request.Form.Files != null && Request.Form.Files.Any() ? Request.Form.Files[0] : null;
+            if (file != null)
+                request.Ext = Common.GetExtention(file);
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
             {
@@ -65,15 +71,26 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+                    if (response != null && response.Data > 0 && file != null)
+                        Common.UplaodFile(file, "subpackageImage", Convert.ToString(response.Data));
                 }
+            }
+            else
+            {
+                var errros = Common.GetErrorListFromModelState(ModelState).FirstOrDefault();
+                return Json(errros);
             }
             return Json(response);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Update(SubPackageRequest request)
         {
+            var file = Request.Form.Files != null && Request.Form.Files.Any() ? Request.Form.Files[0] : null;
+            if (file != null)
+                request.Ext = Common.GetExtention(file);
             var response = new ResultDto<long>();
             if (ModelState.IsValid)
             {
@@ -85,12 +102,20 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+                    if (response != null && response.Data > 0 && file != null)
+                        Common.UplaodFile(file, "subpackageImage", Convert.ToString(response.Data));
                 }
+            }
+            else
+            {
+                var errros = Common.GetErrorListFromModelState(ModelState).FirstOrDefault();
+                return Json(errros);
             }
             return Json(response);
         }
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id,string ext)
         {
             var response = new ResultDto<long>();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
@@ -103,6 +128,16 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
             {
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                 response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+                if (response?.Data > 0)
+                {
+                    var FolderName = @"wwwroot\subpackageImage\" + id + ext;
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), FolderName);
+                   // string ExitingFile = Path.Combine(webHostEnvironment.WebRootPath, "images", UpdatedCost.InvoiceImagePath);
+                    System.IO.File.Delete(path);
+                }
+                 
+
             }
             return Json(response);
         }
@@ -186,6 +221,15 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
             {
                 throw ex;
             }
+        }
+
+        [HttpGet]
+        public FileResult Download(int id, string ext)
+        {
+            var FolderName = @"wwwroot\subpackageImage\" + id + ext;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), FolderName);
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            return File(bytes.ToArray(), "application/octet-stream");
         }
 
 

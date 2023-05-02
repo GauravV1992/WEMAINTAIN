@@ -17,6 +17,8 @@
                         <th>Id</th>
                         <th>Package Name</th>
                         <th>Sub Package Name</th>
+                        <th>Image</th>
+                        <th>Download</th>
                         <th>Terms And Condition</th>
                         <th>Action</th>
                     </tr>
@@ -29,6 +31,7 @@
 </div>
 <script src="~/js/subpackage.js" asp-append-version="true"></script>
 <script type="text/javascript">
+    var imagePath = '@Constants.SiteUrl' + 'subpackageImage/';
     $(function () {
         BindSubPackageDatatable();
     });

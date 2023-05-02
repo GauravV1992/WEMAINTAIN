@@ -7,5 +7,6 @@ namespace BusinessEntities.RequestDto
         public string? Name { get; set; }
         public int PackageId { get; set; }
         public string? TermsAndCondition { get; set; }
+        public string? Ext { get; set; }
     }
 }

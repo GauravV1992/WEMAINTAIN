@@ -81,7 +81,7 @@ function BindCategoryDatatable() {
 		{
 			"name": "Action",
 			render: function (data, type, row) {
-				return CreateActionButton(row.id);
+				return CreateActionButton(row.id,row.ext);
 			}
 		},
 		],
@@ -116,9 +116,10 @@ function CreateDownloadIcon(id, ext) {
 	html = CheckUndefinedBlankAndNull(ext) ? "" : html + '<a href="#" onclick="Download(' + id + ',\'' + ext + '\',\'Category\' )">download</a>';
 	return html;
 }
-function CreateActionButton(id) {
+function CreateActionButton(id,ext) {
 	var html = '';
-	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditPackage(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
+	//html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><button type='button' onclick='EditPackage(" + id + ")' class='btn btn-sm btn-primary me-md-2'>Edit</button><button type='button' onclick='Delete(" + id + ")' class='btn btn-sm btn-danger me-md-2'>Delete</button></div>"
+	html = html + '<div class="d-grid gap-2 d-md-flex justify-content-md-end""><button type="button" onclick="EditPackage(' + id + ')" class="btn btn-sm btn-primary me-md-2">Edit</button><button type="button" onclick="Delete(' + id + ',\'' + ext + '\')" class="btn btn-sm btn-danger me-md-2">Delete</button></div>'
 	return html;
 }
 function OnCreateEditPageLoad() {
@@ -219,10 +220,10 @@ function OnEditPageLoad() {
 			});
 	});
 }
-function Delete(Id) {
+function Delete(Id,ext) {
 	if (confirm(confirmDeleteRecord)) {
 		//window.addAntiForgeryToken = function (Id) {
-		var jsonObject = { Id: Id };
+		var jsonObject = { Id: Id, ext :ext};
 		//	jsonObject._RequestVerificationToken = $("#lstLedger").find('input[name=_RequestVerificationToken]').val();
 		//	return jsonObject;
 		//};

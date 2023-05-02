@@ -116,6 +116,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Login\" />
     <Folder Include="wwwroot\categoryImage\" />
+    <Folder Include="wwwroot\subpackageImage\" />
   </ItemGroup>
 
   <ItemGroup>
