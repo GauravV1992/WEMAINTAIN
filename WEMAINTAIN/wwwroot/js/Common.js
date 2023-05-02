@@ -36,6 +36,8 @@ function SetDateFormat() {
 
 
 }
+
+
 function showLoader(divId) {
 	if (divId != '') {
 		jQuery("#" + divId).append("<div id='preloaded'><div class='preloaded'><img src='" + loaderPath + "'/></div></div>");

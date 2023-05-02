@@ -1,4 +1,10 @@
 ﻿using BusinessEntities.ResponseDto;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.IO;
+using System.Net.Http.Headers;
+using System.Reflection;
+using static System.Net.WebRequestMethods;
+
 namespace WEMAINTAIN.Models
 {
     public static class Common
@@ -6,8 +12,18 @@ namespace WEMAINTAIN.Models
         public static string GetMMDDYYYDate(string date)
         {
             string[] dateSplit = date.Split('/');
-            return dateSplit[1] + "/" + dateSplit[0] + "/"+ dateSplit[2];
+            return dateSplit[1] + "/" + dateSplit[0] + "/" + dateSplit[2];
 
+        }
+        public static List<string> GetErrorListFromModelState
+                                              (ModelStateDictionary modelState)
+        {
+            var query = from state in modelState.Values
+                        from error in state.Errors
+                        select error.ErrorMessage;
+
+            var errorList = query.ToList();
+            return errorList;
         }
         public static string GetAccessToken(HttpContext context)
         {
@@ -29,6 +45,23 @@ namespace WEMAINTAIN.Models
             //    Address = Address.Value,
             //    accessToken = toekn
             //};
+        }
+        public static string GetExtention(IFormFile file)
+        {
+            FileInfo fileInfo = new FileInfo(file.FileName);
+            return fileInfo.Extension;
+        }
+        public static void UplaodFile(IFormFile file, string folderName,string fileName)
+        {
+
+            var FolderName = @"wwwroot\" + folderName + "";
+            var PathToSave = Path.Combine(Directory.GetCurrentDirectory(), FolderName);
+            FileInfo fileInfo = new FileInfo(file.FileName);
+            string fileNameWithPath = Path.Combine(PathToSave, fileName + fileInfo.Extension);
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
         }
     }
 }

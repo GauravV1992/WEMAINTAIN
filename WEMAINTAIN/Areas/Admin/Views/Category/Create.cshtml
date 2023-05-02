@@ -1,6 +1,6 @@
 ﻿@using BusinessEntities.RequestDto
 @model CategoryRequest
-@using (Html.BeginForm("Save", "Category", FormMethod.Post, new { @id = "frmCreate" }))
+@using (Html.BeginForm("Save", "Category", FormMethod.Post, new { @*enctype = "multipart/form-data",*@ @id = "frmCreate" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
@@ -13,6 +13,11 @@
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Package Name</label>
             @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" })
+        </div>
+         <div class="mb-3">
+                <label class="form-label" for="ImageUpload">Uplaod Image</label>
+                <input type="file" class="form-control" id="Image" />
+                
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>

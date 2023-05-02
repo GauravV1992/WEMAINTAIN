@@ -1,4 +1,6 @@
 ﻿using BusinessEntities.Common;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessEntities.RequestDto
 {
@@ -6,5 +8,7 @@ namespace BusinessEntities.RequestDto
     {
         public int Id { get; set; }
         public string? Name { get; set; }
+        public string? Ext { get; set; }
+
     }
 }
