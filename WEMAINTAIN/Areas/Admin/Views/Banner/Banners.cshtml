@@ -1,0 +1,35 @@
+﻿@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12">
+        <input value="Create" onclick="AddBanner()" class="btn btn-primary btn-sm float-end" type="button" />
+    </div>
+</div>
+<div class="pt-2" id="divBanner">
+</div>
+<h5>Banner List</h5>
+<div class="row">
+    <div class="col-md-12 pt-2">
+        <section id="header">
+            <table id="BannerGrid" class="table table-bordered  table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Rank</th>
+                        <th>Image</th>
+                        <th>Download</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+<script src="~/js/banner.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    var imagePath = '@Constants.SiteUrl' + 'bannerImage/';
+    $(function () {
+        BindBannerDatatable();
+    });
+</script>
