@@ -1,0 +1,81 @@
+﻿@using BusinessEntities.RequestDto
+@model VendorRequest
+@using (Html.BeginForm("Save", "Vendor", FormMethod.Post, new { @*enctype = "multipart/form-data",*@ @id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="card" id="divCreate">
+        <div class="card-header">
+            Create Vendor
+        </div>
+         <div class="card-body">
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Company Name</label>
+                    @Html.TextBoxFor(model => model.CompanyName, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">First Name</label>
+                    @Html.TextBoxFor(model => model.FirstName, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+                    @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Address</label>
+                    @Html.TextBoxFor(model => model.Address, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Country</label>
+                    @Html.TextBoxFor(model => model.Country, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">State</label>
+                    @Html.TextBoxFor(model => model.State, new { @Class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">City</label>
+                    @Html.TextBoxFor(model => model.City, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">GST</label>
+                    @Html.TextBoxFor(model => model.GST, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Pincode</label>
+                    @Html.TextBoxFor(model => model.Pincode, new { @Class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Email Address</label>
+                    @Html.TextBoxFor(model => model.EmailAddress, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                    @Html.TextBoxFor(model => model.Phone, new { @Class = "form-control" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label class="form-label" for="Image">Uplaod Image</label>
+                    <input type="file" class="form-control" id="Image" />
+                </div>
+            </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
+                <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        OnCreateEditPageLoad();
+    })
+</script>

@@ -40,6 +40,9 @@ namespace API.Helpers
             services.AddScoped(typeof(ICouponRepository), typeof(CouponRepository));
             services.AddScoped(typeof(ICouponService), typeof(CouponService));
 
+            services.AddScoped(typeof(IVendorRepository), typeof(VendorRepository));
+            services.AddScoped(typeof(IVendorService), typeof(VendorService));
+
         }
         public static void AddConfigure(IApplicationBuilder app, IWebHostEnvironment env)
         {
