@@ -40,6 +40,9 @@ namespace API.Helpers
             services.AddScoped(typeof(ICouponRepository), typeof(CouponRepository));
             services.AddScoped(typeof(ICouponService), typeof(CouponService));
 
+            services.AddScoped(typeof(IBannerRepository), typeof(BannerRepository));
+            services.AddScoped(typeof(IBannerService), typeof(BannerService));
+
             services.AddScoped(typeof(IVendorRepository), typeof(VendorRepository));
             services.AddScoped(typeof(IVendorService), typeof(VendorService));
 

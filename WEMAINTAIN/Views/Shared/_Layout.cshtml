@@ -14,8 +14,8 @@
     <script src="~/js/jquery.datatables.min.js"></script>
     <script src="~/js/datatables.bootstrap5.min.js"></script>
     <script src="~/js/toastr.min.js"></script>
-    
-   @* <script src="~/js/select2.min.js"></script>*@
+
+    @* <script src="~/js/select2.min.js"></script>*@
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -46,6 +46,9 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Package</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="SubPackage" asp-action="Index">Sub Package</a></li>
+                                 <li>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Banner" asp-action="Index">Banner</a>
+                        </li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Service" asp-action="Index">Services</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vendor" asp-action="Index">Vendor</a></li>
@@ -93,5 +96,5 @@
 </html>
 <script>
     var loaderPath = '@Url.Content("~/img/Spinner.gif")';
-    
+
 </script>

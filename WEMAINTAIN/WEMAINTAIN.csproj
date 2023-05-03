@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\banner.js" />
     <Content Remove="wwwroot\js\client\home.js" />
     <Content Remove="wwwroot\js\coupon.js" />
     <Content Remove="wwwroot\js\packageRate.js" />
@@ -91,6 +92,7 @@
     <None Include="wwwroot\assets\sass\sections\_widgets.scss" />
     <None Include="wwwroot\assets\sass\style.scss" />
     <None Include="wwwroot\css\styles.css" />
+    <None Include="wwwroot\js\banner.js" />
     <None Include="wwwroot\js\vendor.js" />
     <None Include="wwwroot\js\client\home.js" />
     <None Include="wwwroot\js\coupon.js" />
@@ -117,6 +119,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Login\" />
+    <Folder Include="wwwroot\bannerImage\" />
     <Folder Include="wwwroot\categoryImage\" />
     <Folder Include="wwwroot\subpackageImage\" />
     <Folder Include="wwwroot\vendorImage\" />
