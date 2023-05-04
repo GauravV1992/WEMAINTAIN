@@ -163,6 +163,61 @@ namespace WEMAINTAIN.Areas.Admin.Controllers
                 throw ex;
             }
         }
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetCountryNames()
+        {
+            try
+            {
+                var countryies = new ResultDto<IEnumerable<SelectListItem>>();
+                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+                HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                var httpResponseMessage = await httpClient.GetAsync("Vendor/GetCountryNames");
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                    countryies = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                }
+                return Json(new
+                {
+                    data = countryies?.Data.ToList()
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetStateNames()
+        {
+            try
+            {
+                var states = new ResultDto<IEnumerable<SelectListItem>>();
+                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                httpClient.DefaultRequestHeaders.Add(
+                HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+                var httpResponseMessage = await httpClient.GetAsync("Vendor/GetStateNames");
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                    states = JsonSerializer.Deserialize<ResultDto<IEnumerable<SelectListItem>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                }
+                return Json(new
+                {
+                    data = states?.Data.ToList()
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         [HttpGet]
         public FileResult Download(int id, string ext)
         {

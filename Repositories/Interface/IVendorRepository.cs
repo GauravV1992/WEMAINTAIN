@@ -9,5 +9,7 @@ namespace Repositories.Interface
         Task<long> Delete(long Id);
         Task<IEnumerable<Vendor>> GetAll(VendorRequest request);
         Task<Vendor> GetById(long Id);
+        Task<IList<SelectListItem>> GetCountryNames();
+        Task<IList<SelectListItem>> GetStateNames();
     }
 }

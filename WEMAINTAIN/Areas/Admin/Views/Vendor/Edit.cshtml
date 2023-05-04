@@ -29,14 +29,14 @@
                 <label for="exampleFormControlInput1" class="form-label">Address</label>
                 @Html.TextBoxFor(model => model.Address, new { @Class = "form-control" })
             </div>
-            <div class="mb-3 col-md-4">
-                <label for="exampleFormControlInput1" class="form-label">Country</label>
-                @Html.TextBoxFor(model => model.Country, new { @Class = "form-control" })
-            </div>
-            <div class="mb-3 col-md-4">
-                <label for="exampleFormControlInput1" class="form-label">State</label>
-                @Html.TextBoxFor(model => model.State, new { @Class = "form-control" })
-            </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Country</label>
+                    @Html.DropDownListFor(model=>model.Country,new List<SelectListItem>(),new {@Class="form-select select2"})
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">State</label>
+                    @Html.DropDownListFor(model=>model.State,new List<SelectListItem>(),new {@Class="form-select select2"})
+                </div>
             </div>
             <div class="row">
             <div class="mb-3 col-md-4">
@@ -75,6 +75,8 @@
 }
 
 <script type="text/javascript">
+    var Country = '@Model.Country';
+    var State = '@Model.State';
     $(document).ready(function () {
         OnCreateEditPageLoad();
     })

@@ -62,8 +62,8 @@ function BindVendorDatatable() {
 		{ "data": "firstName" },
 		{ "data": "lastName" },
 		{ "data": "address" },
-		{ "data": "country" },
-		{ "data": "state" },
+		{ "data": "countryName" },
+		{ "data": "stateName" },
 		{ "data": "city" },
 		{ "data": "gst" },
 		{ "data": "pincode" },
@@ -121,7 +121,8 @@ function CreateActionButton(id,ext) {
 function OnCreateEditPageLoad() {
 	OnCreatePageLoad();
 	OnEditPageLoad();
-
+	BindCountryNames();
+	BindStateNames();
 }
 function ValidateForm() {
 	if (CheckUndefinedBlankAndNull($("#CompanyName").val())) {

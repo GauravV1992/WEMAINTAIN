@@ -102,5 +102,44 @@ namespace Repositories.Implementation
                 return Vendors;
             }
         }
+
+        public async Task<IList<SelectListItem>> GetCountryNames()
+        {
+            List<SelectListItem> dataList = new List<SelectListItem>();
+            var procedureName = "GetCountryNames";
+            using (var connection = _context.CreateConnection())
+            {
+                var countryies = await connection.QueryAsync<Country>
+                (procedureName, null, commandType: CommandType.StoredProcedure);
+
+                dataList.Add(new SelectListItem() { Text = "Select", Value = "" });
+                foreach (var item in countryies)
+                {
+                    dataList.Add(new SelectListItem { Text = item.CountryName.ToString(), Value = Convert.ToInt32(item.Id).ToString() });
+                }
+                return dataList;
+            }
+        }
+
+
+        public async Task<IList<SelectListItem>> GetStateNames()
+        {
+            List<SelectListItem> dataList = new List<SelectListItem>();
+            var procedureName = "GetStateNames";
+            using (var connection = _context.CreateConnection())
+            {
+                var countryies = await connection.QueryAsync<State>
+                (procedureName, null, commandType: CommandType.StoredProcedure);
+
+                dataList.Add(new SelectListItem() { Text = "Select", Value = "" });
+                foreach (var item in countryies)
+                {
+                    dataList.Add(new SelectListItem { Text = item.StateName.ToString(), Value = Convert.ToInt32(item.Id).ToString() });
+                }
+                return dataList;
+            }
+        }
+
+
     }
 }

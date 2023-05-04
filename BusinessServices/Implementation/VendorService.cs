@@ -7,6 +7,7 @@ using Repositories;
 using BusinessEntities.Common;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Repositories.Implementation;
 //using AutoMapper;
 
 namespace BusinessServices.Implementation
@@ -109,6 +110,67 @@ namespace BusinessServices.Implementation
             {
                 res.IsSuccess = true;
                 res.Data = _mapper.Map<Vendor, VendorResponse>(response);
+            }
+            return res;
+        }
+
+        public async Task<ResultDto<IList<SelectListItem>>> GetCountryNames()
+        {
+            var res = new ResultDto<IList<SelectListItem>>()
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
+
+            var response = await _iVendorRepository.GetCountryNames();
+
+            if (response == null)
+            {
+                res.Errors.Add("Data Not Found !!");
+            }
+            else
+            {
+                res.IsSuccess = true;
+                try
+                {
+                    res.Data = response;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return res;
+        }
+
+
+        public async Task<ResultDto<IList<SelectListItem>>> GetStateNames()
+        {
+            var res = new ResultDto<IList<SelectListItem>>()
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
+
+            var response = await _iVendorRepository.GetStateNames();
+
+            if (response == null)
+            {
+                res.Errors.Add("Data Not Found !!");
+            }
+            else
+            {
+                res.IsSuccess = true;
+                try
+                {
+                    res.Data = response;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             return res;
         }

@@ -3,6 +3,7 @@ using API.JWTMiddleware;
 using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
 using BusinessEntities.ResponseDto;
+using BusinessServices.Implementation;
 using BusinessServices.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -97,6 +98,33 @@ namespace API.Controllers
                 return Ok(res);
             }
 
+            return NotFound(res);
+        }
+
+        [CustomAuthorize("Admin")]
+        [HttpGet]
+        [ActionName("GetCountryNames")]
+        public async Task<IActionResult> GetCountryNames()
+        {
+            var res = await _iVendorService.GetCountryNames();
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return NotFound(res);
+        }
+
+
+        [CustomAuthorize("Admin")]
+        [HttpGet]
+        [ActionName("GetStateNames")]
+        public async Task<IActionResult> GetStateNames()
+        {
+            var res = await _iVendorService.GetStateNames();
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
             return NotFound(res);
         }
     }

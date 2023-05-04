@@ -13,5 +13,7 @@ namespace BusinessServices.Interface
         Task<ResultDto<long>> Delete(long Id);
         Task<ResultDto<IEnumerable<VendorResponse>>> GetAll(VendorRequest request);
         Task<ResultDto<VendorResponse>> GetById(long Id);
+        Task<ResultDto<IList<SelectListItem>>> GetCountryNames();
+        Task<ResultDto<IList<SelectListItem>>> GetStateNames();
     }
 }

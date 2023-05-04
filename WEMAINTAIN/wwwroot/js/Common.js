@@ -100,6 +100,58 @@ function BindUserNames() {
 	});
 }
 
+
+function BindCountryNames() {
+	$('#loading').show();
+	$('#Country').select2({ placeholder: "Select Country" });
+	$.ajax({
+		type: "GET",
+		url: '/Admin/Vendor/GetCountryNames',
+		data: null,
+		datatype: "json",
+		success: function (result) {
+			debugger;
+			var controlId = $('#Country');
+			controlId.empty();
+			$.each(result.data, function (i, data) {
+				controlId.append(new Option(data.text, data.value));
+			});
+			if (!CheckUndefinedBlankAndNull(Country)) {
+				controlId.val(Country);
+			}
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
+}
+
+function BindStateNames() {
+	$('#loading').show();
+	$('#State').select2({ placeholder: "Select State" });
+	$.ajax({
+		type: "GET",
+		url: '/Admin/Vendor/GetStateNames',
+		data: null,
+		datatype: "json",
+		success: function (result) {
+			debugger;
+			var controlId = $('#State');
+			controlId.empty();
+			$.each(result.data, function (i, data) {
+				controlId.append(new Option(data.text, data.value));
+			});
+			if (!CheckUndefinedBlankAndNull(State)) {
+				controlId.val(State);
+			}
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
+}
+
+
 function BindPackageNames(controlId) {
 	debugger;
 	$('#loading').show();
