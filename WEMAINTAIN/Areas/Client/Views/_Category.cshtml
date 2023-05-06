@@ -17,14 +17,14 @@
                     {
                     foreach (var package in Model)
                     {
-                    <div class="single-category-item col-lg-4">
+                    <div class="single-category-item col-lg-6">
                         <div class="single-category">
                             <div class="icon">
                                 <i class="flaticon-mop"></i>
                             </div>
                             <div class="category-contents">
-                                <h4 class="category-title"> <a href="#"  onClick="LoadSubPackageSection(@package.Id)"> @package.Name </a> </h4>
-                                <span class="category-para"> 5+ Service </span>
+                                <h4 class="category-title"> <a style="cursor: pointer;" onClick="LoadSubPackageSection(@package.Id)"> @package.Name </a> </h4>
+                              @*  <span class="category-para"> 5+ Service </span>*@
                             </div>
                         </div>
                     </div>
