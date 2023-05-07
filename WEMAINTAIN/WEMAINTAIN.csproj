@@ -13,6 +13,7 @@
     <Content Remove="wwwroot\js\coupon.js" />
     <Content Remove="wwwroot\js\packageRate.js" />
     <Content Remove="wwwroot\js\packageratelog.js" />
+    <Content Remove="wwwroot\js\Product.js" />
     <Content Remove="wwwroot\js\purchasedetails.js" />
     <Content Remove="wwwroot\js\user.js" />
   </ItemGroup>
@@ -93,6 +94,7 @@
     <None Include="wwwroot\assets\sass\style.scss" />
     <None Include="wwwroot\css\styles.css" />
     <None Include="wwwroot\js\banner.js" />
+    <None Include="wwwroot\js\Product.js" />
     <None Include="wwwroot\js\vendor.js" />
     <None Include="wwwroot\js\client\home.js" />
     <None Include="wwwroot\js\coupon.js" />
@@ -121,6 +123,7 @@
     <Folder Include="Areas\Admin\Views\Login\" />
     <Folder Include="wwwroot\bannerImage\" />
     <Folder Include="wwwroot\categoryImage\" />
+    <Folder Include="wwwroot\productImage\" />
     <Folder Include="wwwroot\subpackageImage\" />
     <Folder Include="wwwroot\vendorImage\" />
   </ItemGroup>

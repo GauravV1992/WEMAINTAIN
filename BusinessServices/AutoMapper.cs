@@ -22,6 +22,7 @@ namespace BusinessServices.Automapper
             CreateMap<User, LoginResponse>();
             CreateMap<User, UserResponse>();
             CreateMap<Vendor, VendorResponse>();
+            CreateMap<Product, ProductResponse>();
         }
     }
 }

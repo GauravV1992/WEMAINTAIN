@@ -126,6 +126,31 @@ function BindCountryNames() {
 	});
 }
 
+function BindVendorNames() {
+	$('#loading').show();
+	$('#VendorId').select2({ placeholder: "Select Vendor" });
+	$.ajax({
+		type: "GET",
+		url: '/Admin/Product/GetVendorNames',
+		data: null,
+		datatype: "json",
+		success: function (result) {
+			debugger;
+			var controlId = $('#VendorId');
+			controlId.empty();
+			$.each(result.data, function (i, data) {
+				controlId.append(new Option(data.text, data.value));
+			});
+			if (!CheckUndefinedBlankAndNull(vendorId)) {
+				controlId.val(vendorId);
+			}
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
+}
+
 function BindStateNames() {
 	$('#loading').show();
 	$('#State').select2({ placeholder: "Select State" });
