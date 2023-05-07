@@ -47,6 +47,7 @@ function BindBannerDatatable() {
 			},
 		},
 		"columns": [{ "data": "id" },
+		{ "data": "bannerType" },
 		{ "data": "rank" },
 		{
 			"name": "Image",
@@ -127,6 +128,7 @@ function OnCreatePageLoad() {
 		if (files.length > 0) {
 			data.append("Image", files[0]);
 		}
+		data.append("BannerType", $("#BannerType").val());
 		data.append("Rank", $("#Rank").val());
 		$(':submit', this).attr('disabled', 'disabled');
 		showLoader("divCreate");

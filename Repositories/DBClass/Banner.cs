@@ -8,5 +8,6 @@ namespace Repositories
         public int Id { get; set; }
         public int Rank  { get; set; }
         public string Ext { get; set; }
+        public string? BannerType { get; set; }
     }
 }
