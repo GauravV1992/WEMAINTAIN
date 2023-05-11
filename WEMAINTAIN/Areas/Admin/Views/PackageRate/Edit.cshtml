@@ -34,15 +34,15 @@
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Rate</label>
-                    @Html.TextBoxFor(model => model.Rate, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Rate, new { @Class = "form-control", @maxlength ="20"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Discount</label>
-                    @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control" , @maxlength ="10" })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Package Amount</label>
-                    @Html.TextBoxFor(model => model.PackageAmount, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.PackageAmount, new { @Class = "form-control", @maxlength ="20"  })
                 </div>
             </div>
             <div class="row">
@@ -53,7 +53,7 @@
              
                 <div class="mb-3 col-md-8 d-none">
                     <label for="exampleFormControlInput1" class="form-label">Terms & Condition</label>
-                    @Html.TextAreaFor(model=>model.TermsAndCondition,new { @Class = "form-control" })
+                    @Html.TextAreaFor(model=>model.TermsAndCondition,new { @Class = "form-control", @maxlength ="4000"  })
                 </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">

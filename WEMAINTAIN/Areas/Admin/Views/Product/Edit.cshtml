@@ -17,11 +17,11 @@
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Product Name</label>
-                    @Html.TextBoxFor(model => model.ProductName, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.ProductName, new { @Class = "form-control", @maxlength ="50" })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Product Code</label>
-                    @Html.TextBoxFor(model => model.ProductCode, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.ProductCode, new { @Class = "form-control" , @maxlength ="50"  })
                 </div>
             </div>
             <div class="row">
@@ -35,17 +35,17 @@
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Price</label>
-                    @Html.TextBoxFor(model => model.Price, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Price, new { @Class = "form-control numberonly" , @maxlength ="20" })
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">GST</label>
-                    @Html.TextBoxFor(model => model.GST, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.GST, new { @Class = "form-control" , @maxlength ="20"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Discount</label>
-                    @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control numberonly" , @maxlength ="20" })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Show On Home Page</label>
@@ -64,50 +64,50 @@
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Gold Color</label>
-                    @Html.TextBoxFor(model => model.GoldColor, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.GoldColor, new { @Class = "form-control" , @maxlength ="50"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Gold KT</label>
-                    @Html.TextBoxFor(model => model.GoldKT, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.GoldKT, new { @Class = "form-control" , @maxlength ="50"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Gold Weight</label>
-                    @Html.TextBoxFor(model => model.GoldWeight, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.GoldWeight, new { @Class = "form-control", @maxlength ="50"  })
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Diamond Clarity</label>
-                    @Html.TextBoxFor(model => model.DiamondClarity, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.DiamondClarity, new { @Class = "form-control", @maxlength ="50"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Diamond Color</label>
-                    @Html.TextBoxFor(model => model.DiamondColor, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.DiamondColor, new { @Class = "form-control" , @maxlength ="50" })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Diamond Weight</label>
-                    @Html.TextBoxFor(model => model.DiamondWeight, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.DiamondWeight, new { @Class = "form-control", @maxlength ="50"  })
                 </div>
 
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Diamond Shape</label>
-                    @Html.TextBoxFor(model => model.DiamondShape, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.DiamondShape, new { @Class = "form-control", @maxlength ="50"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Diamond Size</label>
-                    @Html.TextBoxFor(model => model.DiamondSize, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.DiamondSize, new { @Class = "form-control" , @maxlength ="50"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Make Country</label>
-                    @Html.TextBoxFor(model => model.MakeCountry, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.MakeCountry, new { @Class = "form-control", @maxlength ="50"  })
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Male/Female</label>
-                    @Html.TextBoxFor(model => model.MaleFemale, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.MaleFemale, new { @Class = "form-control" , @maxlength ="20" })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">IsActive</label>

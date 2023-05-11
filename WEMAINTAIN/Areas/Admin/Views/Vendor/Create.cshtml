@@ -13,21 +13,21 @@
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Company Name</label>
-                    @Html.TextBoxFor(model => model.CompanyName, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.CompanyName, new { @Class = "form-control",maxlength=100 })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">First Name</label>
-                    @Html.TextBoxFor(model => model.FirstName, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.FirstName, new { @Class = "form-control" ,maxlength=50  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                    @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control",maxlength=50  })
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Address</label>
-                    @Html.TextBoxFor(model => model.Address, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Address, new { @Class = "form-control",maxlength=100  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Country</label>
@@ -43,25 +43,25 @@
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">City</label>
-                    @Html.TextBoxFor(model => model.City, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.City, new { @Class = "form-control" ,maxlength=50  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">GST</label>
-                    @Html.TextBoxFor(model => model.GST, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.GST, new { @Class = "form-control",maxlength=20  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Pincode</label>
-                    @Html.TextBoxFor(model => model.Pincode, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Pincode, new { @Class = "form-control" ,maxlength=10 })
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Email Address</label>
-                    @Html.TextBoxFor(model => model.EmailAddress, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.EmailAddress, new { @Class = "form-control" ,maxlength=100 })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Phone</label>
-                    @Html.TextBoxFor(model => model.Phone, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Phone, new { @Class = "form-control" ,maxlength=20  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label class="form-label" for="Image">Uplaod Image</label>

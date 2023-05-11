@@ -29,7 +29,6 @@ function LoadSubPackageSection(packageId) {
 			$('#exampleModal').html(response);
 		},
 		complete: function () {
-			debugger;
 			$('#exampleModal').modal()
 		}
 	});

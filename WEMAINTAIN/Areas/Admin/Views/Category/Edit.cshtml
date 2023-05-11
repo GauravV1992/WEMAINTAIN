@@ -12,7 +12,7 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Package Name</label>
-                @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" })
+                @Html.TextBoxFor(model => model.Name, new { @Class = "form-control" , @maxlength ="50"})
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Image">Uplaod Image</label>

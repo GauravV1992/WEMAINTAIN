@@ -59,18 +59,19 @@ function CheckEmailAddress(email) {
 	return expr.test(email);
 }
 
+
+
 $(document).ready(function () {
-	$('.numberonly').keypress(function (e) {
-		var charCode = (e.which) ? e.which : e.keyCode
-		if (String.fromCharCode(charCode).match(/[^0-9]/g))
-			return false;
+	$('.numberonly').on("keydown", function (e) {
+		//alert('');
+		var evt = (e) ? e : window.event;
+		var charCode = (evt.keyCode) ? evt.keyCode : evt.which;
+		if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+			return false;}
+		return true;
 	});
-	//$('.modal').on('shown.bs.modal', function () {
-	//	$('html').css('overflow', 'hidden');
-	//}).on('hidden.bs.modal', function () {
-	//	$('html').css('overflow', 'auto');
-	//});
 });
+
 function OnCloseDatatableEditRow() {
 	$('.edit-row').remove();
 }

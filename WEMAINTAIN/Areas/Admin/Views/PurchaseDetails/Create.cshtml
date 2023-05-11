@@ -27,15 +27,15 @@
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Rate</label>
-                    @Html.TextBoxFor(model => model.Rate, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Rate, new { @Class = "form-control", @maxlength ="20"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Discount</label>
-                    @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control", @maxlength ="10"  })
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Package Amount</label>
-                    @Html.TextBoxFor(model => model.PackageAmount, new { @Class = "form-control" })
+                    @Html.TextBoxFor(model => model.PackageAmount, new { @Class = "form-control", @maxlength ="20"  })
                 </div>
             </div>
             <div class="row">
