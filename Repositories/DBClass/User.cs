@@ -13,5 +13,7 @@ namespace Repositories
         public string MobileNo { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
+
+        public string Ext { get; set; }
     }
 }

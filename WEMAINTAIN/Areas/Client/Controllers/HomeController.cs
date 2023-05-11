@@ -33,9 +33,18 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                 user = JsonSerializer.Deserialize<UserResponse>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
+            var banner = new ResultDto<IEnumerable<BannerResponse>>();
+            var bannerResponse = await httpClient.GetAsync("Banner/GetBanner");
+            if (bannerResponse.IsSuccessStatusCode)
+            {
+                var contentStreamBanner = await bannerResponse.Content.ReadAsStringAsync();
+                banner = JsonSerializer.Deserialize<ResultDto<IEnumerable<BannerResponse>>>(contentStreamBanner, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                if (banner?.Data != null)
+                    ViewBag.BannerImg = banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Id + banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Ext;
+            }
             return View("~/areas/client/views/home.cshtml", user);
         }
-       
+
         public async Task<IActionResult> GetCategorySection()
         {
             var categories = new ResultDto<IEnumerable<CategoryResponse>>();

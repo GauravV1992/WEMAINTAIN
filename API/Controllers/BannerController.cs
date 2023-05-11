@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class BannerController : ControllerBase
@@ -21,7 +21,7 @@ namespace API.Controllers
             _iBannerService = iBannerService;
         }
         [CustomAuthorize("Admin")]
-        [HttpPost] 
+        [HttpPost]
         [ActionName("GetAll")]
         public async Task<IActionResult> GetAll([FromBody] BannerRequest request)
         {
@@ -32,7 +32,23 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-       
+
+        [AllowAnonymous]
+        [HttpGet]
+        [ActionName("GetBanner")]
+        public async Task<IActionResult> GetBanner()
+        {
+            BannerRequest request = new BannerRequest();
+            request.PageIndex = 1;
+            request.Length = 10;
+            var res = await _iBannerService.GetAll(request);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return NotFound(res);
+        }
+
         [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("Save")]
@@ -52,7 +68,7 @@ namespace API.Controllers
 
             return NotFound(res);
         }
-       
+
         [CustomAuthorize("Admin")]
         [HttpPost]
         [ActionName("Delete")]
