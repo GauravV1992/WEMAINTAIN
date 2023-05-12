@@ -22,6 +22,7 @@ namespace Repositories.Implementation
             var parameters = new DynamicParameters();
             parameters.Add("Rank", viewModel.Rank, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Ext", viewModel.Ext, DbType.String, ParameterDirection.Input);
+            parameters.Add("BannerType", viewModel.BannerType, DbType.String, ParameterDirection.Input);
             parameters.Add("CreatedBy", viewModel.CreatedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {

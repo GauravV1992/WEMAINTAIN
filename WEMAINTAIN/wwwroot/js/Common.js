@@ -59,18 +59,19 @@ function CheckEmailAddress(email) {
 	return expr.test(email);
 }
 
+
+
 $(document).ready(function () {
-	$('.numberonly').keypress(function (e) {
-		var charCode = (e.which) ? e.which : e.keyCode
-		if (String.fromCharCode(charCode).match(/[^0-9]/g))
-			return false;
+	$('.numberonly').on("keydown", function (e) {
+		//alert('');
+		var evt = (e) ? e : window.event;
+		var charCode = (evt.keyCode) ? evt.keyCode : evt.which;
+		if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+			return false;}
+		return true;
 	});
-	//$('.modal').on('shown.bs.modal', function () {
-	//	$('html').css('overflow', 'hidden');
-	//}).on('hidden.bs.modal', function () {
-	//	$('html').css('overflow', 'auto');
-	//});
 });
+
 function OnCloseDatatableEditRow() {
 	$('.edit-row').remove();
 }
@@ -99,6 +100,83 @@ function BindUserNames() {
 		}
 	});
 }
+
+
+function BindCountryNames() {
+	$('#loading').show();
+	$('#Country').select2({ placeholder: "Select Country" });
+	$.ajax({
+		type: "GET",
+		url: '/Admin/Vendor/GetCountryNames',
+		data: null,
+		datatype: "json",
+		success: function (result) {
+			debugger;
+			var controlId = $('#Country');
+			controlId.empty();
+			$.each(result.data, function (i, data) {
+				controlId.append(new Option(data.text, data.value));
+			});
+			if (!CheckUndefinedBlankAndNull(Country)) {
+				controlId.val(Country);
+			}
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
+}
+
+function BindVendorNames() {
+	$('#loading').show();
+	$('#VendorId').select2({ placeholder: "Select Vendor" });
+	$.ajax({
+		type: "GET",
+		url: '/Admin/Product/GetVendorNames',
+		data: null,
+		datatype: "json",
+		success: function (result) {
+			debugger;
+			var controlId = $('#VendorId');
+			controlId.empty();
+			$.each(result.data, function (i, data) {
+				controlId.append(new Option(data.text, data.value));
+			});
+			if (!CheckUndefinedBlankAndNull(vendorId)) {
+				controlId.val(vendorId);
+			}
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
+}
+
+function BindStateNames() {
+	$('#loading').show();
+	$('#State').select2({ placeholder: "Select State" });
+	$.ajax({
+		type: "GET",
+		url: '/Admin/Vendor/GetStateNames',
+		data: null,
+		datatype: "json",
+		success: function (result) {
+			debugger;
+			var controlId = $('#State');
+			controlId.empty();
+			$.each(result.data, function (i, data) {
+				controlId.append(new Option(data.text, data.value));
+			});
+			if (!CheckUndefinedBlankAndNull(State)) {
+				controlId.val(State);
+			}
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
+}
+
 
 function BindPackageNames(controlId) {
 	debugger;

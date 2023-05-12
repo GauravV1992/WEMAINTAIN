@@ -9,9 +9,9 @@ namespace WEMAINTAIN.Models
 {
     public static class Constants
     {
-        //public const string SiteUrl = "https://localhost:44384/";
+        //public const string SiteUrl = "https://localhost:7018/";
         public const string SiteUrl = "https://fixmyspace.org/";
-
+        
     }
        
 }

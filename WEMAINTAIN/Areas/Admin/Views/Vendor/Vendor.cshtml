@@ -1,0 +1,46 @@
+﻿@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12">
+        <input value="Create" onclick="AddVendor()" class="btn btn-primary btn-sm float-end" type="button" />
+    </div>
+</div>
+<div class="pt-2" id="divVendor">
+</div>
+<h5>Vendor List</h5>
+<div class="row">
+    <div class="col-md-12 pt-2">
+        <section id="header">
+            <div class="table-responsive">
+            <table id="VendorGrid" class="table table-bordered  table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>CompanyName</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Address</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>GST</th>
+                        <th>Pincode</th>
+                        <th>EmailAddress</th>
+                        <th>Phone</th>
+                        <th>Download</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="~/js/vendor.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    var imagePath = '@Constants.SiteUrl' + 'vendorImage/';
+    $(function () {
+        BindVendorDatatable();
+    });
+</script>

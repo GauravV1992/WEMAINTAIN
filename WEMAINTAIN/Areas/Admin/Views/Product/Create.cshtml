@@ -1,0 +1,141 @@
+﻿@using BusinessEntities.RequestDto
+@model ProductRequest
+@using (Html.BeginForm("Save", "Product", FormMethod.Post, new { @*enctype = "multipart/form-data",*@ @id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="card" id="divCreate">
+        <div class="card-header">
+            Create Product
+        </div>
+         <div class="card-body">
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Vendor</label>
+                    @Html.DropDownListFor(model=>model.VendorId,new List<SelectListItem>(),new {@Class="form-select select2"})
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+                    @Html.TextBoxFor(model => model.ProductName, new { @Class = "form-control", @maxlength ="50" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Product Code</label>
+                    @Html.TextBoxFor(model => model.ProductCode, new { @Class = "form-control" , @maxlength ="50"  })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Package</label>
+                    @Html.DropDownListFor(model=>model.PackageId,new List<SelectListItem>(),new {@Class="form-select select2"})
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Sub-Package</label>
+                    @Html.DropDownListFor(model=>model.SubPackageId,new List<SelectListItem>(),new {@Class="form-select select2"})
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Price</label>
+                    @Html.TextBoxFor(model => model.Price, new { @Class = "form-control numberonly" , @maxlength ="20" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">GST</label>
+                    @Html.TextBoxFor(model => model.GST, new { @Class = "form-control" , @maxlength ="20"  })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Discount</label>
+                    @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control numberonly" , @maxlength ="20" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Show On Home Page</label>
+                    @Html.DropDownListFor(model=>model.ShowOnHomePage,new List<SelectListItem>{
+                new SelectListItem{ Text="Yes", Value = "True" },
+                new SelectListItem{ Text="No", Value = "False",Selected=true },
+                },new {@Class="form-select select2"})
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-12">
+                    <label for="exampleFormControlInput1" class="form-label">Product Description</label>
+                    @Html.TextBoxFor(model => model.ProductDescription, new { @Class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Gold Color</label>
+                    @Html.TextBoxFor(model => model.GoldColor, new { @Class = "form-control" , @maxlength ="50"  })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Gold KT</label>
+                    @Html.TextBoxFor(model => model.GoldKT, new { @Class = "form-control" , @maxlength ="50"  })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Gold Weight</label>
+                    @Html.TextBoxFor(model => model.GoldWeight, new { @Class = "form-control", @maxlength ="50"  })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Diamond Clarity</label>
+                    @Html.TextBoxFor(model => model.DiamondClarity, new { @Class = "form-control", @maxlength ="50"  })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Diamond Color</label>
+                    @Html.TextBoxFor(model => model.DiamondColor, new { @Class = "form-control" , @maxlength ="50" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Diamond Weight</label>
+                    @Html.TextBoxFor(model => model.DiamondWeight, new { @Class = "form-control", @maxlength ="50"  })
+                </div>
+               
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Diamond Shape</label>
+                    @Html.TextBoxFor(model => model.DiamondShape, new { @Class = "form-control", @maxlength ="50"  })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Diamond Size</label>
+                    @Html.TextBoxFor(model => model.DiamondSize, new { @Class = "form-control" , @maxlength ="50"  })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Make Country</label>
+                    @Html.TextBoxFor(model => model.MakeCountry, new { @Class = "form-control", @maxlength ="50"  })
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">Male/Female</label>
+                    @Html.TextBoxFor(model => model.MaleFemale, new { @Class = "form-control" , @maxlength ="20" })
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlInput1" class="form-label">IsActive</label>
+                    @Html.DropDownListFor(model=>model.IsActive,new List<SelectListItem>{
+                new SelectListItem{ Text="Active", Value = "True" ,Selected=true },
+                new SelectListItem{ Text="DeActive", Value = "False" },
+                },new {@Class="form-select"})
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label class="form-label" for="Image">Uplaod Image</label>
+                    <input type="file" class="form-control" id="Image" />
+                </div>
+            </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
+                <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript" src="~/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    var packageId = '';
+    var subPackageId = '';
+    var vendorId = '';
+    $(document).ready(function () {
+        OnCreateEditPageLoad();
+        CKEDITOR.replace("ProductDescription");
+    });
+</script>

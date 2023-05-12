@@ -36,11 +36,11 @@
                                         <div class="row">
                                             <div class="mb-3 col-md-12">
                                                 <label for="exampleFormControlInput1" class="form-label">Username</label>
-                                                @Html.TextBoxFor(model => model.Username, new { @Class = "form-control" })
+                                                @Html.TextBoxFor(model => model.Username, new { @Class = "form-control", @maxlength ="50" })
                                             </div>
                                             <div class="mb-3 col-md-12">
                                                 <label for="exampleFormControlInput1" class="form-label">Password</label>
-                                                @Html.TextBoxFor(model => model.Password, new { @Class = "form-control" })
+                                                @Html.TextBoxFor(model => model.Password, new { @Class = "form-control", @maxlength ="20" })
                                             </div>
                                         </div>
                                         <div class="mt-4 mb-0 text-center">

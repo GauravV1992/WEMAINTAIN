@@ -7,18 +7,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
-    @*<link rel="stylesheet" href="~/css/select2.min.css" />*@
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link href="~/css/select2.min.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/common.js"></script>
     <script src="~/js/jquery.datatables.min.js"></script>
     <script src="~/js/datatables.bootstrap5.min.js"></script>
     <script src="~/js/toastr.min.js"></script>
-
-    @* <script src="~/js/select2.min.js"></script>*@
-
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    <script src="~/js/select2.min.js"></script>
+    <link href="~/css/select2.min.css" rel="stylesheet" />
     <link href="~/css/datepicker.css" rel="stylesheet" />
     <script src="~/js/bootstrap-datepicker.js"></script>
 </head>
@@ -47,28 +43,30 @@
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Package</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="SubPackage" asp-action="Index">Sub Package</a></li>
                                 <li>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Banner" asp-action="Index">Banner</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Banner" asp-action="Index">Banner</a>
+                                </li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Service" asp-action="Index">Services</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Vendor" asp-action="Index">Vendor</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a></li>
+                            </ul>
                         </li>
-                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Service" asp-action="Index">Services</a></li>
-                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon</a></li>
-                    </ul>
-                    </li>
-                    <li class="nav-item dropdown" id="myDropdown">
-                        <a class="nav-link text-dark dropdown-toggle" href="#" data-bs-toggle="dropdown">Package Rate</a>
-                        <ul class="dropdown-menu">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="PackageRate" asp-action="Index">Package Rate</a>
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="PackageRateLog" asp-action="Index">Package Rate Log</a>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Index">User Details</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Labour Request</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="PurchaseDetails" asp-action="Index">Purchase Details</a>
-                    </li>
+                        <li class="nav-item dropdown" id="myDropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" data-bs-toggle="dropdown">Package Rate</a>
+                            <ul class="dropdown-menu">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="PackageRate" asp-action="Index">Package Rate</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="PackageRateLog" asp-action="Index">Package Rate Log</a>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Index">User Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Labour Request</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="PurchaseDetails" asp-action="Index">Purchase Details</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="btn btn-light btn-sm" asp-area="Admin" asp-controller="Admin" asp-action="Logout">Log Out</a></li>
