@@ -17,12 +17,19 @@
                     {
                     foreach (var package in Model)
                     {
-                   
-                        <div class="single-category-item col-lg-4">
+                        <div class="single-category-item col-lg-6">
                         <a href="#" onClick="LoadSubPackageSection(@package.Id)">
                              <div class="single-category">
                                     <div class="icon">
-                                        <i class="flaticon-mop"></i>
+                                        @*<i class="flaticon-mop"></i>*@
+                                        @if (@package.Ext != null)
+                                        {
+                                            <img src="~/categoryImage/@package.Id+@package.Ext" width="60" height="60" class="img-fluid" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/img/NoImage100.jpg" width="60" height="60" class="img-fluid" alt="NoImage">
+                                        }
                                     </div>
                                     <div class="category-contents">
                                         <h4 class="category-title"> @package.Name </h4>

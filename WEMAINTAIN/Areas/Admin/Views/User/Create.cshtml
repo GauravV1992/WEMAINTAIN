@@ -12,31 +12,40 @@
         <div class="card-body" id="divCreate">
             <div class="row">
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">FirstName</label>
+                    <label for="exampleFormControlInput1" class="form-label">FirstName<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.FirstName, new {maxlength=50, @Class = "form-control" })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">LastName</label>
+                    <label for="exampleFormControlInput1" class="form-label">LastName<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.LastName, new {maxlength=50, @Class = "form-control" })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Mobile Number</label>
+                    <label for="exampleFormControlInput1" class="form-label">Mobile Number<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.MobileNo, new {maxlength=10, @Class = "form-control numberonly" })
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Address</label>
+                    <label for="exampleFormControlInput1" class="form-label">Address<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.Address, new {maxlength=100, @Class = "form-control" })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <label for="exampleFormControlInput1" class="form-label">Email<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.Email, new {maxlength=100, @Class = "form-control" })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Username</label>
+                    <label for="exampleFormControlInput1" class="form-label">Username<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.Username, new {maxlength=20, @Class = "form-control" })
                 </div>
+                <div class="mb-3 col-md-4 d-none">
+                    <label for="exampleFormControlInput1" class="form-label">Username<span class="Required">*</span></label>
+                    @Html.DropDownListFor(model=>model.IsAdmin,new List<SelectListItem>{
+                    new SelectListItem{ Text="Yes", Value = "True", Selected=true },
+                    new SelectListItem{ Text="No", Value = "False" },
+                  },new {@Class="form-select select2"})
+                </div>
+
+
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>

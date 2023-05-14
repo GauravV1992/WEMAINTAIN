@@ -12,25 +12,25 @@
          <div class="card-body">
              <div class="row">
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Coupon Code</label>
+                    <label for="exampleFormControlInput1" class="form-label">Coupon Code<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.CouponCode, new { @Class = "form-control", @maxlength ="10" })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Coupon Start Date</label>
+                    <label for="exampleFormControlInput1" class="form-label">Coupon Start Date<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.StartDate, new { @Class = "form-control StartDate", @maxlength ="10" })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Coupon End Date</label>
+                    <label for="exampleFormControlInput1" class="form-label">Coupon End Date<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.EndDate, new { @Class = "form-control EndDate", @maxlength ="10" })
                 </div>
              </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">User</label>
+                    <label for="exampleFormControlInput1" class="form-label">User<span class="Required">*</span></label>
                     @Html.DropDownListFor(model=>model.UserId,new List<SelectListItem>(),new {@Class="form-select select2"})
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Discount Percentage</label>
+                    <label for="exampleFormControlInput1" class="form-label">Discount Percentage<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.DiscountPercentage, new { @Class = "form-control" , @maxlength ="10" })
                 </div>
             </div>

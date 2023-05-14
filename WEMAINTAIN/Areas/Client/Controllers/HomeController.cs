@@ -40,7 +40,11 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 var contentStreamBanner = await bannerResponse.Content.ReadAsStringAsync();
                 banner = JsonSerializer.Deserialize<ResultDto<IEnumerable<BannerResponse>>>(contentStreamBanner, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 if (banner?.Data != null)
-                    ViewBag.BannerImg = banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Id + banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Ext;
+                {
+                    ViewBag.BannerImg = banner.Data.Where(i => i.Rank == 1 && i.BannerType == "HomePage").Take(1).FirstOrDefault()?.Id + banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Ext;
+                    ViewBag.Logo = banner.Data.Where(i => i.Rank == 1 && i.BannerType == "Logo").Take(1).FirstOrDefault()?.Id + banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Ext;
+                }
+                    
             }
             return View("~/areas/client/views/home.cshtml", user);
         }
@@ -68,6 +72,34 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 categories = JsonSerializer.Deserialize<ResultDto<IEnumerable<SubPackageResponse>>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
             return PartialView("~/areas/client/views/_subpackage.cshtml", categories?.Data.ToList());
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginRequest model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var token = string.Empty;
+            var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Authenticate", model);
+
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                token = await httpResponseMessage.Content.ReadAsStringAsync();
+                Response.Cookies.Append("access_token", token, new CookieOptions()
+                {
+                    HttpOnly = true,
+                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict,
+                    Secure = true
+                });
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+
+
         }
 
     }

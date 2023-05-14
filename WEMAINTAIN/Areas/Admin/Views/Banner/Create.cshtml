@@ -11,17 +11,19 @@
         </div>
          <div class="card-body">
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Rank</label>
+                <label for="exampleFormControlInput1" class="form-label">Image Type<span class="Required">*</span></label>
                 @Html.DropDownListFor(model=>model.BannerType,new List<SelectListItem>{new SelectListItem{ Text="Select", Value = "" },
-                new SelectListItem{ Text="HomePage", Value = "HomePage" },new SelectListItem{ Text="AboutUs", Value = "AboutUs" },
+                new SelectListItem{ Text="Home Page (1920 x 931)", Value = "HomePage" },
+            new SelectListItem{ Text="About Us (501 x 443)", Value = "AboutUs" },
+                new SelectListItem{ Text="Logo (200 x 45)", Value = "Logo" },
                 },new {@Class="form-select select2"})
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Rank</label>
+                <label for="exampleFormControlInput1" class="form-label">Rank<span class="Required">*</span></label>
                 @Html.TextBoxFor(model => model.Rank, new { @Class = "form-control" })
             </div>
              <div class="mb-3">
-                    <label class="form-label" for="ImageUpload">Uplaod Image</label>
+                <label class="form-label" for="ImageUpload">Uplaod Image<span class="Required">*</span></label>
                     <input type="file" class="form-control" id="Image" />
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">

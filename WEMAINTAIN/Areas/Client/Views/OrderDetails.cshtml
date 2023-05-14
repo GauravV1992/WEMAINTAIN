@@ -11,8 +11,9 @@
         <div class="container container-two nav-container">
             <div class="responsive-mobile-menu">
                 <div class="logo-wrapper">
-                    <a href="index.html" class="logo">
-                        <img src="assets/img/logo-03.png" alt="">
+                    <a asp-controller="Home" asp-action="Index" class="logo">
+                        @*<img src="~/img/FMS-LOGO-1.png" class="img-fluid" />*@
+                        <img src="bannerImage/@ViewBag.Logo" alt="Logo" class="img-fluid" />
                     </a>
                 </div>
                 <a href="#0" class="click_show_icon">
@@ -25,9 +26,9 @@
             <div class="collapse navbar-collapse" id="bizcoxx_main_menu">
                 <ul class="navbar-nav">
                     <li>  <a href="home">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="service_list.html">Service List</a></li>
-                    <li><a href="contact.html">contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">About</a></li>
+                    <li><a asp-area="" asp-controller="Service" asp-action="Index">Service List</a></li>
+                    <li><a asp-area="" asp-controller="Contact" asp-action="Index">contact</a></li>
                 </ul>
             </div>
         </div>

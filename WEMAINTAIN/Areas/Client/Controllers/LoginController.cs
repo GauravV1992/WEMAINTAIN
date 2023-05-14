@@ -30,35 +30,10 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 SameSite = SameSiteMode.Strict,
                 Secure = true
             });
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginRequest model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            var token = string.Empty;
-            var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-            var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Authenticate", model);
-
-            if (httpResponseMessage.IsSuccessStatusCode)
-            {
-                token = await httpResponseMessage.Content.ReadAsStringAsync();
-                Response.Cookies.Append("access_token", token, new CookieOptions()
-                {
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.Strict,
-                    Secure = true
-                });
-                return RedirectToAction("Index", "Home");
-            }
-            return RedirectToAction("Index", "Login");
-
-
-        }
+        
 
     }
 }

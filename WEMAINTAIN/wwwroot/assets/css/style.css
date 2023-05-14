@@ -5901,7 +5901,7 @@ code {
 }
 /* Signup area */
 .signup-wrapper {
-  padding: 80px 100px;
+  padding: 20px 30px;
   -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   max-width: 650px;
@@ -5925,7 +5925,7 @@ code {
 
 .signup-contents .signup-title {
   font-size: 35px;
-  line-height: 55px;
+ /* line-height: 55px;*/
   font-weight: 700;
   text-align: center;
 }
@@ -5946,7 +5946,7 @@ code {
   font-weight: 600;
   font-family: var(--heading-font);
   color: var(--heading-color);
-  line-height: 26px;
+  line-height: 20px;
   margin-bottom: 12px;
 }
 .signup-forms .single-signup .form--control {
@@ -5979,7 +5979,7 @@ code {
   font-weight: 500;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 .signup-forms .bottom-register {
   display: block;
@@ -6013,29 +6013,35 @@ code {
   font-weight: 400;
   color: var(--extra-light-color);
 }
-.signup-checkbox .forgot-btn .forgot-pass {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+.forgot-btn {
+text-align:center;
+padding-top:10px;
+}
+.forgot-pass {
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    font-size: 16px;
+    color: #999999;
 }
 .signup-checkbox .forgot-btn .forgot-pass:hover {
   color: var(--main-color-one);
 }
-
 /* Register Step area */
 .registration-seller-btn .registration-tabs {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  gap: 30px;
-  padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 0;
 }
 @media only screen and (max-width: 480px) {
   .registration-seller-btn .registration-tabs {

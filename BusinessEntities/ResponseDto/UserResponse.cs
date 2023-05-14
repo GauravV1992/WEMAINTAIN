@@ -14,7 +14,7 @@ namespace BusinessEntities.ResponseDto
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string Username { get; set; }
-
+        public bool IsAdmin { get; set; }
         public string Ext { get; set; }
     }
 }
