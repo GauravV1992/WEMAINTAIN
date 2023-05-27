@@ -12,15 +12,15 @@
         <div class="card-body">
             <div class="row">
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Package Name</label>
+                    <label for="exampleFormControlInput1" class="form-label">Package Name<span class="Required">*</span></label>
                     @Html.DropDownListFor(model=>model.PackageId,new List<SelectListItem>(),new {@Class="form-select select2"})
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Sub Package Name</label>
+                    <label for="exampleFormControlInput1" class="form-label">Sub Package Name<span class="Required">*</span></label>
                     @Html.DropDownListFor(model=>model.SubPackageId,new List<SelectListItem>(),new {@Class="form-select select2"})
                 </div>
                     <div class="mb-3 col-md-4">
-                        <label for="exampleFormControlInput1" class="form-label">AMC Period</label>
+                    <label for="exampleFormControlInput1" class="form-label">AMC Period<span class="Required">*</span></label>
                     @Html.DropDownListFor(model=>model.AMCPeriod,new List<SelectListItem>{new SelectListItem{ Text="Select", Value = "" },
                  new SelectListItem{ Text="Daily", Value = "Daily" },
                     new SelectListItem{ Text="Monthly", Value = "Monthly" },
@@ -33,21 +33,21 @@
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Rate</label>
+                    <label for="exampleFormControlInput1" class="form-label">Rate<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.Rate, new { @Class = "form-control", @maxlength ="20"  })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Discount</label>
+                    <label for="exampleFormControlInput1" class="form-label">Discount<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.Discount, new { @Class = "form-control" , @maxlength ="10" })
                 </div>
                 <div class="mb-3 col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Package Amount</label>
+                    <label for="exampleFormControlInput1" class="form-label">Package Amount<span class="Required">*</span></label>
                     @Html.TextBoxFor(model => model.PackageAmount, new { @Class = "form-control", @maxlength ="20"  })
                 </div>
             </div>
             <div class="row">
                      <div class="mb-3 col-md-4">
-                        <label for="exampleFormControlInput1" class="form-label">Service Name</label>
+                    <label for="exampleFormControlInput1" class="form-label">Service Name<span class="Required">*</span></label>
                     @Html.DropDownListFor(model=>model.ServiceId,new List<SelectListItem>(),new {@Class="form-select select2"})
                     </div>
              

@@ -22,9 +22,23 @@ namespace WEMAINTAIN.Areas.Client.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            httpClient.DefaultRequestHeaders.Add(
+            HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+            var banner = new ResultDto<IEnumerable<BannerResponse>>();
+            var bannerResponse = await httpClient.GetAsync("Banner/GetBanner");
+            if (bannerResponse.IsSuccessStatusCode)
+            {
+                var contentStreamBanner = await bannerResponse.Content.ReadAsStringAsync();
+                banner = JsonSerializer.Deserialize<ResultDto<IEnumerable<BannerResponse>>>(contentStreamBanner, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                //(banner.Data.Where(i => i.BannerType == "AboutUs") && ((banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Id + banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Ext)));
+                if (banner?.Data != null)
+                    ViewBag.AboutUs =banner.Data.Where(i => i.Rank == 1 && i.BannerType=="AboutUs").Take(1).FirstOrDefault()?.Id + banner.Data.Where(i => i.Rank == 1).Take(1).FirstOrDefault()?.Ext;
+            }
             return View("~/Areas/Client/Views/AboutUs.cshtml");
+
         }
 
     }

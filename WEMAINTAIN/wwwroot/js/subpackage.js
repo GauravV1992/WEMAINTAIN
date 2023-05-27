@@ -156,6 +156,7 @@ function ValidateForm() {
 		toastr.error('Please Select Package Name');
 		return false;
 	}
+	//var desc = CKEDITOR.instances['TermsAndCondition'].getData();
 	//if (CheckUndefinedBlankAndNull($("#TermsAndCondition").val())) {
 	//	toastr.error('Please Enter Terms And Condition');
 	//	return false;

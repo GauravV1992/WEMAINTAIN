@@ -29,6 +29,8 @@ namespace Repositories.Implementation
             parameters.Add("Email", viewModel.Email, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", viewModel.MobileNo, DbType.String, ParameterDirection.Input);
             parameters.Add("Username", viewModel.Username, DbType.String, ParameterDirection.Input);
+            parameters.Add("IsAdmin", viewModel.IsAdmin, DbType.String, ParameterDirection.Input);
+            parameters.Add("Password", viewModel.Password, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var user = await connection.QuerySingleAsync<User>
@@ -48,6 +50,8 @@ namespace Repositories.Implementation
             parameters.Add("MobileNo", viewModel.MobileNo, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Username", viewModel.Username, DbType.String, ParameterDirection.Input);
+            parameters.Add("IsAdmin", viewModel.IsAdmin, DbType.String, ParameterDirection.Input);
+            parameters.Add("Password", viewModel.Password, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
                 var user = await connection.QuerySingleAsync<User>

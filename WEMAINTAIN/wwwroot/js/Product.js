@@ -65,12 +65,6 @@ function BindProductDatatable() {
 		{ "data": "price" },
 		{ "data": "showOnHomePage" },
 		{
-			"name": "Image",
-			render: function (data, type, row) {
-				return CreateImage(row.id, row.ext);
-			}
-		},
-		{
 			"name": "Download",
 			render: function (data, type, row) {
 				return CreateDownloadIcon(row.id, row.ext);

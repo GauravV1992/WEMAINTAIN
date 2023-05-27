@@ -11,6 +11,7 @@
     <Content Remove="wwwroot\js\banner.js" />
     <Content Remove="wwwroot\js\client\home.js" />
     <Content Remove="wwwroot\js\client\SignInSignUp.js" />
+    <Content Remove="wwwroot\js\client\user.js" />
     <Content Remove="wwwroot\js\coupon.js" />
     <Content Remove="wwwroot\js\packageRate.js" />
     <Content Remove="wwwroot\js\packageratelog.js" />
@@ -96,6 +97,7 @@
     <None Include="wwwroot\css\styles.css" />
     <None Include="wwwroot\js\banner.js" />
     <None Include="wwwroot\js\client\SignInSignUp.js" />
+    <None Include="wwwroot\js\client\user.js" />
     <None Include="wwwroot\js\Product.js" />
     <None Include="wwwroot\js\vendor.js" />
     <None Include="wwwroot\js\client\home.js" />
