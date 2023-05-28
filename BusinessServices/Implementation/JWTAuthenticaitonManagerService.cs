@@ -28,10 +28,10 @@ namespace BusinessServices.Implementation
             _mapper = mapper;
 
         }
-        public async Task<LoginResponse> Authentiate(string usename, string password)
+        public async Task<LoginResponse> Authentiate(string mobileNo, string password)
         {
-            var user = await _iJWTAuthenticaitonManagerRepository.Authentiate(usename, password);
-            if (user != null && (user.Username == usename && user.Password == password))
+            var user = await _iJWTAuthenticaitonManagerRepository.Authentiate(mobileNo, password);
+            if (user != null && (user.MobileNo == mobileNo && user.Password == password))
             {
                 return _mapper.Map<User, LoginResponse>(user);
             }

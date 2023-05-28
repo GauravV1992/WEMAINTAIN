@@ -1,5 +1,5 @@
-﻿@using BusinessEntities.ResponseDto
-@model UserResponse
+﻿@using BusinessEntities.RequestDto
+@model UserRequest
 <link href="~/css/signinsignup.css" rel="stylesheet" />
 <div class="modal fade" id="SignInSignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="container">
@@ -8,16 +8,16 @@
                 <div class="">
                     <div class="signup-contents">
                         <h3 class="signup-title"> Sign In </h3>
+                        <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
                         @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreate" }))
                         {
-                            @Html.AntiForgeryToken()
                             <div class="single-signup margin-top-10">
-                                <label class="signup-label">User Name<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.Username, new { @Class = "form-control" })
+                                <label class="signup-label">Mobile Number<span class="Required">*</span></label>
+                                @Html.TextBox("PhoneNumber",null, new { @Class = "form-control" })
                             </div>
                             <div class="single-signup margin-top-10">
                                 <label class="signup-label"> Password<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.Password, new { @Class = "form-control",type="Password"})
+                                @Html.TextBox("Credential",null, new { @Class = "form-control",type="Password"})
 
                             </div>
                             <div class="signup-checkbox">
@@ -40,7 +40,8 @@
             <div class="form-signup">
                 <div class="signup-contents">
                     <h3 class="signup-title"> Sign Up </h3>
-                    @using (Html.BeginForm("Save", "User", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreate" }))
+                    <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
+                    @using (Html.BeginForm("Save", "User", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreateSignUp" }))
                     {
                         <div class="row">
                             <div class="single-signup col-md-6 col-sm-12">
@@ -51,7 +52,6 @@
                                 <label class="signup-label">Last Name<span class="Required">*</span></label>
                                 @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control", maxlength="50" })
                             </div>
-
                         </div>
 
                         <div class="single-signup margin-top-10">
@@ -63,19 +63,8 @@
                             @Html.TextBoxFor(model => model.MobileNo, new { @Class = "form-control", maxlength="10"})
                         </div>
                         <div class="single-signup margin-top-10">
-                            <label class="signup-label"> User Name<span class="Required">*</span></label>
-                            @Html.TextBoxFor(model => model.Username, new { @Class = "form-control", maxlength="20"})
-                        </div>
-                        <div class="single-signup margin-top-10">
                             <label class="signup-label"> Password<span class="Required">*</span></label>
                             @Html.TextBoxFor(model => model.Password, new { @Class = "form-control", maxlength="20" })
-                        </div>
-                        <div class="single-signup margin-top-10 d-none">
-                            <label for="exampleFormControlInput1" class="form-label">IsAdmin</label>
-                            @Html.DropDownListFor(model=>model.IsAdmin,new List<SelectListItem>{
-                        new SelectListItem{ Text="Yes", Value = "True" },
-                        new SelectListItem{ Text="No", Value = "False",Selected=true},
-                        },new {@Class="form-select select2"})
                         </div>
                         <button type="submit"> Sign Up </button>
                         <div class="signup-active">
@@ -91,9 +80,7 @@
 <script src="~/js/client/signinsignup.js" asp-append-version="true"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".LoginPopup").click(function () {
-            $("#SignInSignUpModal").modal('show');
-            OnRegisterCalled();
-        });
+        debugger;
+        OnRegisterCalled();
     })
 </script>

@@ -6,6 +6,7 @@ using System.Text.Json;
 using WEMAINTAIN.Models;
 namespace WEMAINTAIN.Areas.Client.Controllers
 {
+
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -28,7 +29,6 @@ namespace WEMAINTAIN.Areas.Client.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(UserRequest request)
         {
             var response = new ResultDto<long>();
@@ -44,8 +44,28 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                     response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
             }
-            return RedirectToAction("Index", "Home");
-            //return Json(response);
+            /*return*/
+            RedirectToAction("Index", "Home");
+            return Json(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginRequest model)
+        {
+            var token = string.Empty;
+            var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Authenticate", model);
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                token = await httpResponseMessage.Content.ReadAsStringAsync();
+                Response.Cookies.Append("access_token", token, new CookieOptions()
+                {
+                    HttpOnly = true,
+                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict,
+                    Secure = true
+                });
+            }
+            return Json(httpResponseMessage.IsSuccessStatusCode);
         }
 
     }

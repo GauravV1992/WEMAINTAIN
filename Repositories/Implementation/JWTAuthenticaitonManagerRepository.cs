@@ -21,11 +21,11 @@ namespace Repositories.Implementation
             _context = context;
             
         }
-        public async Task<User> Authentiate(string username, string password)
+        public async Task<User> Authentiate(string mobileNo, string password)
         {
             var procedureName = "CheckUserLogin";
             var parameters = new DynamicParameters();
-            parameters.Add("Username", username, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", mobileNo, DbType.String, ParameterDirection.Input);
             parameters.Add("password", password, DbType.String, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {

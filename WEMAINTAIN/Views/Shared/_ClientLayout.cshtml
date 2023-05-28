@@ -1,5 +1,5 @@
-﻿@using BusinessEntities.ResponseDto
-@model UserResponse
+﻿@using BusinessEntities.RequestDto
+@model UserRequest
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="assets/css/animate.css">
     <!-- bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
+
     <!-- Flat Icon -->
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <!-- slick carousel  -->
@@ -25,6 +27,7 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/toastr.min.js"></script>
 </head>
 
 <body>
