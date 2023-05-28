@@ -1,5 +1,6 @@
 $(function () {
     $(".Register").click(function () {
+        debugger;
         $(".form-signin").toggleClass("form-signin-left");
         $(".form-signup").toggleClass("form-signup-left");
         $(".frame").toggleClass("frame-long");
@@ -10,19 +11,19 @@ $(function () {
     });
 });
 
-$(function () {
-    $(".btn-signup").click(function () {
-        $(".nav").toggleClass("nav-up");
-        $(".form-signup-left").toggleClass("form-signup-down");
-        $(".frame").toggleClass("frame-short");
-    });
-});
+//$(function () {
+//    $(".btn-signup").click(function () {
+//        $(".nav").toggleClass("nav-up");
+//        $(".form-signup-left").toggleClass("form-signup-down");
+//        $(".frame").toggleClass("frame-short");
+//    });
+//});
 
-$(function () {
-    $(".btn-signin").click(function () {
-        //$(".btn-animate").toggleClass("btn-animate-grow");
-        $(".frame").removeClass("frame-long");
-        $(".frame").toggleClass("frame-short");
-        $(".forgot").toggleClass("forgot-fade");
-    });
-});
+//$(function () {
+//    $(".btn-signin").click(function () {
+//        //$(".btn-animate").toggleClass("btn-animate-grow");
+//        $(".frame").removeClass("frame-long");
+//        $(".frame").toggleClass("frame-short");
+//        $(".forgot").toggleClass("forgot-fade");
+//    });
+//});
