@@ -3,70 +3,29 @@
 }
 @using BusinessEntities.ResponseDto
 @model UserResponse
-<header class="header-style-01">
-    <!-- Menu area Starts -->
-    <nav class="navbar navbar-area navbar-two navbar-expand-lg navbar-bg-1">
-        <div class="container container-two nav-container">
-            <div class="responsive-mobile-menu">
-                <div class="logo-wrapper">
-                    <a asp-controller="Home" asp-action="Index" class="logo">
-                        <img src="bannerImage/@ViewBag.Logo" alt="Logo" class="img-fluid" />
-                    </a>
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bizcoxx_main_menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="bizcoxx_main_menu">
-                <ul class="navbar-nav">
-                    <li>  <a href="home">Home</a></li>
-                    <li>  <a asp-area="" asp-controller="AboutUs" asp-action="Index">About</a></li>
-                    <li>  <a asp-area="" asp-controller="Service" asp-action="Index">Service</a></li>
-                    <li>  <a asp-area="" asp-controller="Contact" asp-action="Index">Contact</a></li>
-                </ul>
-            </div>
-            <div class="nav-right-content">
-                <div class="info-bar-item">
-                    <div class="notification-icon icon">
-                        <a class="single-icon" href="javascript:void(0)"> <i class="las la-bell"></i> </a>
-                        <span class="notification-number"> 5 </span>
-                        <div class="notification-list-wrapper">
-                            <h6 class="notification-title"> Notifications </h6>
-                            <ul class="notification-list">
-                                <li class="list">
-                                    <div class="notification-list-flex">
-                                        <div class="item-icon">
-                                            <i class="las la-bell"></i>
-                                        </div>
-                                        <div class="notification-contents">
-                                            <a class="list-title" href="javascript:void(0)"> Notification One </a>
-                                            <span class="list-sub"> 4 hours ago </span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="author-nav-content info-bar-item-two">
-                    @if (Model != null && Model.FirstName != null)
-                    {
-                        <span style="color:white" class="title">@Model.FirstName</span>
-                        <a asp-area="" asp-controller="Login" asp-action="SignOut"><span class="title" style="font-weight: bold;color: var(--main-color-one);">Log Out</span></a>
-                    }
-                    else
-                    {
-                        <a asp-area="" asp-controller="Login" asp-action="Index"><span class="title">Login</span></a>
-                    }
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Menu area end -->
-</header>
-<div class="overlays"></div>
+<style>
+    
+    .banner-area.home-one-banner {
+        padding: 0px 0 119px;
+        background-color: var(--main-color-grey) !important;
+    }
+
+        .banner-area.home-one-banner::after {
+            background-color:white;
+        }
+
+    .navbar-nav  a {
+        color: var(--heading-color)
+    }
+</style>
+
 <!-- Header area end -->
 <!-- Banner Inner area Starts -->
+
+<div class="banner-area home-one-banner">
+    
+</div>
+
 <div class="banner-inner-area section-bg-2">
     <div class="container">
         <div class="row">
@@ -82,6 +41,7 @@
         </div>
     </div>
 </div>
+           
 <!-- Banner Inner area end -->
 <!-- About area Starts -->
 <section class="About-area padding-top-70 padding-bottom-140">
@@ -118,7 +78,7 @@
                                     <div class="about-review-tab">
                                         <div class="about-seller-flex-content flex-start padding-top-40">
                                             <div class="about-seller-thumb">
-                                                <a href="javascript:void(0)"> <img src="assets/img/about/Happy.png" alt=""> </a>
+                                                <a href="javascript:void(0)"> <img src="assets/img/about/Smile-05.png" alt=""> </a>
                                             </div>
                                             <div class="about-seller-content">
                                                 <h5 class="title"> <a href="javascript:void(0)"> Customer satisfaction</a> </h5>
@@ -131,7 +91,7 @@
                                     <div class="about-review-tab">
                                         <div class="about-seller-flex-content flex-start padding-top-40">
                                             <div class="about-seller-thumb">
-                                                <a href="javascript:void(0)"> <img src="assets/img/about/star.png" alt=""> </a>
+                                                <a href="javascript:void(0)"> <img src="assets/img/about/star-05.png" alt=""> </a>
                                             </div>
                                             <div class="about-seller-content">
                                                 <h5 class="title"> <a href="javascript:void(0)">Quality solutions</a> </h5>
@@ -144,7 +104,7 @@
                                     <div class="about-review-tab">
                                         <div class="about-seller-flex-content flex-start padding-top-40">
                                             <div class="about-seller-thumb">
-                                                <a href="javascript:void(0)"> <img src="assets/img/about/Pepole.png" alt=""> </a>
+                                                <a href="javascript:void(0)"> <img src="assets/img/about/People-05.png" alt=""> </a>
                                             </div>
                                             <div class="about-seller-content">
                                                 <h5 class="title"> <a href="javascript:void(0)">Skilled team</a> </h5>

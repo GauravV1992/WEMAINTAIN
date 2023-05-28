@@ -23,16 +23,7 @@ namespace WEMAINTAIN.Areas.Client.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var user = new UserResponse();
             var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-            httpClient.DefaultRequestHeaders.Add(
-            HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-            var httpResponseMessage = await httpClient.GetAsync("User/GetUserDetails");
-            if (httpResponseMessage.IsSuccessStatusCode)
-            {
-                var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                user = JsonSerializer.Deserialize<UserResponse>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-            }
             var banner = new ResultDto<IEnumerable<BannerResponse>>();
             var bannerResponse = await httpClient.GetAsync("Banner/GetBanner");
             if (bannerResponse.IsSuccessStatusCode)
@@ -46,7 +37,7 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 }
                     
             }
-            return View("~/areas/client/views/home.cshtml", user);
+            return View("~/areas/client/views/home.cshtml");
         }
 
         public async Task<IActionResult> GetCategorySection()
