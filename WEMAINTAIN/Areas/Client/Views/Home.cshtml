@@ -15,6 +15,9 @@
                         <img src="bannerImage/@ViewBag.Logo" alt="Logo" class="img-fluid" />
                     </a>
                 </div>
+                <a href="#0" class="click_show_icon">
+                    <i class="las la-ellipsis-v"></i>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bizcoxx_main_menu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -258,20 +261,21 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 </div>
 
-<div class="modal fade" id="SignInSignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="SignInSignUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+
+   
     <div class="container">
+         
         <div class="frame">
-           @* <div class="nav">
-                <ul class"links">
-                    <li class="signin-active"><a class="btn">Sign in</a></li>
-                    <li class="signup-inactive"><a class="btn">Sign up </a></li>
-                </ul>
-            </div>*@
             <div>
                 <div class="form-signin">
-                <div class="">
+                <div>
+                        <button type="button" class="close btclose">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     <div class="signup-contents">
                         <h3 class="signup-title"> Sign In </h3>
+                            
                       @*  @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreate" }))
                         {*@
                            @* @Html.AntiForgeryToken()*@
@@ -354,7 +358,9 @@
             </div>
         </div>
     </div>
+     
 </div>
+
 <script src="~/js/client/home.js" asp-append-version="true"></script>
 <script src="~/js/client/signinsignup.js" asp-append-version="true"></script>
 <script src="~/js/client/user.js" asp-append-version="true"></script>
@@ -366,6 +372,9 @@
         $(".LoginPopup").click(function () {
             $("#SignInSignUpModal").modal('show');
             OnRegisterCalled();
+        });
+        $(".btclose").click(function () {
+            $("#SignInSignUpModal").modal('hide');
         });
        
     })
