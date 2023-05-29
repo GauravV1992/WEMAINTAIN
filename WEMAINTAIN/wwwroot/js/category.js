@@ -65,7 +65,8 @@ function BindCategoryDatatable() {
 			},
 		},
 		"columns": [{ "data": "id" },
-		{ "data": "name" },
+			{ "data": "name" },
+			{ "data": "description" },
 		{
 			"name": "Image",
 			render: function (data, type, row) {
@@ -148,6 +149,7 @@ function OnCreatePageLoad() {
 			data.append("Image", files[0]);
 		}
 		data.append("Name", $("#Name").val());
+		data.append("Description", $("#Description").val());
 		$(':submit', this).attr('disabled', 'disabled');
 		showLoader("divCreate");
 		$.ajax(
@@ -191,6 +193,7 @@ function OnEditPageLoad() {
 			data.append("Image", files[0]);
 		}
 		data.append("Name", $("#Name").val());
+		data.append("Description", $("#Description").val());
 		data.append("Id", $("#Id").val());
 		$(':submit', this).attr('disabled', 'disabled');
 		showLoader("divEdit");

@@ -1,9 +1,7 @@
 function OnHomePageLoad() {
-
 	LoadPackageSection();
 }
 function LoadPackageSection() {
-	debugger;
 	$("#divCategroy").empty();
 	$.ajax({
 		type: "Get",
@@ -18,7 +16,6 @@ function LoadPackageSection() {
 	});
 }
 function LoadSubPackageSection(packageId) {
-	debugger;
 	$("#exampleModal").empty();
 	$.ajax({
 		type: "Get",

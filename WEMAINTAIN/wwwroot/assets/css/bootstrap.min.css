@@ -6303,7 +6303,7 @@ button.close {
     margin-left: 3px;
     text-indent: -999px;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, .5)
+    background-color:  var(--heading-color);
 }
 
 .carousel-indicators li::before {
@@ -6326,9 +6326,9 @@ button.close {
     content: ""
 }
 
-.carousel-indicators .active {
-    background-color: #fff
-}
+    .carousel-indicators .active {
+        background-color: var(--main-color-one);
+    }
 
 .carousel-caption {
     position: absolute;

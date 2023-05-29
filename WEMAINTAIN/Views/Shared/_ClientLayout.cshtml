@@ -1,20 +1,21 @@
-﻿
+﻿@using BusinessEntities.RequestDto
+@model UserRequest
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Fix My Space </title>
-
     <!-- favicon -->
     <link rel=icon href="favicons.ico" sizes="16x16" type="icon/ico">
     <!-- animate -->
     <link rel="stylesheet" href="assets/css/animate.css">
     <!-- bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
+
     <!-- Flat Icon -->
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <!-- slick carousel  -->
@@ -26,159 +27,24 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
+    <script src="~/js/toastr.min.js"></script>
 </head>
 
 <body>
-    <!-- preloader area start -->
-    <div class="preloader" id="preloader">
+   @* <div class="preloader" id="preloader">
         <div class="preloader-inner">
-            <div class="loader_bars">
-                <span></span>
+            <div class="">
+                <img src="~/img/loaderfms3.gif" alt="FIXMYSPACE">
             </div>
         </div>
-    </div>
-    <!-- preloader area end -->
-    <!-- Header area Starts -->
- 
+    </div>*@
+    @await Component.InvokeAsync("Menu")
+    <div class="overlays"></div>
     @RenderBody()
-    <!-- footer area start -->
-    <footer class="footer-area">
-        <div class="footer-top padding-top-100 padding-bottom-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="footer-widget widget ">
-                         @*   <div class="about_us_widget">
-                                <a href="index.html" class="footer-logo"><img src="img/FMS-LOGO-1.png" width="200" alt=""/></a>
-                            </div>*@
-                            <div class="about_us_widget">
-                            <a asp-controller="Home" asp-action="Index" class="logo">
-                                <img src="bannerImage/@ViewBag.Logo" alt="Logo" width="200" class="img-fluid" />
-                            </a>
-                            </div>
-                            <div class="footer-inner">
-                                <p class="footer-para">
-                                    Our track record of successful projects and satisfied customers is a testament to our commitment to excellence and customer
-                                    satisfaction.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="footer-widget widget">
-                            <h6 class="widget-title">Contact Info</h6>
-                            <div class="footer-inner">
-                                <ul class="footer-link-address">
-                                    <li class="list"><span class="address"> <i class="las la-map-marker-alt"></i>PLOT NO 1 BEHIND SABIR APPARTEMENT</span></li>
-                                    <li class="list"><span class="address"> <i class="las la-map-marker-alt"></i>HIMALAYA SOCIETY GOVIND NAGAR</span></li>
-                                    <li class="list"><span class="address"> <i class="las la-map-marker-alt"></i>GHATKOPAR MUMBAI 400084</span></li>
-                                   @* <li class="list"> <span class="address"> <a href="tel:+012-78901234"> <i class="las la-mobile-alt"></i> +012-78901234</a> </span></li>
-                                    <li class="list"> <span class="address"> <a href="mailto:help@mail.com"> <i class="las la-envelope"></i> help@mail.com</a> </span></li>*@
-                                </ul>
-                                <div class="footer-socials d-none">
-                                    <ul class="footer-social-list">
-                                        <li class="lists">
-                                            <a class="facebook" href="#0"> <i class="lab la-facebook-f"></i> </a>
-                                        </li>
-                                        <li class="lists">
-                                            <a class="twitter" href="#0"> <i class="lab la-twitter"></i> </a>
-                                        </li>
-                                        <li class="lists">
-                                            <a class="instagram" href="#0"> <i class="lab la-instagram"></i> </a>
-                                        </li>
-                                        <li class="lists">
-                                            <a class="youtube" href="#0"> <i class="lab la-youtube"></i> </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 d-none">
-                        <div class="footer-widget widget">
-                            <h4 class="widget-title">Recent News</h4>
-                            <div class="footer-inner">
-                                <div class="footer-recent-single">
-                                    <div class="footer-recent-flex">
-                                        <a href="javascript:void(0)" class="recents-thumbs">
-                                            <img src="assets/img/footer/n1.jpg" alt="">
-                                        </a>
-                                        <div class="footer-recent-text">
-                                            <a href="javascript:void(0)" class="footer-recent-para"> Everything opened for the sake of livelihood. </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer-recent-single">
-                                    <div class="footer-recent-flex">
-                                        <a href="javascript:void(0)" class="recents-thumbs">
-                                            <img src="assets/img/footer/n2.jpg" alt="">
-                                        </a>
-                                        <div class="footer-recent-text">
-                                            <a href="javascript:void(0)" class="footer-recent-para"> Mary Lou Retton Is for the All About the Memories. </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 d-none">
-                        <div class="footer-widget widget">
-                            <h4 class="widget-title">Subscribe Newsletter</h4>
-                            <div class="footer-inner">
-                                <p class="subscribe-para"> Get the latest creative news from Qixer template </p>
-                                <div class="subscribe-form">
-                                    <form class="widget-form-single" action="#">
-                                        <input class="form--control" type="text" name="email" placeholder="Enter Email Address">
-                                        <button type="submit" class="btn-subscribe"> <i class="las la-paper-plane"></i> </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright-area copyright-border">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 col-md-6">
-                        <ul class="copyright-list">
-                            <li class="list">
-                                <a href="javascript:void(0)"> Privacy Policy </a>
-                            </li>
-                            <li class="list">
-                                <a href="javascript:void(0)"> Terms & Conditions </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="copyright-contents">
-                            <span> All copyright (C) 2023 Reserved </span>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="copyright-payment">
-                            <ul class="payment-list">
-                                <li class="list">
-                                    <a href="javascript:void(0)"> <img src="assets/img/footer/c1.png" alt=""> </a>
-                                </li>
-                                <li class="list">
-                                    <a href="javascript:void(0)"> <img src="assets/img/footer/c2.png" alt=""> </a>
-                                </li>
-                                <li class="list">
-                                    <a href="javascript:void(0)"> <img src="assets/img/footer/c3.png" alt=""> </a>
-                                </li>
-                                <li class="list">
-                                    <a href="javascript:void(0)"> <img src="assets/img/footer/c4.png" alt=""> </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @await Component.InvokeAsync("Footer")
+    @Html.Partial("~/views/shared/_signinsignup.cshtml",Model)
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
     <!-- footer area end -->
     <!-- back to top area start -->
     <div class="back-to-top">
@@ -205,7 +71,7 @@
     <script src="~/js/common.js"></script>
  
     <script src="~/js/toastr.min.js"></script>
-
+   
 </body>
 
 </html>

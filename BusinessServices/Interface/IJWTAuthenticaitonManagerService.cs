@@ -6,6 +6,6 @@ namespace BusinessServices.Interface
 {
     public interface IJWTAuthenticaitonManagerService
     {
-       Task<LoginResponse> Authentiate(string Username,string password);
+       Task<LoginResponse> Authentiate(string mobileNo,string password);
     }
 }

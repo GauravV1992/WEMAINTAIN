@@ -1,80 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
-@using BusinessEntities.ResponseDto
-@model UserResponse
-<link href="~/css/signinsignup.css" rel="stylesheet" />
-<header class="header-style-01">
-    <!-- Menu area Starts -->
-    <nav class="navbar navbar-area white nav-absolute navbar-expand-lg navbar-border">
-        <div class="container container-two nav-container">
-            <div class="responsive-mobile-menu">
-                <div class="logo-wrapper">
-                    <a asp-controller="Home" asp-action="Index" class="logo">
-                        @*<img src="~/img/FMS-LOGO-1.png" class="img-fluid" />*@
-                        <img src="bannerImage/@ViewBag.Logo" alt="Logo" class="img-fluid" />
-                    </a>
-                </div>
-                <a href="#0" class="click_show_icon">
-                    <i class="las la-ellipsis-v"></i>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bizcoxx_main_menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="bizcoxx_main_menu">
 
-                <ul class="navbar-nav">
-                    <li>  <a href="home">Home</a></li>
-                    <li>  <a asp-area="" asp-controller="AboutUs" asp-action="Index">About</a></li>
-                    <li>  <a asp-area="" asp-controller="Service" asp-action="Index">Service</a></li>
-                    <li>  <a asp-area="" asp-controller="Contact" asp-action="Index">Contact</a></li>
-                </ul>
-            </div>
-            <div class="nav-right-content">
-                <div class="info-bar-item">
-                    <div class="notification-icon icon">
-                        <a class="single-icon" href="javascript:void(0)"> <i class="las la-bell"></i> </a>
-                        <span class="notification-number"> 5 </span>
-                        <div class="notification-list-wrapper">
-                            <h6 class="notification-title"> Notifications </h6>
-                            <ul class="notification-list">
-                                <li class="list">
-                                    <div class="notification-list-flex">
-                                        <div class="item-icon">
-                                            <i class="las la-bell"></i>
-                                        </div>
-                                        <div class="notification-contents">
-                                            <a class="list-title" href="javascript:void(0)"> Notification One </a>
-                                            <span class="list-sub"> 4 hours ago </span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="author-nav-content info-bar-item-two">
-                    @if (Model != null && Model.FirstName != null)
-                    {
-                        <span style="color:white" class="title">@Model.FirstName</span>
-                        <a asp-area="" asp-controller="Login" asp-action="SignOut"><span class="title" style="font-weight: bold;color: var(--main-color-one);">Log Out</span></a>
-                    }
-                    else
-                    {
-                        @*<a asp-area="" asp-controller="Login" asp-action="Index"><span style="color:white" class="title">Login</span></a>*@
 
-                        <a class="LoginPopup"><span style="color:white" class="title">Login</span></a>
-                        
-                    }
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Menu area end -->
-</header>
+@*@using BusinessEntities.ResponseDto
+@model UserResponse*@
 
-<div class="overlays"></div>
+
+
+
 
 <!-- Header area end -->
 <!-- Banner area Starts -->
@@ -92,290 +26,159 @@
     </div>
 </div>
 <!-- Banner area end -->
-<section id="divCategroy" class="category-area section-bg-1 padding-top-100 padding-bottom-100">
+<section id="divCategroy" class="category-area section-bg-1 padding-top-50 padding-bottom-50">
 </section>
 
-<!-- Marketplace area end -->
-<section class="margketplace-area padding-top-100 padding-bottom-100">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-7 col-md-10">
-                <div class="section-title">
-                    <h2 class="title"> Why Our <span class="title-color"> Marketplace? </span> </h2>
-                    <span class="section-para"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </span>
-                </div>
-            </div>
-        </div>
-        <div class="row margin-top-20">
-            <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
-                <div class="single-marketplace">
-                    <div class="icon">
-                        <i class="las la-tools"></i>
-                    </div>
-                    <div class="marketplace-contents">
-                        <h4 class="common-title-two"> <a href="javascript:void(0)"> Service Commitment </a> </h4>
-                        <p class="common-para"> It is a long established fact that a reader will be distracted by the readable. It is a long established fact that a reader. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
-                <div class="single-marketplace">
-                    <div class="icon">
-                        <i class="las la-users-cog"></i>
-                    </div>
-                    <div class="marketplace-contents">
-                        <h4 class="common-title-two"> <a href="javascript:void(0)"> Super Experience </a> </h4>
-                        <p class="common-para"> It is a long established fact that a reader will be distracted by the readable. It is a long established fact that a reader. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
-                <div class="single-marketplace">
-                    <div class="icon">
-                        <i class="las la-shield-alt"></i>
-                    </div>
-                    <div class="marketplace-contents">
-                        <h4 class="common-title-two"> <a href="javascript:void(0)"> User Data Secure </a> </h4>
-                        <p class="common-para"> It is a long established fact that a reader will be distracted by the readable. It is a long established fact that a reader. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
-                <div class="single-marketplace">
-                    <div class="icon">
-                        <i class="las la-stopwatch"></i>
-                    </div>
-                    <div class="marketplace-contents">
-                        <h4 class="common-title-two"> <a href="javascript:void(0)"> Fast Service </a> </h4>
-                        <p class="common-para"> It is a long established fact that a reader will be distracted by the readable. It is a long established fact that a reader. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
-                <div class="single-marketplace">
-                    <div class="icon">
-                        <i class="las la-file-invoice-dollar"></i>
-                    </div>
-                    <div class="marketplace-contents">
-                        <h4 class="common-title-two"> <a href="javascript:void(0)"> Secure Payment </a> </h4>
-                        <p class="common-para"> It is a long established fact that a reader will be distracted by the readable. It is a long established fact that a reader. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
-                <div class="single-marketplace">
-                    <div class="icon">
-                        <i class="las la-headset"></i>
-                    </div>
-                    <div class="marketplace-contents">
-                        <h4 class="common-title-two"> <a href="javascript:void(0)"> Dedicated Support </a> </h4>
-                        <p class="common-para"> It is a long established fact that a reader will be distracted by the readable. It is a long established fact that a reader. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Marketplace area end -->
+
 <!-- Professional Service area end -->
-<section class="professional-area section-bg-1 padding-top-100 padding-bottom-100 section-bg-1">
+<section class="professional-area grey-background-color  padding-bottom-50 section-bg-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-8 col-md-10">
+                            <div class="section-title">
+                                <h2 class="category-para"> From Clients</h2>
+                                <ol class="carousel-indicators" style="position:sticky">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <span class="section-para d-block w-100">
+                                            Amazing service by FIXMYSPACE ! Loved how explained things and made me comfortable.
+
+                                        </span>
+                                        <div class="pt-2">
+                                            -Jayesh Vishwakarma
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <span class="section-para d-block w-100">
+                                            Professional, punctual. Solid service 👍👍
+
+                                        </span>
+                                        <div class="pt-2">
+                                            -Amarnath Sharma
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <span class="section-para d-block w-100">
+                                            Very patient and very nice service. Totally happy with both services. Will definitely recommend.
+                                        </span>
+                                        <div class="pt-2">
+                                            -Shivkumar Sawant
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    @*  <div class="container">
+    <div class="row justify-content-center">
+    <div class="col-lg-8">
+    <div class="section-title">
+    <h2 class="category-para"> From Clients  </h2>
+    <span class="section-para extra-padding">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
+    </span>
+    </div>
+    </div>
+    </div>
+    </div>*@
+</section>
+
+<!-- Professional Service area end -->
+
+<section id="divServices" class="category-area section-bg-1">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-xl-8 col-lg-8 col-md-10">
                 <div class="section-title">
-                    <h2 class="title"> Popular <span class="title-color"> Professional Services </span> </h2>
-                    <span class="section-para extra-padding"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </span>
+                    <h2 class="category-para"> Other Services @*<span class="title-color"> Package </span> *@</h2>
+                    <span class="section-para">
+                        For all your quick services need we have a variery of services ready to be booked instantly. Choose from the below listed catagory.
+                    </span>
                 </div>
             </div>
         </div>
         <div class="row margin-top-50">
-            <div class="col-lg-12">
-                <div class="professional-slider nav-style-one">
-                    <div class="single-professional-item">
-                        <div class="single-professional">
-                            <a href="javascript:void(0)" class="professional-thumb">
-                                <img src="assets/img/service/ps1.jpg" alt="">
-                            </a>
-                            <div class="professional-contents">
-                                <h6 class="professional-title"> <a href="javascript:void(0)"> Cleaning </a> </h6>
-                            </div>
+            <div class="single-category-item col-lg-3">
+                <a href="#" onClick="LoadSubPackageSection(1)">
+                    <div class="single-category">
+                        <div class="icon">
+                            <img src="~/img/Painting-03.png" width="60" height="60" class="img-fluid" alt="NoImage">
+                        </div>
+                        <div class="category-contents padding-top-10">
+                            <h4 class="category-title"> Painting </h4>
                         </div>
                     </div>
-                    <div class="single-professional-item">
-                        <div class="single-professional">
-                            <a href="javascript:void(0)" class="professional-thumb">
-                                <img src="assets/img/service/ps2.jpg" alt="">
-                            </a>
-                            <div class="professional-contents">
-                                <h6 class="professional-title"> <a href="javascript:void(0)"> Moving </a> </h6>
-                            </div>
+                </a>
+            </div>
+            <div class="single-category-item col-lg-3">
+                <a href="#" onClick="LoadSubPackageSection(1)">
+                    <div class="single-category">
+                        <div class="icon">
+                            <img src="~/img/Plumbing-03.png" class="img-fluid" alt="NoImage">
+                        </div>
+                        <div class="category-contents padding-top-10">
+                            <h4 class="category-title"> Plumbing </h4>
                         </div>
                     </div>
-                    <div class="single-professional-item">
-                        <div class="single-professional">
-                            <a href="javascript:void(0)" class="professional-thumb">
-                                <img src="assets/img/service/ps3.jpg" alt="">
-                            </a>
-                            <div class="professional-contents">
-                                <h6 class="professional-title"> <a href="javascript:void(0)"> Painting </a> </h6>
-                            </div>
+                </a>
+            </div>
+            <div class="single-category-item col-lg-3">
+                <a href="#" onClick="LoadSubPackageSection(1)">
+                    <div class="single-category">
+                        <div class="icon">
+                            <img src="~/img/Electrical-03.png" class="img-fluid" alt="NoImage">
+                        </div>
+                        <div class="category-contents padding-top-10">
+                            <h4 class="category-title"> Electrical </h4>
                         </div>
                     </div>
-                    <div class="single-professional-item">
-                        <div class="single-professional">
-                            <a href="javascript:void(0)" class="professional-thumb">
-                                <img src="assets/img/service/ps4.jpg" alt="">
-                            </a>
-                            <div class="professional-contents">
-                                <h6 class="professional-title"> <a href="javascript:void(0)"> Electrician </a> </h6>
-                            </div>
+                </a>
+            </div>
+            <div class="single-category-item col-lg-3">
+                <a href="#" onClick="LoadSubPackageSection(1)">
+                    <div class="single-category">
+                        <div class="icon">
+                            <img src="~/img/Carpenter-03.png" class="img-fluid" alt="NoImage">
+                        </div>
+                        <div class="category-contents padding-top-10">
+                            <h4 class="category-title"> Carpentry </h4>
                         </div>
                     </div>
-                    <div class="single-professional-item">
-                        <div class="single-professional">
-                            <a href="javascript:void(0)" class="professional-thumb">
-                                <img src="assets/img/service/ps5.jpg" alt="">
-                            </a>
-                            <div class="professional-contents">
-                                <h6 class="professional-title"> <a href="javascript:void(0)"> Saloon </a> </h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-professional-item">
-                        <div class="single-professional">
-                            <a href="javascript:void(0)" class="professional-thumb">
-                                <img src="assets/img/service/ps2.jpg" alt="">
-                            </a>
-                            <div class="professional-contents">
-                                <h6 class="professional-title"> <a href="javascript:void(0)"> Moving </a> </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
 </section>
-<!-- Professional Service area end -->
+
+
+
 <!-- Modal Start -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-</div>
-
-<div class="modal fade" id="SignInSignUpModal" tabindex="-1" role="dialog" aria-hidden="true">
-
-   
-    <div class="container">
-         
-        <div class="frame">
-            <div>
-                <div class="form-signin">
-                <div>
-                        <button type="button" class="close btclose">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    <div class="signup-contents">
-                        <h3 class="signup-title"> Sign In </h3>
-                            
-                      @*  @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreate" }))
-                        {*@
-                           @* @Html.AntiForgeryToken()*@
-                                <div class="single-signup margin-top-10">
-                                    <label class="signup-label">User Name<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.Username, new { @Class = "form-control" })
-                            </div>
-                                <div class="single-signup margin-top-10">
-                                    <label class="signup-label"> Password<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.Password, new { @Class = "form-control",type="Password"})
-
-                            </div>
-                            <div class="signup-checkbox">
-                                <div class="checkbox-inlines">
-                                    <input class="check-input" type="checkbox" id="check8">
-                                    <label class="checkbox-label" for="check8"> Remember me </label>
-                                </div>
-                            </div>
-                            <button type="submit"> Login Now </button>
-                             <div class="forgot-btn">
-                                  <a href="javascript:void(0)" class="forgot-pass"> Forgot Password </a>
-                             </div>
-                                <div class="signup-inactive">
-                                    <span class="bottom-register"> Don't have Account? <a class="resgister-link signup-inactive Register"> Sign Up </a> </span>
-                             </div>
-                       @* }*@
-                    </div>
-                </div>
-                </div>
-                <div class="form-signup">
-                    <div class="">
-                         <div class="signup-contents">
-                    <h3 class="signup-title"> Sign Up </h3>
-                   @* @Html.AntiForgeryToken()*@
-                    @using (Html.BeginForm("Save", "User", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreate" }))
-                        {
-                           <div class="row">
-                                <div class="single-signup col-md-6 col-sm-12">
-                                    <label class="signup-label">First Name<span class="Required">*</span></label>
-                                    @Html.TextBoxFor(model => model.FirstName, new { @Class = "form-control", maxlength="50" })
-                                </div>
-                                <div class="single-signup col-md-6 col-sm-12">
-                                    <label class="signup-label">Last Name<span class="Required">*</span></label>
-                                    @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control", maxlength="50" })
-                                </div>
-
-                           </div>
-                       
-                        <div class="single-signup margin-top-10">
-                            <label class="signup-label"> Email<span class="Required">*</span></label>
-                                    @Html.TextBoxFor(model => model.Email, new { @Class = "form-control", maxlength="100"})
-                        </div>
-                        <div class="single-signup margin-top-10">
-                            <label class="signup-label"> Mobile Number<span class="Required">*</span></label>
-                                    @Html.TextBoxFor(model => model.MobileNo, new { @Class = "form-control", maxlength="10"})
-                        </div>
-                                <div class="single-signup margin-top-10">
-                                    <label class="signup-label"> User Name<span class="Required">*</span></label>
-                                    @Html.TextBoxFor(model => model.Username, new { @Class = "form-control", maxlength="20"})
-                                </div>
-                        <div class="single-signup margin-top-10">
-                                    <label class="signup-label"> Password<span class="Required">*</span></label>
-                                    @Html.TextBoxFor(model => model.Password, new { @Class = "form-control", maxlength="20" })
-                        </div>
-                        <div class="single-signup margin-top-10 d-none">
-                            <label for="exampleFormControlInput1" class="form-label">IsAdmin</label>
-                            @Html.DropDownListFor(model=>model.IsAdmin,new List<SelectListItem>{
-                        new SelectListItem{ Text="Yes", Value = "True" },
-                        new SelectListItem{ Text="No", Value = "False",Selected=true},
-                        },new {@Class="form-select select2"})
-                        </div>
-                        <button type="submit"> Sign Up </button>
-                                <div class="signup-active">
-                                    <span class="bottom-register"> Already have an account? <a class="resgister-link signup-inactive Register"> Sign In!</a> </span>
-                        </div>
-                    }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-     
-</div>
 
 <script src="~/js/client/home.js" asp-append-version="true"></script>
-<script src="~/js/client/signinsignup.js" asp-append-version="true"></script>
+
 <script src="~/js/client/user.js" asp-append-version="true"></script>
 
-<!-- Modal End -->
 <script type="text/javascript">
     $(document).ready(function () {
         OnHomePageLoad();
-        $(".LoginPopup").click(function () {
-            $("#SignInSignUpModal").modal('show');
-            OnRegisterCalled();
-        });
-        $(".btclose").click(function () {
-            $("#SignInSignUpModal").modal('hide');
-        });
-       
     })
 </script>
+
