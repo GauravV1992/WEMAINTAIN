@@ -26,7 +26,7 @@
 }
 
 .frame-long {
-    height: 610px;
+    height: 590px;
    /* overflow-y:scroll;*/
 }
 
@@ -125,6 +125,12 @@ li {
     margin-left: 5px;
     color: #dc3545;
     font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .form-signup, .form-signin, .frame {
+        width: 100% !important;
+    }
 }
 
  

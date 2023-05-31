@@ -1,16 +1,15 @@
 ﻿@using BusinessEntities.RequestDto
 @model UserRequest
 <link href="~/css/signinsignup.css" rel="stylesheet" />
-<div class="modal fade" id="SignInSignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="SignInSignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="container">
         <div class="frame">
             <div class="form-signin">
-                <div class="">
-                    <div class="signup-contents">
-                        <h3 class="signup-title"> Sign In </h3>
-                        <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
+             <div class="signup-contents">
+                    <h3 class="signup-title"> Sign In <button type="button" class="close pull-right" data-dismiss="modal">&times;</button></h3>
                         @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreate" }))
                         {
+                            <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
                             <div class="single-signup margin-top-10">
                                 <label class="signup-label">Mobile Number<span class="Required">*</span></label>
                                 @Html.TextBox("PhoneNumber",null, new { @Class = "form-control" })
@@ -35,14 +34,13 @@
                             </div>
                         }
                     </div>
-                </div>
             </div>
             <div class="form-signup">
                 <div class="signup-contents">
-                    <h3 class="signup-title"> Sign Up </h3>
-                    <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
+                    <h3 class="signup-title"> Sign Up <button type="button" class="close pull-right" data-dismiss="modal">&times;</button></h3>
                     @using (Html.BeginForm("Save", "User", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreateSignUp" }))
                     {
+                        <div style="text-align:center"><span id="spnSignUpError" style="color:red"></span></div>
                         <div class="row">
                             <div class="single-signup col-md-6 col-sm-12">
                                 <label class="signup-label">First Name<span class="Required">*</span></label>
