@@ -52,23 +52,23 @@ namespace WEMAINTAIN.Areas.Client.Controllers
 
 
         [HttpGet]
-        //public async Task<ActionResult> Edit(int id)
-        //{
-        //    var Users = new ResultDto<UserResponse>();
-        //    var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-        //    httpClient.DefaultRequestHeaders.Add(
-        //      HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-        //    var httpResponseMessage = await httpClient.GetAsync("User/GetById/" + id + "");
-        //    if (httpResponseMessage.IsSuccessStatusCode)
-        //    {
-        //        var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-        //        Users = JsonSerializer.Deserialize<ResultDto<UserResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-        //    }
-            
-        //    //return PartialView("~/areas/Client/views/MyProfile.cshtml", Users?.Data);
-        //   return RedirectToAction("Index","MyProfile");
-        //    //return Json(Users);
-        //}
+        public async Task<ActionResult> Edit(int id)
+        {
+            var Users = new ResultDto<UserResponse>();
+            var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            httpClient.DefaultRequestHeaders.Add(
+              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+            var httpResponseMessage = await httpClient.GetAsync("User/GetById/" + id + "");
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                Users = JsonSerializer.Deserialize<ResultDto<UserResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+
+            //return PartialView("~/areas/Client/views/MyProfile.cshtml", Users?.Data);
+            return RedirectToAction("Index", "MyProfile");
+            //return Json(Users);
+        }
 
 
         //[HttpPost]
