@@ -1,5 +1,4 @@
 function OnRegisterCalled() {
-
 	debugger;
 	OnLoginClick();
 	OnRegisterClick();
@@ -11,6 +10,7 @@ function OnLoginClick() {
 		$("#SignInSignUpModal").modal('show');
 	});
 }
+
 function toggleSignInSignUp() {
 	$(".form-signin").toggleClass("form-signin-left");
 	$(".form-signup").toggleClass("form-signup-left");
@@ -26,12 +26,11 @@ function OnRegisterClick() {
 	});
 }
 function OnCreatePageLoad() {
-	debugger;
 	$("#frmCreateSignUp").on("submit", function (e) {
 		e.preventDefault();
-		//if (!ValidateForm()) {
-		//	return;
-		//}
+		if (!ValidateForm()) {
+			return;
+		}
 		$(':submit', this).attr('disabled', 'disabled');
 		$.ajax(
 			{
@@ -58,6 +57,10 @@ function OnCreatePageLoad() {
 			});
 	});
 }
+
+$('#SignInSignUpModal').on('hidden.bs.modal', function () {
+	$(this).find('form').trigger('reset');
+})
 
 function OnCheckLogin() {
 	debugger;
@@ -99,6 +102,7 @@ function clearRegisterForm() {
 }
 function ValidateLoginForm() {
 	$("#spnError").text('');
+	$("#spnSignUpError").text('');
 	if (CheckUndefinedBlankAndNull($("#PhoneNumber").val())) {
 		$("#spnError").text('Please Enter Mobile Number')
 		return false;
@@ -110,26 +114,26 @@ function ValidateLoginForm() {
 	return true;
 }
 function ValidateForm() {
-
-	$("#spnError").text('');
+	$("#spnError").text('')
+	$("#spnSignUpError").text('');
 	if (CheckUndefinedBlankAndNull($("#FirstName").val())) {
-		$("#spnError").text('Please Enter First Name')
+		$("#spnSignUpError").text('Please Enter First Name')
 		return false;
 	}
 	else if (CheckUndefinedBlankAndNull($("#LastName").val())) {
-		$("#spnError").text('Please Enter Last Name')
+		$("#spnSignUpError").text('Please Enter Last Name')
 		return false;
 	}
 	else if (CheckUndefinedBlankAndNull($("#MobileNo").val())) {
-		$("#spnError").text('Please Enter Mobile Number')
+		$("#spnSignUpError").text('Please Enter Mobile Number')
 		return false;
 	}
 	else if (CheckUndefinedBlankAndNull($("#Email").val())) {
-		$("#spnError").text('Please Enter Email Address')
+		$("#spnSignUpError").text('Please Enter Email Address')
 		return false;
 	}
 	if (CheckUndefinedBlankAndNull($("#Password").val())) {
-		$("#spnError").text('Please Enter Password')
+		$("#spnSignUpError").text('Please Enter Password')
 		return false;
 	}
 	return true;

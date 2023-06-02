@@ -1,0 +1,47 @@
+﻿@using BusinessEntities.RequestDto
+<link href="~/css/BookAppoinment.css" rel="stylesheet" />
+<div class="modal" id="BookAppoinmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="container">
+        <div class="frame">
+            <div class="form-signin">
+                <div class="signup-contents">
+                    <h3 class="signup-title"> Book Appoinment <button type="button" class="close pull-right" data-dismiss="modal">&times;</button></h3>
+                    @using (Html.BeginForm("BookAppoinment", "Home", FormMethod.Post, new { @class = "signup-forms", @id = "frmBookAppoinment" }))
+                    {
+                        <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label">Service<span class="Required">*</span></label>
+                            @Html.TextBox("PhoneNumber",null, new { @Class = "form-control" })
+                        </div>
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label"> Date<span class="Required">*</span></label>
+                            @Html.TextBox("Credential",null, new { @Class = "form-control",type="Password"})
+
+                        </div>
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label"> Time<span class="Required">*</span></label>
+                            @Html.TextBox("Credential",null, new { @Class = "form-control",type="Password"})
+
+                        </div>
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label"> Phone<span class="Required">*</span></label>
+                            @Html.TextBox("Credential",null, new { @Class = "form-control",type="Password"})
+                        </div>
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label"> Address<span class="Required">*</span></label>
+                            @Html.TextBox("Credential",null, new { @Class = "form-control",type="Password"})
+                        </div>
+                        <button type="submit">Book Appoinment</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End -->
+<script src="~/js/client/bookappoinment.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //OnRegisterCalled();
+    })
+</script>

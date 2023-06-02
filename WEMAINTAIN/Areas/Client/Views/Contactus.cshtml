@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "AboutUs";
+}
+@using BusinessEntities.ResponseDto
+@model UserResponse
+<style type="text/css">
+
+    .banner-area.home-one-banner {
+        padding: 0px 0 119px;
+        background-color: var(--main-color-grey) !important;
+    }
+
+        .banner-area.home-one-banner::after {
+            background-color: white;
+        }
+
+    .la-ellipsis-v {
+        color: #000;
+    }
+
+    .navbar-nav a {
+        color: var(--heading-color)
+    }
+
+    @@media only screen and (max-width: 991px) {
+        .navbar-nav a {
+            color: #fff !important;
+        }
+    }
+</style>
+
+<!-- Header area end -->
+<!-- Banner Inner area Starts -->
+
+<div class="banner-area home-one-banner">
+</div>
+
+<div class="banner-inner-area section-bg-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-inner-contents">
+                    <ul class="inner-menu">
+                        <li class="list"><a asp-controller="Home" asp-action="Index"> Home </a></li>
+                        <li class="list"> Contact Us </li>
+                    </ul>
+                    <h2 class="banner-inner-title"> Contact Us </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Banner Inner area end -->
+<!-- About area Starts -->
+<section class="About-area padding-top-70 padding-bottom-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 margin-top-30">
+                <div class="about-thumb-content">
+
+                    <img src="assets/img/service/ContactUs.jpg" alt="">
+
+                </div>
+            </div>
+            <div class="col-lg-6 margin-top-30">
+                <div class="col-lg-12 col-sm-12">
+                    <div class="single-contacts" style="visibility: visible;">
+                        <div class="contact-icon">
+                            <i class="las la-phone-volume"></i>
+                        </div>
+                        <div class="contacts-contents">
+                            <h4 class="title"> Call Us </h4>
+                            <div class="item-contents">
+                                <span class="item"> <a href="tel:412-723-5750"> 412-723-5750 </a> </span>
+                                <span class="item"> <a href="tel:978-488-6321"> 978-488-6321 </a> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-sm-12 margin-top-30">
+                    <div class="single-contacts"  style="visibility: visible;">
+                        <div class="contact-icon">
+                            <i class="las la-envelope"></i>
+                        </div>
+                        <div class="contacts-contents">
+                            <h4 class="title"> Mail Address </h4>
+                            <div class="item-contents">
+                                <span class="item"> <a href="mailto:Contact@mail.com"> Contact@mail.com </a> </span>
+                                <span class="item"> <a href="mailto:Support@mail.com"> Support@mail.com </a> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-sm-12 margin-top-30">
+                    <div class="single-contacts"  style="visibility: visible;">
+                        <div class="contact-icon">
+                            <i class="las la-headset"></i>
+                        </div>
+                        <div class="contacts-contents">
+                            <h4 class="title"> Support Time </h4>
+                            <div class="item-contents">
+                                <span class="item"> 08.00am to 11.00pm </span>
+                                <span class="item"> Saturday to Thursday </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Client Logo area ends -->
+
+<script src="~/js/client/home.js" asp-append-version="true"></script>
+<!-- Modal End -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        OnHomePageLoad();
+    })
+</script>

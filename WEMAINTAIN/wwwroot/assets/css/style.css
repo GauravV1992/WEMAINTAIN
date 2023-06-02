@@ -1578,7 +1578,7 @@ code {
 }
 @media (min-width: 320px) and (max-width: 991.98px) {
   .navbar-area .nav-container .logo-wrapper .logo img {
-    max-width: 150px;
+    max-width: 130px;
   }
 }
 .navbar-area .nav-container .nav-right-content {

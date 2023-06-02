@@ -3,19 +3,28 @@
 }
 @using BusinessEntities.ResponseDto
 @model UserResponse
-<style>
-    
+<style type="text/css">
+
     .banner-area.home-one-banner {
         padding: 0px 0 119px;
         background-color: var(--main-color-grey) !important;
     }
 
         .banner-area.home-one-banner::after {
-            background-color:white;
+            background-color: white;
         }
 
-    .navbar-nav  a {
+    .la-ellipsis-v {
+        color: #000;
+    }
+    .navbar-nav a {
         color: var(--heading-color)
+    }
+
+    @@media only screen and (max-width: 991px) {
+        .navbar-nav a {
+            color: #fff !important;
+        }
     }
 </style>
 
@@ -23,7 +32,6 @@
 <!-- Banner Inner area Starts -->
 
 <div class="banner-area home-one-banner">
-    
 </div>
 
 <div class="banner-inner-area section-bg-2">
@@ -41,7 +49,7 @@
         </div>
     </div>
 </div>
-           
+
 <!-- Banner Inner area end -->
 <!-- About area Starts -->
 <section class="About-area padding-top-70 padding-bottom-140">
@@ -55,8 +63,8 @@
                     <div class="about-thumb">
                         <img src="bannerImage/@ViewBag.AboutUs" alt="AboutUs">
                         @*<div class="about-experience">
-                            <h2 class="years-tiitle"> 8 Years </h2>
-                            <h4 class="experience-tiitle"> Experience </h4>
+                        <h2 class="years-tiitle"> 8 Years </h2>
+                        <h4 class="experience-tiitle"> Experience </h4>
                         </div>*@
                     </div>
                 </div>
@@ -128,5 +136,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         OnHomePageLoad();
+       
+        
     })
 </script>

@@ -4,11 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>C:\Users\user\Desktop\FREEMYSPACEBUILD</BaseOutputPath>
+    <BaseOutputPath>D:\FreeMySpace</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot\js\banner.js" />
+    <Content Remove="wwwroot\js\client\BookAppoinment.js" />
     <Content Remove="wwwroot\js\client\home.js" />
     <Content Remove="wwwroot\js\client\SignInSignUp.js" />
     <Content Remove="wwwroot\js\client\user.js" />
@@ -96,6 +97,7 @@
     <None Include="wwwroot\assets\sass\style.scss" />
     <None Include="wwwroot\css\styles.css" />
     <None Include="wwwroot\js\banner.js" />
+    <None Include="wwwroot\js\client\BookAppoinment.js" />
     <None Include="wwwroot\js\client\SignInSignUp.js" />
     <None Include="wwwroot\js\client\user.js" />
     <None Include="wwwroot\js\Product.js" />

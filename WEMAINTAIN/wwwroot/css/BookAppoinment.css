@@ -12,7 +12,7 @@
 }
 
 .frame {
-    height: 475px;
+    height: 580px;
     width: 430px;
     background-color: #fff;
     background-size: cover;
@@ -26,12 +26,12 @@
 }
 
 .frame-long {
-    height: 590px;
-   /* overflow-y:scroll;*/
+    height: 580px;
+    /* overflow-y:scroll;*/
 }
 
 .frame-short {
-    height: 475px;
+    height: 580px;
     margin-top: 50px;
     box-shadow: 0px 2px 7px rgba(0,0,0,0.1);
 }

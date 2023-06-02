@@ -10,6 +10,9 @@
                         <img src="bannerImage/@ViewBag.Logo" alt="Logo" class="img-fluid" />
                     </a>
                 </div>
+                <a href="#0" class="click_show_icon">
+                    <i class="las la-ellipsis-v"></i>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bizcoxx_main_menu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -19,42 +22,60 @@
                 <ul class="navbar-nav">
                     <li>  <a href="home">Home</a></li>
                     <li>  <a asp-area="" asp-controller="AboutUs" asp-action="Index">About</a></li>
-                    <li>  <a asp-area="" asp-controller="Service" asp-action="Index">Service</a></li>
-                    <li>  <a asp-area="" asp-controller="Contact" asp-action="Index">Contact</a></li>
+                    <li>  <a asp-area="" asp-controller="Services" asp-action="Index">Service</a></li>
+                    <li>  <a asp-area="" asp-controller="Contactus" asp-action="Index">Contact</a></li>
                 </ul>
             </div>
             <div class="nav-right-content">
-               @* <div class="info-bar-item">
-                    <div class="notification-icon icon">
-                        <a class="single-icon" href="javascript:void(0)"> <i class="las la-bell"></i> </a>
-                        <span class="notification-number"> 5 </span>
-                        <div class="notification-list-wrapper">
-                            <h6 class="notification-title"> Notifications </h6>
-                            <ul class="notification-list">
-                                <li class="list">
-                                    <div class="notification-list-flex">
-                                        <div class="item-icon">
-                                            <i class="las la-bell"></i>
+                <div class="info-bar-item">
+                    @if (Model != null && Model.FirstName != null)
+                    {
+                        <div class="notification-icon icon">
+                            <a class="single-icon author-thumb" href="javascript:void(0)">  <img width="40" height="40" src="assets/img/IconUser.png" alt=""></a>
+                            <div class="notification-list-wrapper">
+                                <h6 class="notification-title"> <span style="color: var(--main-color-one)" class="title">@Model.FirstName</span> </h6>
+                                <ul class="notification-list">
+                                    <li class="list">
+                                        <div class="notification-list-flex">
+                                            <div class="notification-contents">
+                                                <a class="list-title" href="javascript:void(0)"> My Profile </a>
+                                            </div>
                                         </div>
-                                        <div class="notification-contents">
-                                            <a class="list-title" href="javascript:void(0)"> Notification One </a>
-                                            <span class="list-sub"> 4 hours ago </span>
+                                    </li>
+                                    <li class="list">
+                                        <div class="notification-list-flex">
+                                            <div class="notification-contents">
+                                                <a class="list-title" href="javascript:void(0)"> Order Deatails </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                    <li class="list">
+                                        <div class="notification-list-flex">
+                                            <div class="notification-contents">
+                                                <a class="list-title" href="javascript:void(0)"> Payment Details </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list">
+                                        <div class="notification-list-flex">
+                                            <div class="notification-contents">
+                                                <a class="list-title" data-toggle="modal" data-target="#BookAppoinmentModal" href="javascript:void(0)">Book Appoinment</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    }
+                </div>
                 <div class="author-nav-content info-bar-item-two">
                     @if (Model != null && Model.FirstName != null)
                     {
-                        <span style="color: var(--main-color-one)" class="title">@Model.FirstName</span>
                         <a asp-area="" asp-controller="Login" asp-action="SignOut"><span class="title" style="font-weight: bold;color: var(--main-color-one);">Log Out</span></a>
                     }
                     else
                     {
-                        <a href="javascript:void(0)" class="LoginPopup"><span style="color: var(--main-color-one)" class="title">Login</span></a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#SignInSignUpModal"><span style="color: var(--main-color-one)" class="title">Login</span></a>
                     }
                 </div>
             </div>

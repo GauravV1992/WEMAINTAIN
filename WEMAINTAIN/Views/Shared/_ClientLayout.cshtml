@@ -44,6 +44,8 @@
 
     @await Component.InvokeAsync("SignInSignUp")
 
+
+    @Html.Partial("~/views/shared/BookAppoinment.cshtml",Model)
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     </div>
     <!-- footer area end -->
