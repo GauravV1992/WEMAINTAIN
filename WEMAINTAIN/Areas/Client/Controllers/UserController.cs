@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.Common;
 using BusinessEntities.RequestDto;
+using BusinessEntities.ResponseDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using System.Text.Json;
@@ -48,6 +49,49 @@ namespace WEMAINTAIN.Areas.Client.Controllers
             RedirectToAction("Index", "Home");
             return Json(response);
         }
+
+
+        [HttpGet]
+        //public async Task<ActionResult> Edit(int id)
+        //{
+        //    var Users = new ResultDto<UserResponse>();
+        //    var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+        //    httpClient.DefaultRequestHeaders.Add(
+        //      HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+        //    var httpResponseMessage = await httpClient.GetAsync("User/GetById/" + id + "");
+        //    if (httpResponseMessage.IsSuccessStatusCode)
+        //    {
+        //        var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+        //        Users = JsonSerializer.Deserialize<ResultDto<UserResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        //    }
+            
+        //    //return PartialView("~/areas/Client/views/MyProfile.cshtml", Users?.Data);
+        //   return RedirectToAction("Index","MyProfile");
+        //    //return Json(Users);
+        //}
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Update(UserRequest request)
+        //{
+        //    var response = new ResultDto<long>();
+        //    if (ModelState.IsValid)
+        //    {
+        //        var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+        //        httpClient.DefaultRequestHeaders.Add(
+        //      HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+        //        var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Update", request);
+        //        if (httpResponseMessage.IsSuccessStatusCode)
+        //        {
+        //            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+        //            response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        //        }
+        //    }
+        //    return Json(response);
+        //}
+
+
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequest model)
