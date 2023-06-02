@@ -1,0 +1,86 @@
+﻿@using BusinessEntities.RequestDto
+@model UserRequest
+<link href="~/css/signinsignup.css" rel="stylesheet" />
+<div class="modal fade" id="SignInSignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="container">
+        <div class="frame">
+            <div class="form-signin">
+                <div class="">
+                    <div class="signup-contents">
+                        <h3 class="signup-title"> Sign In </h3>
+                        <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreate" }))
+                        {
+                            <div class="single-signup margin-top-10">
+                                <label class="signup-label">Mobile Number<span class="Required">*</span></label>
+                                @Html.TextBox("PhoneNumber",null, new { @Class = "form-control" })
+                            </div>
+                            <div class="single-signup margin-top-10">
+                                <label class="signup-label"> Password<span class="Required">*</span></label>
+                                @Html.TextBox("Credential",null, new { @Class = "form-control",type="Password"})
+
+                            </div>
+                            <div class="signup-checkbox">
+                                <div class="checkbox-inlines">
+                                    <input class="check-input" type="checkbox" id="check8">
+                                    <label class="checkbox-label" for="check8"> Remember me </label>
+                                </div>
+                            </div>
+                            <button type="submit"> Login Now </button>
+                            <div class="forgot-btn">
+                                <a href="javascript:void(0)" class="forgot-pass"> Forgot Password </a>
+                            </div>
+                            <div class="signup-inactive">
+                                <span class="bottom-register"> Don't have Account? <a class="resgister-link signup-inactive Register"> Sign Up </a> </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="form-signup">
+                <div class="signup-contents">
+                    <h3 class="signup-title"> Sign Up </h3>
+                    <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
+                    @using (Html.BeginForm("Save", "User", FormMethod.Post, new { @class = "signup-forms", @id = "frmCreateSignUp" }))
+                    {
+                        <div class="row">
+                            <div class="single-signup col-md-6 col-sm-12">
+                                <label class="signup-label">First Name<span class="Required">*</span></label>
+                                @Html.TextBoxFor(model => model.FirstName, new { @Class = "form-control", maxlength="50" })
+                            </div>
+                            <div class="single-signup col-md-6 col-sm-12">
+                                <label class="signup-label">Last Name<span class="Required">*</span></label>
+                                @Html.TextBoxFor(model => model.LastName, new { @Class = "form-control", maxlength="50" })
+                            </div>
+                        </div>
+
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label"> Email<span class="Required">*</span></label>
+                            @Html.TextBoxFor(model => model.Email, new { @Class = "form-control", maxlength="100"})
+                        </div>
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label"> Mobile Number<span class="Required">*</span></label>
+                            @Html.TextBoxFor(model => model.MobileNo, new { @Class = "form-control", maxlength="10"})
+                        </div>
+                        <div class="single-signup margin-top-10">
+                            <label class="signup-label"> Password<span class="Required">*</span></label>
+                            @Html.TextBoxFor(model => model.Password, new { @Class = "form-control", maxlength="20" })
+                        </div>
+                        <button type="submit"> Sign Up </button>
+                        <div class="signup-active">
+                            <span class="bottom-register"> Already have an account? <a class="resgister-link signup-inactive Register"> Sign In!</a> </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End -->
+<script src="~/js/client/signinsignup.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        OnRegisterCalled();
+    })
+</script>

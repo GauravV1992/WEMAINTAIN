@@ -29,7 +29,6 @@ function OnCreatePageLoad() {
 	debugger;
 	$("#frmCreateSignUp").on("submit", function (e) {
 		e.preventDefault();
-		debugger;
 		//if (!ValidateForm()) {
 		//	return;
 		//}

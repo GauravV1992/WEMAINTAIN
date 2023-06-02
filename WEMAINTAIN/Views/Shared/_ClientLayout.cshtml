@@ -1,5 +1,4 @@
-﻿@using BusinessEntities.RequestDto
-@model UserRequest
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,23 +25,25 @@
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/toastr.min.js"></script>
 </head>
 
 <body>
-   @* <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="">
-                <img src="~/img/loaderfms3.gif" alt="FIXMYSPACE">
-            </div>
-        </div>
+    @* <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+    <div class="">
+    <img src="~/img/loaderfms3.gif" alt="FIXMYSPACE">
+    </div>
+    </div>
     </div>*@
     @await Component.InvokeAsync("Menu")
     <div class="overlays"></div>
     @RenderBody()
     @await Component.InvokeAsync("Footer")
-    @Html.Partial("~/views/shared/_signinsignup.cshtml",Model)
+
+    @await Component.InvokeAsync("SignInSignUp")
+
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     </div>
     <!-- footer area end -->
@@ -64,14 +65,14 @@
     <!-- Nice Select -->
     <script src="assets/js/jquery.nice-select.js"></script>
     <!-- Nice Scroll -->
-  <script src="assets/js/jquery.nicescroll.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.min.js"></script>
     <!-- main js -->
-   <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <script src="~/js/common.js"></script>
- 
+
     <script src="~/js/toastr.min.js"></script>
-   
+
 </body>
 
 </html>
