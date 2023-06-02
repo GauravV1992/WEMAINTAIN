@@ -137,6 +137,21 @@ namespace API.Controllers
             return NotFound(res);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [ActionName("GetBillingAndCartDetails")]
+        public async Task<IActionResult> GetBillingAndCartDetails([FromBody] CartRequest viewModel)
+        {
+            LoginResponse user = Common.GetSessionData(HttpContext);
+            viewModel.CreatedBy = user.Id;
+            var res = await _iSubPackageService.GetBillingAndCartDetails(viewModel);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return NotFound(res);
+        }
+
 
     }
 }

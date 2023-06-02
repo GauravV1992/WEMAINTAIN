@@ -11,8 +11,8 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddHttpClient("WEMAINTAIN", httpClient =>
 {
-    //httpClient.BaseAddress = new Uri("https://api.fixmyspace.org/api/");
-    httpClient.BaseAddress = new Uri("https://localhost:7019/api/");
+    httpClient.BaseAddress = new Uri("https://api.fixmyspace.org/api/");
+    //httpClient.BaseAddress = new Uri("https://localhost:7019/api/");
 });
 
 var app = builder.Build();

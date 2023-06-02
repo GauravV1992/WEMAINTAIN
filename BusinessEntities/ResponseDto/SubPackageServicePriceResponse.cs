@@ -13,6 +13,8 @@ namespace BusinessEntities.ResponseDto
         public string? AMCPeriod { get; set; }
         public decimal Discount { get; set; }
         public decimal PackageAmount { get; set; }
+
+        public decimal Rate { get; set; }
         public string? ServiceName { get; set; }
 
     }

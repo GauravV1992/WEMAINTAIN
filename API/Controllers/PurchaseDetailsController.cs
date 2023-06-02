@@ -57,7 +57,7 @@ namespace API.Controllers
             }
             return NotFound(res);
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ActionName("Save")]
         public async Task<IActionResult> Post([FromBody] PurchaseDetailsRequest viewModel)

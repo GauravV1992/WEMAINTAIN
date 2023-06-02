@@ -157,7 +157,8 @@
                             </div>
                             <div class="col-lg-12">
                                     <div class="btn-wrapper">
-                                        <a id="ancBilling" href="javascript:void(0)" class="cmn-btn btn-appoinment btn-bg-1"> Billing & Payment </a>
+                                        <a  class="cmn-btn btn-appoinment btn-bg-1" onClick="return OnClickBilling()" asp-area="" asp-controller="Billing" asp-action="Index">Billing & Checkout</a>
+                                       @* <a id="ancBilling" onClick="OnClickBilling()" href="/Billing/Index" > Billing & Payment </a>*@
                                     </div>
                             </div>
                             @*<div class="col-lg-4 margin-top-30">
@@ -201,12 +202,13 @@
         </div>
     </div>
 </section>
+
 <script src="~/js/client/orderDetails.js" asp-append-version="true"></script>
 <script type="text/javascript">
     var subPackageId = '@Model.SubPackages.Id';
     var amcPeriod = ''; var servicesIds = '';
     $(document).ready(function () {
         //OnPackageRateChange();/*OnServiceChecked();*/
-        OnClickBilling();
+        //OnClickBilling();
     })
 </script>

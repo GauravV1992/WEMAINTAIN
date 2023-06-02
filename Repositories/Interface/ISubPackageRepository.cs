@@ -15,5 +15,7 @@ namespace Repositories.Interface
         Task<IEnumerable<SubPackage>> GetSubPackageSection(long id);
 
         Task<SubPackagePriceDetailsResponse> GetSubPackagePriceDetails(long id, string amcPeriod);
+
+        Task<BillingAndCartDetailsResponse> GetBillingAndCartDetails(CartRequest request);
     }
 }

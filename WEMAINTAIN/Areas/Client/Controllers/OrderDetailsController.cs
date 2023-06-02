@@ -45,46 +45,24 @@ namespace WEMAINTAIN.Areas.Client.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetServiceRate(int subPackageId, string amcPeriod = "Quarterly")
-        {
-            try
-            {
-                var subPackagePriceDetails = new ResultDto<SubPackagePriceDetailsResponse>();
-                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackagePriceDetails/" + subPackageId + "/" + amcPeriod + "");
-                if (httpResponseMessage.IsSuccessStatusCode)
-                {
-                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    subPackagePriceDetails = JsonSerializer.Deserialize<ResultDto<SubPackagePriceDetailsResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                }
-                return Json(new
-                {
-                    data = subPackagePriceDetails?.Data
-                });
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
-
+       
 
         [HttpGet]
+
+            
         public async Task<IActionResult> Billing(int subPackageId, string amcPeriod, string servicesIds)
         {
             try
             {
-                var subPackagePriceDetails = new ResultDto<SubPackagePriceDetailsResponse>();
-                var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-                var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackagePriceDetails/" + subPackageId + "/" + amcPeriod + "");
-                if (httpResponseMessage.IsSuccessStatusCode)
-                {
-                    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-                    subPackagePriceDetails = JsonSerializer.Deserialize<ResultDto<SubPackagePriceDetailsResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                }
-                return View("~/areas/client/views/orderdetails.cshtml", null);
+                //var subPackagePriceDetails = new ResultDto<SubPackagePriceDetailsResponse>();
+                //var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+                //var httpResponseMessage = await httpClient.GetAsync("SubPackage/GetSubPackagePriceDetails/" + subPackageId + "/" + amcPeriod + "");
+                //if (httpResponseMessage.IsSuccessStatusCode)
+                //{
+                //    var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                //    subPackagePriceDetails = JsonSerializer.Deserialize<ResultDto<SubPackagePriceDetailsResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                //}
+                return PartialView("~/areas/client/views/billing.cshtml");
             }
             catch (Exception ex)
             {
