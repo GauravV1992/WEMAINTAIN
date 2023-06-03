@@ -135,5 +135,27 @@ namespace Repositories.Implementation
                 return objResp;
             }
         }
+        public async Task<BillingAndCartDetailsResponse> GetBillingAndCartDetails(CartRequest request)
+        {
+            BillingAndCartDetailsResponse objResp = new BillingAndCartDetailsResponse();
+            var procedureName = "GetBillingAndCartDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("UserId", request.CreatedBy, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("SubPackageId", request.SubPackageId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("AMCPeriod", request.AMCPeriod, DbType.String, ParameterDirection.Input);
+            parameters.Add("ServicesIds", request.ServicesIds, DbType.String, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                using (var multi = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure))
+                {
+                    objResp.User = await multi.ReadFirstOrDefaultAsync<UserResponse>();
+                    objResp.SubPackageServicePrices = await multi.ReadAsync<SubPackageServicePriceRequest>();
+                    objResp.TotalDiscount = objResp.SubPackageServicePrices.ToList().Sum(a => a.Discount); objResp.TotalPackageAmount = objResp.SubPackageServicePrices.ToList().Sum(a => a.PackageAmount);
+                }
+                return objResp;
+            }
+        }
+
+       
     }
 }

@@ -203,5 +203,19 @@ namespace BusinessServices.Implementation
             }
             return res;
         }
+
+        public async Task<ResultDto<BillingAndCartDetailsResponse>> GetBillingAndCartDetails(CartRequest viewModel)
+        {
+            var res = new ResultDto<BillingAndCartDetailsResponse>()
+            {
+                IsSuccess = false,
+                Data = null,
+                Errors = new List<string>()
+            };
+            var response = await _iSubPackageRepository.GetBillingAndCartDetails(viewModel);
+            res.IsSuccess = true;
+            res.Data = response;
+            return res;
+        }
     }
 }

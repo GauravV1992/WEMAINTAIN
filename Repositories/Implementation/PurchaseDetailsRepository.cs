@@ -25,13 +25,12 @@ namespace Repositories.Implementation
         {
             var procedureName = "SavePurchaseDetails";
             var parameters = new DynamicParameters();
-            parameters.Add("PackageId", viewModel.PackageId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("SubPackageId", viewModel.SubPackageId, DbType.Int32, ParameterDirection.Input);
             //parameters.Add("ServiceId", viewModel.ServiceId, DbType.Int32, ParameterDirection.Input);
             //parameters.Add("Rate", viewModel.Rate, DbType.Decimal, ParameterDirection.Input);
             //parameters.Add("Discount", viewModel.Discount, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("PackageAmount", viewModel.PackageAmount, DbType.Decimal, ParameterDirection.Input);
-            //parameters.Add("AMCPeriod", viewModel.AMCPeriod, DbType.String, ParameterDirection.Input);
+            parameters.Add("AMCPeriod", viewModel.AMCPeriod, DbType.String, ParameterDirection.Input);
             parameters.Add("UserId", viewModel.CreatedBy, DbType.Int32, ParameterDirection.Input);
             using (var connection = _context.CreateConnection())
             {
@@ -42,6 +41,18 @@ namespace Repositories.Implementation
                     {
                         var purchaseDetails = await connection.QuerySingleAsync<PurchaseDetails>
            (procedureName, parameters, tran, commandType: CommandType.StoredProcedure);
+                        string[] serviceIds = viewModel.ServicesIds.Split(',');
+                        foreach (string sid in serviceIds)
+                        {
+                            var procedureName1 = "SavePurchaseServiceDetails";
+                            var parameters1 = new DynamicParameters();
+                            parameters1.Add("SubPackageId", viewModel.SubPackageId, DbType.Int32, ParameterDirection.Input);
+                            parameters1.Add("AMCPeriod", viewModel.AMCPeriod, DbType.String, ParameterDirection.Input);
+                            parameters1.Add("PurchaseDetailsId", purchaseDetails.Id, DbType.Int32, ParameterDirection.Input);
+                            parameters1.Add("ServiceId", sid, DbType.Int32, ParameterDirection.Input);
+                            var purchaseServiceDetails = await connection.QuerySingleAsync<PurchaseDetails>
+               (procedureName1, parameters1, tran, commandType: CommandType.StoredProcedure);
+                        }
                         tran.Commit();
                         return purchaseDetails.Id;
                     }

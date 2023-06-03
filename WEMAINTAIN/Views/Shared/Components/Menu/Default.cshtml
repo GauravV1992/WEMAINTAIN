@@ -42,24 +42,18 @@
                                             </div>
                                         </div>
                                     </li>
+                                   
                                     <li class="list">
                                         <div class="notification-list-flex">
                                             <div class="notification-contents">
-                                                <a class="list-title" href="javascript:void(0)"> Order Deatails </a>
+                                                <a class="list-title" asp-area="" asp-controller="Payment" asp-action="Index" asp-route-userId="@Model.Id"> Payment Details </a>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="list">
                                         <div class="notification-list-flex">
                                             <div class="notification-contents">
-                                                <a class="list-title" href="javascript:void(0)"> Payment Details </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list">
-                                        <div class="notification-list-flex">
-                                            <div class="notification-contents">
-                                                <a class="list-title" data-toggle="modal" data-target="#BookAppoinmentModal" href="javascript:void(0)">Book Appoinment</a>
+                                                <a class="list-title" data-toggle="modal" data-target="#BookAppoinmentModal" href="javascript:void(0)">Labour Request</a>
                                             </div>
                                         </div>
                                     </li>
@@ -71,7 +65,7 @@
                 <div class="author-nav-content info-bar-item-two">
                     @if (Model != null && Model.FirstName != null)
                     {
-                        <a asp-area="" asp-controller="Login" asp-action="SignOut"><span class="title" style="font-weight: bold;color: var(--main-color-one);">Log Out</span></a>
+                        <a id="ancSignOut" asp-area="" asp-controller="Login" asp-action="SignOut"><span class="title" style="font-weight: bold;color: var(--main-color-one);">Log Out</span></a>
                     }
                     else
                     {

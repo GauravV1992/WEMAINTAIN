@@ -1,5 +1,4 @@
-﻿@using BusinessEntities.RequestDto
-@model UserRequest
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,12 @@
     <!-- favicon -->
     <link rel=icon href="favicons.ico" sizes="16x16" type="icon/ico">
     <!-- animate -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css"
+          integrity="sha512-1k7mWiTNoyx2XtmI96o+hdjP8nn0f3Z2N4oF/9ZZRgijyV4omsKOXEnqL1gKQNPy2MTSP9rIEWGcH/CInulptA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="assets/css/animate.css">
     <!-- bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -26,24 +31,28 @@
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/toastr.min.js"></script>
 </head>
 
 <body>
-   @* <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="">
-                <img src="~/img/loaderfms3.gif" alt="FIXMYSPACE">
-            </div>
-        </div>
+    @* <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+    <div class="">
+    <img src="~/img/loaderfms3.gif" alt="FIXMYSPACE">
+    </div>
+    </div>
     </div>*@
     @await Component.InvokeAsync("Menu")
     <div class="overlays"></div>
-    @RenderBody()
+    <div id="divBody">
+    @RenderBody()</div>
     @await Component.InvokeAsync("Footer")
-    @Html.Partial("~/views/shared/_signinsignup.cshtml",Model)
-   @* @Html.Partial("~/views/shared/BookAppoinment.cshtml",Model)*@
+
+    @await Component.InvokeAsync("SignInSignUp")
+
+
+  @*  @Html.Partial("~/views/shared/BookAppoinment.cshtml",Model)*@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     </div>
     <!-- footer area end -->
@@ -65,14 +74,20 @@
     <!-- Nice Select -->
     <script src="assets/js/jquery.nice-select.js"></script>
     <!-- Nice Scroll -->
-  <script src="assets/js/jquery.nicescroll.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.min.js"></script>
     <!-- main js -->
-   <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <script src="~/js/common.js"></script>
- 
+
     <script src="~/js/toastr.min.js"></script>
-   
+
+    <!-- ✅ load DataTables ✅ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+            integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
 </body>
 
 </html>

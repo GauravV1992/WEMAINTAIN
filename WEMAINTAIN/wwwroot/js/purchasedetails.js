@@ -46,13 +46,14 @@ $('#PurchaseDetailsGrid').on('click', '.viewcs', function () {
 			/*$('#loading').hide();*/
 		}
 	});
-	
+
 	$('<tr class="edit-row"><td colspan="7"><div id="divPurchaseServices"></div></td></tr>').insertAfter(tr);
 })
 
 
 
 function BindPurchaseDetailsDatatable() {
+	debugger;
 	$("#PurchaseDetailsGrid").DataTable({
 
 		"language": {
@@ -87,11 +88,12 @@ function BindPurchaseDetailsDatatable() {
 				return CreateActionButton(row.id);
 			}
 		},
-		{ "data": "mobileNo" },
-		{ "data": "userName" },
 		{ "data": "packageName" },
 		{ "data": "subPackageName" },
 		{ "data": "packageAmount" },
+		{ "data": "amcPeriod" },
+		{ "data": "startDate" },
+		{ "data": "endDate" },
 		{ "data": "createdOn" },
 		],
 		"columnDefs": [{
@@ -118,7 +120,7 @@ function BindPurchaseDetailsDatatable() {
 function CreateActionButton(id) {
 	var html = '';
 
-	
+
 	html = html + "<div class='d-grid gap-2 d-md-flex justify-content-md-end'><a class='viewcs' href='#' data-bs-toggle='collapse'>Services</></div>"
 	return html;
 }

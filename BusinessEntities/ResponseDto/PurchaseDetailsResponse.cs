@@ -15,9 +15,13 @@ namespace BusinessEntities.ResponseDto
         //public decimal Rate { get; set; }
         //public decimal Discount { get; set; }
         public decimal PackageAmount { get; set; }
-        //public string AMCPeriod { get; set; }
+        public string AMCPeriod { get; set; }
         public string UserName { get; set; }
         public string MobileNo { get; set; }
+
+        public string StartDate { get; set; }
+
+        public string EndDate { get; set; }
 
     }
 }

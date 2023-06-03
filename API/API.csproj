@@ -4,8 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>D:\FreeMySpace</BaseOutputPath>
+    <BaseOutputPath>C:\Users\user\Desktop\FREEMYSPACEBUILD</BaseOutputPath>
   </PropertyGroup>
+
+ 
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />

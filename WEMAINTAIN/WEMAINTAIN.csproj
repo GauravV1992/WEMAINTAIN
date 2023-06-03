@@ -4,8 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>D:\FreeMySpace</BaseOutputPath>
+    <BaseOutputPath>C:\Users\user\Desktop\FREEMYSPACEBUILD</BaseOutputPath>
   </PropertyGroup>
+
+  
 
   <ItemGroup>
     <Content Remove="wwwroot\js\banner.js" />
@@ -119,6 +121,7 @@
     <PackageReference Include="CKEditor" Version="3.6.4" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="8.0.0-preview.3.23177.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Razorpay" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>

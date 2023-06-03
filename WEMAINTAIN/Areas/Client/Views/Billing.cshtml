@@ -1,0 +1,151 @@
+﻿@using BusinessEntities.Common
+@using BusinessEntities.ResponseDto
+@model BillingAndCartDetailsResponse
+@{
+
+    var user = Model.User;
+    var cartDetails = Model.SubPackageServicePrices;
+    var billingDetails = ViewData["BillingDetails"] as PaymentSuccessRequest;
+}
+<style>
+    
+    .banner-area.home-one-banner {
+        padding: 0px 0 119px;
+        background-color: var(--main-color-grey) !important;
+    }
+        .banner-area.home-one-banner::after {
+            background-color:white;
+        }
+    .navbar-nav  a {
+        color: var(--heading-color)
+    }
+</style>
+<div class="banner-area home-one-banner">
+</div>
+<div class="banner-inner-area section-bg-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-inner-contents">
+                    <h2 class="banner-inner-title">Billing & Checkout</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="padding-top-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                    <fieldset class="padding-bottom-100">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="service-overview-wrapper padding-bottom-30">
+                                    <div class="overview-single col-lg-12">
+                                        <h4 class="title margin-top-30"> Please provide Billing Details </h4>
+                                        <div class="row">
+                                            <div style="text-align:center"> <span id="spnError" style="color:red"></span></div>
+                            <div class="col-lg-6">
+                                            <div class="single-signup margin-top-10">
+                                <label class="signup-label">First Name<span class="Required">*</span></label>
+                                @Html.TextBox("FirstName",user.FirstName, new { @Class = "form-control" })
+                            </div>
+                            </div>
+                            <div class="col-lg-6">
+                            <div class="single-signup margin-top-10">
+                                <label class="signup-label"> Last Name<span class="Required">*</span></label>
+                                @Html.TextBox("LastName",user.LastName, new { @Class = "form-control"})
+
+                            </div></div>
+                            <div class="col-lg-6">
+                             <div class="single-signup margin-top-10">
+                                <label class="signup-label"> Email<span class="Required">*</span></label>
+                                @Html.TextBox("Email",user.Email, new { @Class = "form-control",type="Email"})
+                            </div> </div>
+                           <div class="col-lg-6">
+                             <div class="single-signup margin-top-10">
+                                <label class="signup-label"> Mobile Number<span class="Required">*</span></label>
+                                @Html.TextBox("MobileNo",user.MobileNo, new { @Class = "form-control"})
+                            </div></div>
+                             <div class="col-lg-12">
+                            <div class="single-signup margin-top-10">
+                                <label class="signup-label"> Address<span class="Required">*</span></label>
+                                @Html.TextArea("Address",user.Address, new {@multiline="true", @Class = "form-control"})
+                            </div>
+                             </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 margin-top-30">
+                                <div class="service-overview-summery">
+                                    <h4 class="title">Package Summery </h4>
+                                    <div class="overview-summery-contents">
+                                        <div class="single-summery">
+                                            <span class="summery-title">Services </span>
+                                            <div class="summery-list-all">
+                                                <ul id="ulItem" class="summery-list">
+                                                      @if (cartDetails != null && cartDetails.Any())
+                                            {
+                                                foreach (var item in cartDetails)
+                                                {
+                                                    <li class="list">
+                                                        <span class="rooms"> @item.ServiceName</span>
+                                                        <span class="value-count">₹@item.Rate</span>
+                                                    </li>
+                                                    }}
+                                                </ul>
+                                                <ul class="summery-result-list result-border padding-bottom-20">
+                                                    <li class="result-list">
+                                                        <span class="rooms"> Discount</span>
+                                                        <span class="value-count">₹@Model.TotalDiscount</span>
+                                                    </li>
+                                                </ul>
+                                                <ul class="summery-result-list">
+                                                    <li class="result-list">
+                                                        <span class="rooms"> <strong>Total</strong></span>
+                                                        <span class="value-count">₹@Model.TotalPackageAmount</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="btn-wrapper">
+                                            @using (Html.BeginForm("Success", "Billing", FormMethod.Post))
+                        {
+                            <script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="@ViewBag.KeyId" 
+    data-amount="@Model.TotalPackageAmount"
+    data-currency="INR"
+    data-order_id="@ViewBag.OrderId"
+    data-buttontext="Pay"
+    data-name="FIX MY SPACE"
+    data-image="https://localhost:44384/bannerImage/30.png"
+    data-prefill.name="@user.FirstName"
+    data-prefill.email="@user.Email"
+    data-theme.color="#F8C33A"
+></script>
+                              <input type="hidden" id="sOrderId" value="@ViewBag.OrderId" name="sOrderId"/>
+                              <input type="hidden" id="PackageAmount" value="@Model.TotalPackageAmount" name="PackageAmount"/>
+                       <input type="hidden" id="ServicesIds" value="@billingDetails.ServicesIds" name="ServicesIds"/>
+                       <input type="hidden" id="AMCPeriod" value="@billingDetails.AMCPeriod" name="AMCPeriod"/>
+                       <input type="hidden" id="subPackageId" value="@billingDetails.subPackageId" name="subPackageId"/>
+                          }
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+    })
+</script>
