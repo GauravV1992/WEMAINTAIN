@@ -53,6 +53,7 @@ $('#PurchaseDetailsGrid').on('click', '.viewcs', function () {
 
 
 function BindPurchaseDetailsDatatable() {
+	debugger;
 	$("#PurchaseDetailsGrid").DataTable({
 
 		"language": {
@@ -87,8 +88,6 @@ function BindPurchaseDetailsDatatable() {
 				return CreateActionButton(row.id);
 			}
 		},
-		{ "data": "mobileNo" },
-		{ "data": "userName" },
 		{ "data": "packageName" },
 		{ "data": "subPackageName" },
 		{ "data": "packageAmount" },

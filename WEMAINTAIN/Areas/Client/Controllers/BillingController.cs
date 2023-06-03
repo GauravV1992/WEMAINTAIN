@@ -117,7 +117,7 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                 response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Payment");
         }
 
     }
