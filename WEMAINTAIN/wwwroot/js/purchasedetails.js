@@ -87,7 +87,9 @@ function BindPurchaseDetailsDatatable() {
 			render: function (data, type, row) {
 				return CreateActionButton(row.id);
 			}
-		},
+			},
+			{ "data": "mobileNo" },
+			{ "data": "userName" },
 		{ "data": "packageName" },
 		{ "data": "subPackageName" },
 		{ "data": "packageAmount" },

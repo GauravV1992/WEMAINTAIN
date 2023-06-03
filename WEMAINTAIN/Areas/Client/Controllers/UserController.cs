@@ -17,19 +17,24 @@ namespace WEMAINTAIN.Areas.Client.Controllers
             _logger = logger;
             _httpClientFactory = httpClientFactory;
         }
-        public IActionResult Index()
-        {
-            return View("~/areas/Client/views/Home.cshtml");
-        }
-
         [HttpGet]
-        public ActionResult Create(UserRequest request)
+        public async Task<ActionResult> Index(int userId)
         {
-            var Users = new UserRequest();
-            return PartialView("~/areas/Client/views/Home.cshtml", Users);
+            var Users = new ResultDto<UserResponse>();
+            var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+            httpClient.DefaultRequestHeaders.Add(
+              HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
+            var httpResponseMessage = await httpClient.GetAsync("User/GetById/" + userId + "");
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+                Users = JsonSerializer.Deserialize<ResultDto<UserResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+            return View("~/areas/Client/views/MyProfile.cshtml", Users?.Data);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(UserRequest request)
         {
             var response = new ResultDto<long>();
@@ -38,79 +43,36 @@ namespace WEMAINTAIN.Areas.Client.Controllers
                 var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
                 httpClient.DefaultRequestHeaders.Add(
               HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-                var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Save", request);
+                var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Update", request);
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
                     response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
             }
-            /*return*/
-            RedirectToAction("Index", "Home");
             return Json(response);
         }
 
 
-        [HttpGet]
-        //public async Task<ActionResult> Edit(int id)
-        //{
-        //    var Users = new ResultDto<UserResponse>();
-        //    var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-        //    httpClient.DefaultRequestHeaders.Add(
-        //      HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-        //    var httpResponseMessage = await httpClient.GetAsync("User/GetById/" + id + "");
-        //    if (httpResponseMessage.IsSuccessStatusCode)
-        //    {
-        //        var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-        //        Users = JsonSerializer.Deserialize<ResultDto<UserResponse>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-        //    }
-            
-        //    //return PartialView("~/areas/Client/views/MyProfile.cshtml", Users?.Data);
-        //   return RedirectToAction("Index","MyProfile");
-        //    //return Json(Users);
-        //}
-
 
         //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Update(UserRequest request)
+        //public async Task<IActionResult> Login(LoginRequest model)
         //{
-        //    var response = new ResultDto<long>();
-        //    if (ModelState.IsValid)
+        //    var token = string.Empty;
+        //    var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
+        //    var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Authenticate", model);
+        //    if (httpResponseMessage.IsSuccessStatusCode)
         //    {
-        //        var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-        //        httpClient.DefaultRequestHeaders.Add(
-        //      HeaderNames.Authorization, "Bearer " + Common.GetAccessToken(HttpContext) + "");
-        //        var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Update", request);
-        //        if (httpResponseMessage.IsSuccessStatusCode)
+        //        token = await httpResponseMessage.Content.ReadAsStringAsync();
+        //        Response.Cookies.Append("access_token", token, new CookieOptions()
         //        {
-        //            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
-        //            response = JsonSerializer.Deserialize<ResultDto<long>>(contentStream, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-        //        }
+        //            HttpOnly = true,
+        //            SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict,
+        //            Secure = true
+        //        });
         //    }
-        //    return Json(response);
+        //    return Json(httpResponseMessage.IsSuccessStatusCode);
         //}
-
-
-
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginRequest model)
-        {
-            var token = string.Empty;
-            var httpClient = _httpClientFactory.CreateClient("WEMAINTAIN");
-            var httpResponseMessage = await httpClient.PostAsJsonAsync("User/Authenticate", model);
-            if (httpResponseMessage.IsSuccessStatusCode)
-            {
-                token = await httpResponseMessage.Content.ReadAsStringAsync();
-                Response.Cookies.Append("access_token", token, new CookieOptions()
-                {
-                    HttpOnly = true,
-                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict,
-                    Secure = true
-                });
-            }
-            return Json(httpResponseMessage.IsSuccessStatusCode);
-        }
 
     }
 }

@@ -45,8 +45,8 @@
     </div>*@
     @await Component.InvokeAsync("Menu")
     <div class="overlays"></div>
-    <div id="divBody">
-    @RenderBody()</div>
+   
+    @RenderBody()
     @await Component.InvokeAsync("Footer")
 
     @await Component.InvokeAsync("SignInSignUp")

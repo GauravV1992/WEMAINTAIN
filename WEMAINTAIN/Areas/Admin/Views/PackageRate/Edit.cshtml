@@ -1,6 +1,6 @@
 ﻿@using BusinessEntities.ResponseDto
 @model PackageRateResponse
-@using (Html.BeginForm("Update", "PackageRate", FormMethod.Post, new { @id = "frmEdit" }))
+@using (Html.BeginForm("Save", "PackageRate", FormMethod.Post, new { @id = "frmEdit" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)

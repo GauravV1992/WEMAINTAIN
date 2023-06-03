@@ -5,12 +5,15 @@
         padding: 0px 0 119px;
         background-color: var(--main-color-grey) !important;
     }
+
         .banner-area.home-one-banner::after {
             background-color: white;
         }
+
     .navbar-nav a {
         color: var(--heading-color)
     }
+
     @@media only screen and (max-width: 991px) {
         .navbar-nav a {
             color: #fff !important;
@@ -37,60 +40,56 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-            @using (Html.BeginForm("Update", "User", FormMethod.Post, new { @id = "frmEdit" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.Id)
+                @using (Html.BeginForm("Update", "User", FormMethod.Post, new { @id = "frmUserUpdate" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
 
-            <div class="card" id="divEdit">
-                <div class="card-header">
-                        Update Profile
-                </div>
-                <div class="card-body">
-                   <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label for="exampleFormControlInput1" class="form-label">FirstName<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.FirstName, new {maxlength=50, @Class = "form-control" })
+                    <div class="card">
+                        <div class="card-header">
+                            Update Profile
                         </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="exampleFormControlInput1" class="form-label">LastName<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.LastName, new {maxlength=50, @Class = "form-control" })
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="exampleFormControlInput1" class="form-label">Mobile Number<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.MobileNo, new {maxlength=10, @Class = "form-control numberonly" })
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label for="exampleFormControlInput1" class="form-label">FirstName<span class="Required">*</span></label>
+                                    @Html.TextBoxFor(model => model.FirstName, new {maxlength=50, @Class = "form-control" })
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="exampleFormControlInput1" class="form-label">LastName<span class="Required">*</span></label>
+                                    @Html.TextBoxFor(model => model.LastName, new {maxlength=50, @Class = "form-control" })
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="exampleFormControlInput1" class="form-label">Mobile Number<span class="Required">*</span></label>
+                                    @Html.TextBoxFor(model => model.MobileNo, new {maxlength=10, @Class = "form-control numberonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label for="exampleFormControlInput1" class="form-label">Address<span class="Required">*</span></label>
+                                    @Html.TextBoxFor(model => model.Address, new {maxlength=100, @Class = "form-control" })
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="exampleFormControlInput1" class="form-label">Email<span class="Required">*</span></label>
+                                    @Html.TextBoxFor(model => model.Email, new {maxlength=100, @Class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn btn-success btn-sm me-md-2">Update</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label for="exampleFormControlInput1" class="form-label">Address<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.Address, new {maxlength=100, @Class = "form-control" })
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="exampleFormControlInput1" class="form-label">Email<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.Email, new {maxlength=100, @Class = "form-control" })
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="exampleFormControlInput1" class="form-label">Username<span class="Required">*</span></label>
-                                @Html.TextBoxFor(model => model.Username, new {maxlength=20, @Class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="submit" class="btn btn-success btn-sm me-md-2">Save</button>
-                        <button type="button" onclick="OnCancel()" class="btn btn-sm btn-danger pl-2">Cancel</button>
-                    </div>
-                </div>
-            </div>
-            }
+                }
             </div>
         </div>
-
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            OnCreateEditPageLoad();
-        })
-    </script>
 </section>
 
+<script src="~/js/client/user.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        OnEditPageLoad();
+    });
+
+    
+</script>
