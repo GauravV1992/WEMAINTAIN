@@ -9,7 +9,6 @@ function AddPackage() {
 		data: null,
 		datatype: "json",
 		success: function (response) {
-			debugger;
 			$('#divPackage').html(response);
 		},
 		complete: function () {
@@ -18,7 +17,6 @@ function AddPackage() {
 	});
 }
 function EditPackage(id) {
-	debugger;
 	$("#divPackage").empty();
 	var jsonObject = { Id: id };
 	/*$('#loading').show();*/
@@ -28,7 +26,6 @@ function EditPackage(id) {
 		data: jsonObject,
 		datatype: "json",
 		success: function (response) {
-			debugger;
 			$('#divPackage').html(response);
 		},
 		complete: function () {

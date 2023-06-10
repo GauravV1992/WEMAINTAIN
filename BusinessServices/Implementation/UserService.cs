@@ -45,6 +45,34 @@ namespace BusinessServices.Implementation
             res.Data = response;
             return res;
         }
+        public async Task<ResultDto<long>> UpdateProfile(UserRequest viewModel)
+        {
+            var res = new ResultDto<long>()
+            {
+                IsSuccess = false,
+                Data = 0,
+                Errors = new List<string>()
+            };
+            var response = await _IUserRepository.UpdateProfile(viewModel);
+            res.IsSuccess = true;
+            res.Data = response;
+            return res;
+        }
+
+        public async Task<ResultDto<long>> UpdatePassword(UserRequest viewModel)
+        {
+            var res = new ResultDto<long>()
+            {
+                IsSuccess = false,
+                Data = 0,
+                Errors = new List<string>()
+            };
+            var response = await _IUserRepository.UpdatePassword(viewModel);
+            res.IsSuccess = true;
+            res.Data = response;
+            return res;
+        }
+
         public async Task<ResultDto<long>> Delete(long Id)
         {
             var res = new ResultDto<long>()

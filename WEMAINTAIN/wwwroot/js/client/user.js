@@ -1,8 +1,17 @@
-function OnEditPageLoad() {
+function OnEdit() {
 	debugger;
-	OnEdit();
+	OnEdit1();
+	OnPasswordUpdate();
 }
-function ValidateForm() {
+
+function ValidatePass() {
+	if (CheckUndefinedBlankAndNull($("#Pass").val())) {
+		toastr.error('Please Enter Password');
+		return false;
+	}
+	return true;
+}
+function ValidateProfileForm() {
 	debugger;
 
 	if (CheckUndefinedBlankAndNull($("#FirstName").val())) {
@@ -32,22 +41,51 @@ function ValidateForm() {
 	return true;
 }
 
-function OnEdit() {
+function OnEdit1() {
 	debugger;
-	$("#frmUserUpdate").on("submit", function (e) {
+	$('button.submitForm').click(function (e) {
 		e.preventDefault();
-		if (!ValidateForm()) {
+		if (!ValidateProfileForm()) {
 			return;
 		}
 		$(':submit', this).attr('disabled', 'disabled');
-		showLoader("divCreate");
 		$.ajax(
 			{
 				cache: false,
 				async: true,
 				type: "POST",
-				url: $(this).attr('action'),
-				data: $(this).serialize(),
+				url: '/User/UpdateProfile',
+				data: $('#frmUserUpdate').serialize(),
+				success: function (data) {
+					debugger;
+					if (data.data > 0) {
+						toastr.success(suceessMsg);
+					} else {
+						toastr.error(errorMsg);
+					}
+				},
+				complete: function () {
+					$(':submit').prop('disabled', false);
+				}
+			});
+	});
+}
+
+function OnPasswordUpdate() {
+	debugger;
+	$('button.submitPass').click(function (e) {
+		e.preventDefault();
+		if (!ValidatePass()) {
+			return;
+		}
+		$(':submit', this).attr('disabled', 'disabled');
+		$.ajax(
+			{
+				cache: false,
+				async: true,
+				type: "POST",
+				url: '/User/UpdatePassword',
+				data: $('#frmPasswordUpdate').serialize(),
 				success: function (data) {
 					debugger;
 					if (data.data > 0) {

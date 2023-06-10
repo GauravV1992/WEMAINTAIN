@@ -9,7 +9,6 @@ function AddBanner() {
 		data: null,
 		datatype: "json",
 		success: function (response) {
-			debugger;
 			$('#divBanner').html(response);
 		},
 		complete: function () {
@@ -142,7 +141,6 @@ function OnCreatePageLoad() {
 				url: $(this).attr('action'),
 				data: data,
 				success: function (data) {
-					debugger;
 					if (data.data > 0) {
 						toastr.success(suceessMsg);
 						RefreshGrid();

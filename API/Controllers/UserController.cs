@@ -129,6 +129,44 @@ namespace API.Controllers
 
             return NotFound(res);
         }
+        [HttpPost]
+        
+        [ActionName("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UserRequest viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.Values.ToArray());
+            }
+            LoginResponse user = Common.GetSessionData(HttpContext);
+            viewModel.ModifiedBy = user.Id;
+            var res = await _iUserService.UpdateProfile(viewModel);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+
+            return NotFound(res);
+        }
+
+        [ActionName("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UserRequest viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.Values.ToArray());
+            }
+            LoginResponse user = Common.GetSessionData(HttpContext);
+            viewModel.ModifiedBy = user.Id;
+            var res = await _iUserService.UpdatePassword(viewModel);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+
+            return NotFound(res);
+        }
+
 
         [HttpPost]
         [CustomAuthorize("Admin")]

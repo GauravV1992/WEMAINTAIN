@@ -59,6 +59,39 @@ namespace Repositories.Implementation
                 return user.Id;
             }
         }
+        public async Task<long> UpdateProfile(UserRequest viewModel)
+        {
+            var procedureName = "UpdateUserProfile";
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", viewModel.Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("FirstName", viewModel.FirstName, DbType.String, ParameterDirection.Input);
+            parameters.Add("LastName", viewModel.LastName, DbType.String, ParameterDirection.Input);
+            parameters.Add("Address", viewModel.Address, DbType.String, ParameterDirection.Input);
+            parameters.Add("Email", viewModel.Email, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", viewModel.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QuerySingleAsync<User>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user.Id;
+            }
+        }
+
+        public async Task<long> UpdatePassword(UserRequest viewModel)
+        {
+            var procedureName = "UpdatePassword";
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", viewModel.Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Password", viewModel.Password, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", viewModel.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QuerySingleAsync<User>
+           (procedureName, parameters, commandType: CommandType.StoredProcedure);
+                return user.Id;
+            }
+        }
         public async Task<long> Delete(long id)
         {
             var procedureName = "DeleteUser";

@@ -363,7 +363,6 @@
     preloader
     ------------------*/
     $(window).on('load', function () {
-        debugger;
         $('#preloader').delay(100).fadeOut('fast');
         $('body').delay(100).css({
             'overflow': 'visible'

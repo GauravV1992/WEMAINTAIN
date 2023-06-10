@@ -1,5 +1,4 @@
 function OnRegisterCalled() {
-	debugger;
 	OnLoginClick();
 	OnRegisterClick();
 	OnCreatePageLoad();
@@ -40,7 +39,6 @@ function OnCreatePageLoad() {
 				url: '/User/Save',
 				data: $(this).serialize(),
 				success: function (data) {
-					debugger;
 					if (data.data > 0) {
 						clearRegisterForm();
 						toastr.success('User registration successful! Please sign in.');
@@ -63,10 +61,10 @@ $('#SignInSignUpModal').on('hidden.bs.modal', function () {
 })
 
 function OnCheckLogin() {
-	debugger;
+
 	$("#frmCreate").on("submit", function (e) {
 		e.preventDefault();
-		debugger;
+
 		if (!ValidateLoginForm()) {
 			return;
 		}
@@ -79,7 +77,7 @@ function OnCheckLogin() {
 				url: '/User/Login',
 				data: $(this).serialize(),
 				success: function (data) {
-					debugger;
+				
 					if (data) {
 						clearRegisterForm();
 						location.reload(true);

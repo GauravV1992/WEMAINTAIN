@@ -1,5 +1,5 @@
 ﻿@using BusinessEntities.ResponseDto
-@model UserResponse;
+@model ProfileResponse;
 <style>
     .banner-area.home-one-banner {
         padding: 0px 0 119px;
@@ -40,7 +40,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                @using (Html.BeginForm("Update", "User", FormMethod.Post, new { @id = "frmUserUpdate" }))
+                @using (Html.BeginForm("UpdateProfile", "User", FormMethod.Post, new { @id = "frmUserUpdate" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(m => m.Id)
@@ -74,8 +74,32 @@
                                     @Html.TextBoxFor(model => model.Email, new {maxlength=100, @Class = "form-control" })
                                 </div>
                             </div>
+                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" id="btnProfile" class="submitForm btn btn-success btn-sm me-md-2">Update</button>
+                           </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @using (Html.BeginForm("UpdatePassword", "User", FormMethod.Post, new { @id = "frmPasswordUpdate" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card">
+                        <div class="card-header">
+                            Update Profile
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label  class="form-label">Password<span class="Required">*</span></label>
+                                    @Html.TextBoxFor(model => model.Pass, new {maxlength=50, @Class = "form-control" })
+                                </div>
+                            </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="submit" class="btn btn-success btn-sm me-md-2">Update</button>
+                                <button type="button" id="btnPassword" class="submitPass btn btn-success btn-sm me-md-2">Update</button>
                             </div>
                         </div>
                     </div>
@@ -84,11 +108,11 @@
         </div>
     </div>
 </section>
+<script src="~/js/client/user.js"></script>
 
-<script src="~/js/client/user.js" asp-append-version="true"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        OnEditPageLoad();
+        OnEdit();
     });
 
     
